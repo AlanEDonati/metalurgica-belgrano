@@ -1,0 +1,2076 @@
+/* --- ESTILOS METALÚRGICA BELGRANO: ELITE EDITION --- */
+* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+:root {
+  --belgrano-blue: #004a99; 
+  --belgrano-dark: #000b1a; 
+  --belgrano-accent: #00d4ff;
+  --accent: #004a99;         /* Esta es la que falta para el logo */
+  --cyan: #00f2ff;           /* Necesaria para los efectos de Ingeniería */
+  --surface-light: #0a0c10;  
+  --accent-glow: rgba(0, 74, 153, 0.3);
+}
+body { 
+  font-family: 'Outfit', sans-serif; 
+  background-color: var(--belgrano-dark); 
+  color: #fff; 
+  line-height: 1.6; 
+  margin: 0;
+}
+.navbar { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 20px 5%; 
+            align-items: center; 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            background: rgba(5, 6, 8, 0.95); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        .logo { font-weight: 900; font-size: 1.3rem; color: #ffffff; letter-spacing: 1px; }
+        .logo span { color: var(--accent); text-shadow: 0 0 15px rgba(0, 118, 255, 0.5); }
+
+        .nav-links a { 
+            color: rgba(255, 255, 255, 0.7); 
+            text-decoration: none; 
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            margin-left: 30px; 
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: 0.3s; 
+        }
+        .nav-links a:hover, .nav-links a.active { color: #ffffff; }
+        
+        /* Botón de la Navbar */
+        .nav-links .portal-btn { 
+            background: var(--accent); 
+            color: white !important; 
+            padding: 10px 22px; 
+            border-radius: 2px; 
+            margin-left: 30px;
+        }
+
+/* HERO ELITE *//* --- HERO ELITE: REINVENTADO (IMPACTO TITÁN) --- */
+.hero-elite {
+ height: 100vh;
+ background: #000; /* Fondo negro profundo */
+ position: relative;
+ display: flex;
+ align-items: center;
+ overflow: hidden;
+ padding-top: 80px;
+}
+
+.hero-elite::before {
+ content: "";
+ position: absolute;
+ inset: 0;
+ /* Cambia 'Tanque.jpg' por el nombre exacto de tu archivo de soldadura */
+ background: radial-gradient(circle at 40% 50%, rgba(0, 74, 153, 0.2) 0%, transparent 70%),
+ linear-gradient(to right, #000b1a 20%, transparent 60%, #000b1a 90%),
+ url('Tanque.jpg'); /* <--- AQUÍ PON EL NOMBRE DE TU ARCHIVO */
+ background-size: cover;
+ background-position: center;
+ opacity: 0.8; /* Sube un poco la opacidad para que la soldadura brille más */
+ z-index: 1;
+}
+
+.hero-blueprint-overlay {
+ position: absolute; 
+ inset: 0;
+ background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+ linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+ background-size: 60px 60px;
+ z-index: 2;
+ mask-image: radial-gradient(circle at center, black, transparent 80%);
+}
+
+.hero-container {
+ width: 100%; 
+ max-width: 1600px; /* Más ancho para mayor escala */
+ margin: 0 auto; 
+ padding: 0 5%;
+ position: relative; 
+ z-index: 3; 
+ display: grid; 
+ grid-template-columns: 1.4fr 0.6fr; /* Más espacio al título */
+ align-items: center;
+}
+
+/* TÍTULO MASIVO */
+.main-title {
+  font-size: clamp(3rem, 8vw, 6.5rem); 
+  line-height: 0.9;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -3px;
+  margin: 20px 0;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  z-index: 10;
+  position: relative;
+}
+
+/* --- TÍTULO CORREGIDO (UNIFICADO) --- */
+.main-title .bold-line { 
+ display: block; 
+ color: #fff; 
+}
+
+.main-title .outline-line { 
+ display: block; 
+ color: transparent; 
+ /* Hemos subido a 0.7 para que el borde brille contra el acero del fondo */
+ -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.7); 
+ margin-top: -10px; /* Ajustado para que las letras se acoplen mejor */
+ letter-spacing: 2px; /* Un poco más de aire para el look industrial */
+}
+
+/* BADGE ESTILO ETIQUETA INDUSTRIAL */
+.location-badge {
+ background: transparent;
+ border: none;
+ padding: 0;
+ font-size: 0.65rem;
+ color: rgba(255,255,255,0.6);
+ margin-bottom: 20px;
+}
+
+.hero-description { 
+ max-width: 500px; 
+ font-size: 1.2rem; 
+ color: rgba(255,255,255,0.7); 
+ margin-bottom: 50px; 
+ border-left: 3px solid var(--belgrano-blue); 
+ padding-left: 25px;
+ font-weight: 300;
+}
+
+/* ESTADÍSTICAS FLOTANTES (CUADROS BLANCOS/GRISES) */
+/* --- HERO STATS: ESTILO BLOQUE INDUSTRIAL --- */
+.hero-stats { 
+ display: flex; 
+ flex-direction: column; 
+ gap: 15px; /* Espaciado más compacto y elegante */
+ padding-left: 50px; 
+ align-items: flex-end; /* Alinea las cajas a la derecha */
+ max-width: 100%;
+}
+
+.stat-item {
+ background: #ffffff; /* Blanco sólido para resaltar sobre el fondo oscuro */
+ padding: 15px 25px;
+ width: 280px; /* Ancho fijo para que todas las cajas se vean uniformes */
+ display: flex;
+ align-items: center;
+ gap: 20px;
+ box-shadow: 20px 20px 60px rgba(0,0,0,0.5); /* Sombra pesada para dar profundidad */
+ transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+ border-left: 5px solid var(--belgrano-blue); /* Detalle de color lateral */
+}
+
+.stat-item:hover {
+ transform: translateX(-15px); /* Se desplaza hacia la izquierda al pasar el mouse */
+ background: var(--belgrano-blue);
+ border-left-color: #fff;
+}
+
+/* Ajuste de los textos dentro de la caja */
+.stat-item .stat-num { 
+ font-size: 2.2rem; 
+ font-weight: 900; 
+ color: #000; /* Texto negro sobre fondo blanco */
+ line-height: 1; 
+ margin: 0;
+ min-width: 70px;
+}
+
+.stat-item .stat-label { 
+ font-size: 0.7rem; 
+ text-transform: uppercase; 
+ color: #444; /* Gris oscuro para el subtítulo */
+ font-weight: 900;
+ letter-spacing: 1px;
+ line-height: 1.2;
+}
+
+/* Cambio de color al hacer Hover */
+.stat-item:hover .stat-num, 
+.stat-item:hover .stat-label {
+ color: #ffffff; /* Todo pasa a blanco sobre el fondo azul */
+}
+
+/* --- SECCIÓN CAPABILITIES: MÓDULOS DE INGENIERÍA --- */
+.industrial-capabilities { 
+    background-color: var(--belgrano-dark);
+    padding: 120px 5%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.capabilities-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 25px; 
+    width: 100%;
+    max-width: 1400px;
+    margin: 40px auto 0;
+}
+
+.cap-item { 
+    position: relative;
+    display: flex; 
+    flex-direction: column; /* Icono arriba, texto abajo */
+    padding: 50px 40px; 
+    background: rgba(255, 255, 255, 0.01); 
+    border: 1px solid rgba(255, 255, 255, 0.05); 
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    overflow: hidden;
+}
+
+/* El "Brillo de Arista" (Línea superior azul que aparece al hover) */
+.cap-item::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    transition: 0.6s;
+}
+
+.cap-item:hover {
+    background: rgba(0, 74, 153, 0.05);
+    border-color: rgba(0, 212, 255, 0.3);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.cap-item:hover::before {
+    left: 100%;
+}
+
+/* Estilo para los Iconos (Reemplaza los números) */
+.cap-icon {
+    font-size: 2.5rem;
+    color: var(--cyan);
+    margin-bottom: 25px;
+    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
+    transition: 0.3s;
+}
+
+.cap-item:hover .cap-icon {
+    transform: scale(1.1) rotate(5deg);
+    color: #fff;
+}
+
+.cap-info h3 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.cap-info p {
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin: 0 !important;
+}
+
+/* Eliminamos definitivamente el número */
+.cap-num { display: none; }
+
+
+/* Arreglo para el título y párrafo en Postventa */
+.cap-header h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+
+
+
+.catalog-section { 
+   background-color: var(--belgrano-dark);
+    padding: 100px 5%;
+    margin: 0;           /* Elimina cualquier espacio entre secciones */
+    border: none;        /* Elimina bordes accidentales */
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+.product-grid-nexura { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    gap: 30px; 
+}
+
+.p-card { 
+    background: rgba(255, 255, 255, 0.02); 
+    border: 1px solid rgba(255, 255, 255, 0.08); 
+    transition: 0.5s; 
+    overflow: hidden; /* Mantiene la imagen dentro de los límites */
+    display: flex;
+    flex-direction: column;
+}
+
+.p-card:hover { 
+    transform: translateY(-10px); 
+    border-color: var(--belgrano-blue); 
+    background: rgba(255, 255, 255, 0.05); /* Brillo sutil al pasar el mouse */
+}
+
+.p-img { 
+    height: 250px; 
+    position: relative; 
+    overflow: hidden; 
+}
+
+.p-img img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+/* Ajuste del overlay para que sea visible al hover */
+.p-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 74, 153, 0.8); /* Azul Belgrano con transparencia */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.p-overlay span {
+    border: 1px solid white;
+    padding: 10px 20px;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    font-weight: 900;
+    color: white;
+}
+
+.p-card:hover .p-overlay { 
+    opacity: 1; 
+}
+
+.p-info { 
+    padding: 35px; 
+}
+
+/* Agregamos esto para asegurar que el texto sea blanco y destaque */
+.p-info h3 {
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.p-info p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+
+/* --- LIMPIEZA TOTAL: AZUL BELGRANO --- */
+
+.seccion-corte-final {
+   background-color: var(--belgrano-dark);
+    padding: 100px 5%;
+    margin: 0;           /* Elimina cualquier espacio entre secciones */
+    border: none;        /* Elimina bordes accidentales */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* La tarjeta (Elimina el gris y el blanco) */
+.tarjeta-corte-unificada {
+display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: var(--surface-light); /* Un gris azulado muy oscuro, no negro puro */
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+}
+
+/* Imagen al 100% */
+.tarjeta-corte-unificada .product-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Contenedor de texto azul */
+.tarjeta-corte-unificada .product-detail {
+    padding: 60px;
+    background-color: #0a111d; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tarjeta-corte-unificada h2 {
+    color: #ffffff;
+    font-size: 2.8rem;
+    font-weight: 900;
+    margin: 15px 0;
+    line-height: 1.1;
+}
+
+.tarjeta-corte-unificada .brand-line {
+    color: #0056b3; /* Azul de tu logo */
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Botones alineados y azules */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-contact-elite {
+    background: #0056b3;
+    color: white;
+    padding: 15px 25px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.btn-pdf-elite {
+    background: transparent;
+    border: 1px solid #ffffff;
+    color: white;
+    padding: 15px 25px;
+    cursor: pointer;
+    border-radius: 4px;
+
+}
+/* Ajuste de botones para el nuevo fondo */
+.btn-pdf { 
+    background: rgba(255, 255, 255, 0.05); 
+    color: white; 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    padding: 15px 30px; 
+    font-weight: 700; 
+    cursor: pointer; 
+    transition: 0.3s;
+}
+
+.btn-pdf:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* SIDE PANEL - ACTUALIZADO PARA CIERRE POR CLIC EXTERNO */
+.side-panel {
+    position: fixed; 
+    top: 0; 
+    right: -100%; 
+    width: 100%; /* Siempre 100% para cubrir la pantalla y detectar el clic */
+    height: 100%;
+    background: rgba(0, 0, 0, 0); /* Fondo invisible por defecto */
+    z-index: 2000; 
+    transition: background 0.4s ease, right 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    display: flex;
+    justify-content: flex-end; /* Empuja el contenido a la derecha */
+    pointer-events: none; /* Evita que bloquee la web cuando está cerrado */
+}
+
+.side-panel.active { 
+    right: 0; 
+    background: rgba(0, 11, 26, 0.6); /* Oscurece el catálogo al abrirse */
+    pointer-events: auto; /* Activa la detección de clics */
+}
+
+/* AQUÍ PASAMOS EL FONDO AZUL Y EL ANCHO AL CONTENIDO */
+.panel-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 100%;
+    height: 100%;
+    max-width: 45vw;
+
+    background: radial-gradient(circle at top right, #001a33, #000b1a);
+    border-left: 2px solid var(--belgrano-blue);
+
+    padding: 80px 10%;
+    overflow-y: auto;
+
+    transform: translateX(100%);
+    transition: transform 0.45s cubic-bezier(.4,0,.2,1);
+    cursor: default; /* Para que dentro del panel el mouse sea normal */
+}
+
+.side-panel.active .panel-content {
+    transform: translateX(0);
+}
+
+.panel-content .ai-agent {
+  transform: none;
+}
+
+
+/* En PC, el panel de contenido vuelve al 45% */
+@media (min-width: 1024px) { 
+    .panel-content { width: 45%; } 
+}
+
+/* AI AGENT TRIGGER */
+/* --- AI AGENT TRIGGER: ESTILO COMANDO --- */
+#ai-agent-trigger {
+ position: fixed;
+ bottom: 30px;
+ right: 100px;
+ background: rgba(0, 11, 26, 0.9); /* Fondo oscuro semitransparente */
+ border: 1px solid var(--belgrano-blue);
+ color: #fff;
+ padding: 12px 24px;
+ font-size: 0.65rem;
+ font-weight: 900;
+ letter-spacing: 2px;
+ z-index: 3000;
+ cursor: pointer;
+ backdrop-filter: blur(10px);
+ display: flex;
+ align-items: center;
+ gap: 12px;
+ box-shadow: 0 0 30px rgba(0, 74, 153, 0.2);
+ transition: 0.3s ease;
+}
+
+#ai-agent-trigger:hover {
+ background: var(--belgrano-blue);
+ color: white;
+ box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
+ transform: translateY(-5px);
+}
+
+#ai-agent-trigger .dot {
+ width: 8px;
+ height: 8px;
+ background: var(--belgrano-blue);
+ border-radius: 50%;
+ box-shadow: 0 0 10px var(--belgrano-blue);
+ animation: pulse-blue 2s infinite;
+}
+
+/* Bloqueo de interferencia: Ocultar IA cuando el panel está activo */
+#spec-panel.active + #ai-agent-trigger {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transition: 0.3s ease;
+}
+
+/* Animación de pulso para que parezca un sistema "vivo" */
+@keyframes pulse-blue {
+ 0% { transform: scale(1); opacity: 1; }
+50% { transform: scale(1.5); opacity: 0.5; }
+ 100% { transform: scale(1); opacity: 1; }
+}
+
+#ai-agent-trigger:hover .dot {
+ background: #fff;
+ box-shadow: 0 0 10px #fff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+ .hero-container, .product-card { grid-template-columns: 1fr; }
+ .hero-stats { flex-direction: row; padding-left: 0; margin-top: 50px; justify-content: center; }
+ .product-detail { padding: 40px 5%; }
+}
+
+.ficha-grid {
+ display: grid;
+ gap: 30px;
+ margin-top: 40px;
+}
+.ficha-section h3 {
+ font-size: 0.8rem;
+ color: var(--belgrano-blue);
+ margin-bottom: 15px;
+ border-bottom: 1px solid rgba(255,255,255,0.1);
+ padding-bottom: 5px;
+}
+.row {
+ display: flex;
+ justify-content: space-between;
+ padding: 8px 0;
+ font-size: 0.9rem;
+}
+.row strong { color: #fff; }
+.row span { color: rgba(255,255,255,0.5); }
+
+.hero-text-side {
+ animation: revealIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-stats .stat-item {
+ opacity: 0;
+ animation: revealIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Delay para que las stats entren después del título */
+.hero-stats .stat-item:nth-child(1) { animation-delay: 0.4s; }
+.hero-stats .stat-item:nth-child(2) { animation-delay: 0.6s; }
+.hero-stats .stat-item:nth-child(3) { animation-delay: 0.8s; }
+
+/* --- PARTNER LOGOS: SELLOS DE CALIDAD --- */
+.partner-logos {
+ display: flex;
+ align-items: center;
+ gap: 30px;
+ margin-top: 20px;
+}
+
+.partner-logos img {
+ height: 35px; /* Altura uniforme para que se vea ordenado */
+ width: auto;
+ transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+ /* Estado inicial: sutil y elegante */
+ filter: grayscale(1) brightness(2) opacity(0.5); 
+}
+
+.partner-logos img:hover {
+ /* Estado activo: cobra vida con el color original y un brillo azul */
+ filter: grayscale(0) brightness(1) opacity(1) 
+ drop-shadow(0 0 15px rgba(0, 74, 153, 0.6));
+ transform: scale(1.1) translateY(-5px);
+}
+
+/* Decorador de línea para títulos de secciones */
+.p-line {
+ display: block;
+ font-size: 0.65rem;
+ font-weight: 900;
+ color: var(--belgrano-blue);
+ letter-spacing: 3px;
+ margin-bottom: 15px;
+ text-transform: uppercase;
+ border-left: 3px solid var(--belgrano-blue); padding-left: 15px;
+}
+
+
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    padding: 100px 5%;
+    align-items: center;
+}
+
+.norma-box {
+    background: #f8f9fa;
+    padding: 25px;
+    border-left: 5px solid var(--belgrano-blue);
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.norma-box:hover {
+    transform: translateX(10px);
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.norma-box h4 {
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: #111;
+}
+
+
+.cta-engineering .portal-btn {
+    text-decoration: none;
+    font-weight: 800;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.cta-engineering .portal-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Ajuste para que los logos de partners no se amontonen en móvil */
+@media (max-width: 768px) {
+    .partners-section div {
+        flex-direction: column;
+        gap: 40px !important;
+    }
+}
+
+/* Imagen específica para la sección de ingeniería - AJUSTE DE CONTRASTE */
+/* --- HERO INGENIERÍA: AJUSTE FINAL DE CONTRASTE --- */
+.hero-ingenieria::before {
+    /* Combinamos lo mejor de ambos: sombra profunda bajo el texto y destello azul */
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(0, 118, 255, 0.15) 0%, transparent 50%), 
+        linear-gradient(to right, #050608 30%, rgba(5, 6, 8, 0.7) 50%, transparent 90%),
+        url('gemini.jpg') !important;
+    
+    /* Filtro equilibrado: oscurece chispas pero mantiene el drama del acero */
+    filter: brightness(0.6) contrast(1.2) !important; 
+    opacity: 1 !important;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.text-glow {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--cyan);
+    /* Doble capa de sombra para legibilidad extrema */
+    filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.7)) 
+            drop-shadow(0 0 5px rgba(0,0,0,1));
+            letter-spacing: 1px;
+}
+
+/* --- REDISEÑO TITÁN: SECCIÓN INGENIERÍA FINAL --- */
+/* --- REDISEÑO FINAL CTA: INGENIERÍA --- */
+.final-cta {
+    position: relative;
+    padding: 180px 10%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Alineación a la izquierda */
+    background: 
+        radial-gradient(circle at 40% 50%, rgba(0, 242, 255, 0.15) 0%, transparent 60%),
+        linear-gradient(to right, var(--belgrano-dark) 20%, rgba(0, 11, 26, 0.7) 60%, transparent 100%),
+        url('gemini.jpg') !important; 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    text-align: left !important;
+    border-top: 1px solid var(--accent);
+    overflow: hidden;
+}
+
+/* El blueprint (cuadrícula técnica) */
+.final-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(0, 242, 255, 0.08) 1.5px, transparent 1.5px),
+        linear-gradient(90deg, rgba(0, 242, 255, 0.08) 1.5px, transparent 1.5px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(circle at 40% 50%, black, transparent 80%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.final-cta h2 {
+    font-size: clamp(3rem, 8vw, 6rem) !important;
+    font-weight: 300 !important; /* Estilo fino */
+    line-height: 0.85 !important;
+    letter-spacing: -3px !important;
+    text-transform: uppercase;
+    margin-bottom: 40px !important;
+    position: relative;
+    z-index: 10;
+}
+
+.final-cta h2 span {
+    display: block;
+    font-weight: 900 !important; /* Estilo grueso */
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--cyan);
+    filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.5));
+}
+
+.final-cta p {
+    max-width: 550px;
+    font-size: 1.2rem !important;
+    color: rgba(255,255,255,0.7) !important;
+    line-height: 1.5 !important;
+    border-left: 4px solid var(--cyan);
+    padding-left: 25px;
+    margin: 0 0 50px 0 !important; /* Sin 'auto' para que no se centre */
+    text-align: left !important;
+    position: relative;
+    z-index: 10;
+}
+
+.final-cta .portal-btn {
+    background: transparent !important;
+    border: 2px solid var(--cyan) !important;
+    padding: 20px 45px !important;
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.2) !important;
+}
+
+.final-cta .portal-btn:hover {
+    background: var(--cyan) !important;
+    color: #000 !important;
+    box-shadow: 0 0 50px rgba(0, 242, 255, 0.6) !important;
+}
+
+/* --- PASO 5: CRONOLOGÍA HISTÓRICA --- */
+.history-section {
+    padding: 120px 10%;
+    position: relative;
+    background: var(--belgrano-dark);
+}
+
+/* La línea vertical del centro */
+.history-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--belgrano-blue), transparent);
+    transform: translateX(-50%);
+}
+
+.history-event {
+    position: relative;
+    width: 50%;
+    padding: 40px;
+    margin-bottom: 20px;
+}
+
+/* Eventos a la izquierda e izquierda (Zig-Zag) */
+.history-event:nth-child(even) { margin-left: auto; text-align: left; }
+.history-event:nth-child(odd) { margin-right: auto; text-align: right; }
+
+.event-date {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--belgrano-blue);
+    margin-bottom: 10px;
+    display: block;
+}
+
+.event-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 30px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: 0.4s;
+}
+
+.event-card:hover {
+    border-color: var(--belgrano-blue);
+    background: rgba(0, 74, 153, 0.05);
+    transform: translateY(-5px);
+}
+
+.event-card h3 {
+    font-weight: 900;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.event-card p {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.95rem;
+}
+
+/* Puntero que une la caja con la línea */
+.event-pointer {
+    position: absolute;
+    top: 50px;
+    width: 20px;
+    height: 20px;
+    background: var(--belgrano-blue);
+    border-radius: 50%;
+    z-index: 5;
+}
+
+.history-event:nth-child(odd) .event-pointer { right: -10px; }
+.history-event:nth-child(even) .event-pointer { left: -10px; }
+
+
+
+/* 2. Estilos para POST-VENTA (Archivo 4) */
+.service-hero {
+    padding: 150px 10% 80px;
+    background: linear-gradient(rgba(0,11,26,0.9), rgba(0,11,26,0.9)), url('postventa-bg.jpg');
+    background-size: cover;
+    text-align: center;
+}
+
+
+/* ESTILOS DE ENLACES DEL FOOTER */
+.footer-top a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: 0.3s ease;
+}
+
+.footer-top a:hover {
+    color: var(--belgrano-accent);
+}
+
+
+/* O si no usas clases en el body, agrégalo a las secciones principales de cada interior */
+.catalog-section, .main-wrapper, .history-section, .contact-page {
+    padding-top: 140px !important;
+}
+
+/* --- SECCIÓN POSTVENTA UNIFICADA --- */
+
+/* 1. El Hero: Vital para el espacio con la Navbar */
+/* --- POSTVENTA: REPARACIÓN DE DISEÑO --- */
+
+.service-hero {
+    padding: 160px 10% 100px !important;
+    background: linear-gradient(rgba(0,11,26,0.85), rgba(0,11,26,0.95)), url('postventa.jpg');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.parts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Crea las columnas */
+    gap: 30px;
+    padding: 80px 10%;
+    background: #000711; /* Fondo un poco más profundo */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.part-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    transition: 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.part-item:hover {
+    border-color: var(--belgrano-blue);
+    background: rgba(0, 74, 153, 0.1);
+    transform: translateY(-8px);
+}
+
+.part-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.part-item h3 {
+    color: #ffffff !important; /* Forzamos blanco para los títulos */
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.part-item p {
+    color: rgba(255, 255, 255, 0.7) !important; /* Gris claro para lectura */
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+/* Fix para el banner de emergencia que se ve cortado */
+.emergency-banner {
+    background: var(--belgrano-blue);
+    padding: 100px 10%;
+    text-align: center;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn-ghost {
+    display: inline-block;
+    padding: 15px 35px;
+    border: 2px solid white;
+    color: white;
+    text-decoration: none;
+    font-weight: 900;
+    letter-spacing: 2px;
+    transition: 0.3s;
+
+}
+
+/* RESET DE ESTÉTICA A MODO ELITE */
+.contact-page-elite {
+    background: radial-gradient(circle at top right, #0a0c10, #050608);
+    min-height: 100vh;
+    padding: 120px 5% 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.form-container-premium {
+    width: 100%;
+    max-width: 900px;
+    background: rgba(20, 22, 26, 0.6);
+    padding: 60px;
+    border: 1px solid rgba(0, 118, 255, 0.2);
+    position: relative;
+    backdrop-filter: blur(20px);
+}
+
+/* Decoración técnica en las esquinas */
+.form-container-premium::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px; width: 40px; height: 40px;
+    border-top: 2px solid var(--accent); border-left: 2px solid var(--accent);
+}
+
+.form-header h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: -2px;
+    margin: 10px 0;
+}
+
+.text-glow-blue {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--accent);
+    filter: drop-shadow(0 0 10px rgba(0, 118, 255, 0.5));
+}
+
+.tech-tag {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    color: var(--cyan);
+    font-weight: 700;
+}
+
+/* INPUTS ESTILO TERMINAL */
+.input-box {
+    position: relative;
+    margin-top: 40px;
+}
+
+.input-box input, .input-box select, .input-box textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    font-size: 1rem;
+    padding: 10px 0;
+    outline: none;
+    font-family: 'Outfit', sans-serif;
+}
+
+.input-box label {
+    position: absolute;
+    top: 10px; left: 0;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 2px;
+    transition: 0.4s;
+    pointer-events: none;
+}
+
+/* Efecto de animación al escribir */
+.input-box input:focus ~ label, .input-box input:valid ~ label,
+.input-box select:focus ~ label, .input-box select:valid ~ label {
+    top: -20px;
+    color: var(--cyan);
+}
+
+.input-box .line {
+    position: absolute;
+    bottom: 0; left: 0; width: 0; height: 2px;
+    background: var(--accent);
+    transition: 0.5s;
+}
+
+.input-box input:focus ~ .line { width: 100%; }
+
+/* BOTÓN DE ALTO IMPACTO */
+.btn-industrial-submit {
+    grid-column: span 2;
+    margin-top: 50px;
+    background: var(--accent);
+    border: none;
+    padding: 20px;
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-industrial-submit:hover {
+    background: var(--cyan);
+    color: #000;
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+}
+
+/* EFECTO DE FONDO TECNOLÓGICO */
+.tech-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: -1;
+    background: #050608;
+}
+
+/* Rejilla técnica (Grid) */
+.grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(rgba(0, 118, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 118, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at center, black, transparent 90%);
+}
+
+/* Animación de escaneo de fondo */
+.grid-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent, rgba(0, 242, 255, 0.1), transparent);
+    height: 20%;
+    width: 100%;
+    animation: scan-slow 8s linear infinite;
+}
+
+@keyframes scan-slow {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(500%); }
+}
+
+/* STATUS BAR */
+.status-bar {
+    font-size: 0.6rem;
+    color: var(--cyan);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.status-bar .dot {
+    height: 6px;
+    width: 6px;
+    background: var(--cyan);
+    border-radius: 50%;
+    margin-right: 10px;
+    box-shadow: 0 0 10px var(--cyan);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* CONTENEDOR DEL FORMULARIO */
+.form-container-premium {
+    background: rgba(10, 12, 16, 0.8);
+    border: 1px solid rgba(0, 118, 255, 0.3);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    padding: 50px;
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+
+/* --- FOOTER UNIFICADO: ELITE EDITION --- */
+.footer-belgrano {
+    background-color: var(--belgrano-dark);
+    padding: 100px 5%;
+    margin: 0;           /* Elimina cualquier espacio entre secciones */
+    border: none;        /* Elimina bordes accidentales */
+    width: 100%;
+    box-sizing: border-box;
+
+}
+/* --- REDISEÑO FOOTER ELITE --- */
+.footer-belgrano {
+    background-color: #050608; /* Negro más profundo para el cierre */
+    padding: 100px 5% 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr; /* 4 columnas para dar más aire */
+    gap: 40px;
+}
+
+.footer-column h4 {
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Línea decorativa bajo títulos del footer */
+.footer-column h4::after {
+    content: "";
+    position: absolute;
+    bottom: -10px; left: 0;
+    width: 30px; height: 2px;
+    background: var(--belgrano-blue);
+}
+
+.footer-description {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-top: 20px;
+}
+
+/* Estilo de links de navegación en footer */
+.footer-nav-list {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-nav-list li {
+    margin-bottom: 12px;
+}
+
+.footer-nav-list a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.footer-nav-list a:hover {
+    color: var(--cyan);
+    transform: translateX(5px);
+}
+
+/* Estilo de contacto */
+.footer-contact-info p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-contact-info strong {
+    color: #fff;
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.footer-column p, .footer-column a {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin: 5px 0;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-column a:hover {
+    color: #fff;
+}
+
+.footer-description {
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+.footer-bottom {
+    max-width: 1200px;
+    margin: 60px auto 0;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 1px;
+}
+
+@keyframes revealIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+        filter: blur(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+        filter: blur(0); 
+    }
+} 
+
+@media (max-width: 900px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    .footer-description {
+        margin: 20px auto !important;
+    }
+}
+
+/* --- CORRECCIÓN PARA EL INDEX (CLASE ELITE) --- */
+.technical-feature {
+    background-color: var(--belgrano-dark);
+    padding: 100px 5%;
+    margin: 0;           /* Elimina cualquier espacio entre secciones */
+    border: none;        /* Elimina bordes accidentales */
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+.product-card-elite { 
+   display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: var(--surface-light); /* Un gris azulado muy oscuro, no negro puro */
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+    padding: 60px;
+    background-color: transparent;
+}
+
+/* Forzar que la imagen no se escape de su mitad */
+.product-visual { 
+    position: relative !important; 
+    height: 100% !important; 
+    min-height: 500px !important; 
+}
+
+.product-card-elite .product-visual img { 
+    width: 100% !important; 
+    height: 100% !important; 
+    object-fit: cover !important; 
+    display: block !important;
+}
+
+/* Ajuste del texto para que no sea negro */
+.product-detail { 
+   padding: 60px;
+    background-color: transparent;
+}
+
+.product-card-elite h2 { 
+    color: #ffffff !important; 
+    font-size: 2.8rem !important;
+}
+
+ .info-box p { 
+    color: rgba(255,255,255,0.7) !important; 
+}
+
+/* Estilo de los botones dentro de la versión Elite */
+.btn-pdf-elite {
+    background: #1a1d23;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.btn-contact-elite {
+    background: var(--belgrano-blue);
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* === HERO CTA UNIFICADOS === */
+.hero-elite .hero-cta-group {
+    display: flex;
+    gap: 18px;
+}
+
+.hero-elite .hero-cta-group a {
+    height: 54px;
+    padding: 0 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    line-height: 1;
+    align-items: center;
+}
+
+/* Estilo único para ambos botones */
+.hero-elite .hero-cta-group .btn-primary-belgrano,
+.hero-elite .hero-cta-group .btn-ghost {
+    background: linear-gradient(135deg, #0057ff, #003b8f);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+}
+
+/* Hover */
+.hero-elite .hero-cta-group .btn-primary-belgrano:hover,
+.hero-elite .hero-cta-group .btn-ghost:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0,87,255,0.35);
+}
+
+/* 1. OCULTAR ELEMENTOS FLOTANTES (IA Y WHATSAPP) AL ABRIR EL PANEL */
+/* Usamos + porque el trigger ahora es el hermano siguiente inmediato */
+#spec-panel.active + #ai-agent-trigger,
+#spec-panel.active ~ .wsp-float {
+    display: none !important;
+}
+
+/* BOTONES DE ACCIÓN DENTRO DEL PANEL */
+.ficha-actions {
+    margin-top: 50px;
+    padding-bottom: 60px; /* Espacio extra al final para que no se corte */
+    display: grid;
+    gap: 15px;
+}
+
+.ficha-actions .btn-primary-belgrano {
+    background: #ffffff !important; /* Blanco sólido */
+    color: #000000 !important;    /* Texto negro */
+    border: none !important;
+    font-weight: 800;
+    height: 55px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: 0.3s ease;
+}
+
+.ficha-actions .btn-primary-belgrano:hover {
+    background: #f0f0f0 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* Botón secundario (Fantasma) */
+.ficha-actions .btn-ghost {
+    width: 100%;
+    margin-left: 0;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: transparent;
+    color: white;
+    padding: 15px;
+    font-weight: 700;
+}
+
+
+.filter-container h2 {
+    color: #fff;
+    margin-top: 10px;
+}
+
+.filter-group { 
+    margin-top: 30px; 
+    display: flex; 
+    justify-content: center; 
+    gap: 12px; 
+    flex-wrap: wrap; 
+}
+
+.filter-btn { 
+    padding: 12px 24px; 
+    border: 1px solid rgba(255,255,255,0.1); 
+    background: rgba(255,255,255,0.03); 
+    color: rgba(255,255,255,0.6);
+    border-radius: 4px; /* Más industrial que circular */
+    cursor: pointer; 
+    font-weight: 700; 
+    font-size: 0.75rem; 
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.filter-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+}
+
+.filter-btn.active { 
+    background: #0066cc; /* Azul Belgrano */
+    color: white; 
+    border-color: #0066cc; 
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+}
+
+/* Manejo de estados de las tarjetas */
+.p-card.hidden { 
+    display: none; 
+}
+
+/* Estilos internos del SIDE PANEL (Ficha Técnica) */
+#dynamic-content .ficha-header {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+#dynamic-content h3 {
+    color: #0066cc;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+#dynamic-content .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.95rem;
+}
+
+#dynamic-content .row strong {
+    color: rgba(255,255,255,0.5);
+    font-weight: 400;
+}
+
+#dynamic-content .row span {
+    color: #fff;
+    font-weight: 700;
+}
+
+.btn-close-panel {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.5);
+    padding: 8px 15px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: 0.3s;
+}
+
+.btn-close-panel:hover {
+    color: #fff;
+    border-color: #fff;
+}
+
+/* ===== Ingeniero IA (igual en todo el sitio) ===== */
+
+.ai-agent {
+  margin-top: 40px;
+  padding: 22px;
+
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+
+  text-align: center;
+  cursor: pointer;
+
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 136, 0.15),
+    0 0 25px rgba(0, 255, 136, 0.25);
+
+  backdrop-filter: blur(6px);
+}
+
+
+.category-title {
+    margin-top: 90px;
+    margin-bottom: 35px;
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.product-grid-nexura {
+    margin-bottom: 40px;
+}
+
+
+.footer-industrial {
+    background: linear-gradient(180deg, #020b18, #000814);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 80px 5% 30px;
+    color: rgba(255,255,255,0.7);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px;
+}
+
+.footer-col h3 {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.footer-col h4 {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: var(--belgrano-blue);
+    margin-bottom: 20px;
+}
+
+.footer-col p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+}
+
+.footer-cta {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 22px;
+    border: 1px solid var(--belgrano-blue);
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.footer-cta:hover {
+    background: var(--belgrano-blue);
+}
+
+.footer-bottom {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.75rem;
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+
+.p-img img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+
+/* Separación clara entre secciones de productos */
+.category-title {
+    margin-top: 120px;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+/* ================================
+   ESPACIADOS GENERALES DEL CATÁLOGO
+================================ */
+
+/* La primera sección no necesita tanto margen */
+.catalog-section .category-title:first-of-type {
+    margin-top: 60px;
+}
+
+.product-grid-nexura {
+    margin-bottom: 80px;
+}
+
+
+/* ================================
+   TEXTOS POR ENCIMA DEL FONDO
+================================ */
+
+.catalog-title {
+    position: relative;
+    z-index: 2;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+}
+
+.division-label,
+.pre-title {
+    position: relative;
+    z-index: 2;
+}
+
+/* =====================================
+   ESPACIADOS GENERALES DEL CATÁLOGO
+===================================== */
+
+/* La primera sección no necesita tanto margen */
+.catalog-section .category-title:first-of-type {
+    margin-top: 60px;
+}
+
+.product-grid-nexura {
+    margin-bottom: 80px;
+}
+
+/* =====================================
+   HEADER / FILTROS – CATÁLOGO PRODUCTOS
+===================================== */
+/* ================================
+   HEADER CATÁLOGO CON LOGO DE FONDO
+================================ */
+.filter-container {
+    position: relative;
+    padding: 150px 5% 120px;
+    text-align: center;
+    overflow: hidden;
+
+    background-color: #020b18;
+    background-image:
+        radial-gradient(
+            ellipse at center,
+            rgba(0, 80, 160, 0.18),
+            rgba(0, 10, 25, 0.95) 70%
+        ),
+        url("metalurgica.png");
+
+    background-repeat: no-repeat;
+    background-position: center 55%;
+    background-size: 360px;
+}
+
+/* Overlay oscuro */
+.filter-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 1;
+}
+
+/* Textos y botones por encima */
+.filter-container > * {
+    position: relative;
+    z-index: 2;
+}
+
+
+.catalog-title {
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+}
+
+.pre-title {
+    color: var(--belgrano-blue, #0066cc);
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.filter-group {
+    margin-top: 40px;
+}
+
+/* ================================
+   LOGO LINK (si usas logo clickeable)
+================================ */
+
+.logo-link {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    color: inherit;
+}
+
+.logo-link:hover {
+    filter: brightness(1.15);
+    transition: filter 0.3s ease;
+}
+
+.logo-link .logo span {
+    color: var(--belgrano-blue, #0066cc);
+}
+
+
+/* FOOTER INDUSTRIAL */
+.footer-industrial {
+    background: #080c14;
+    color: #fff;
+    padding: 80px 0 30px;
+    border-top: 2px solid var(--belgrano-blue);
+    font-family: 'Outfit', sans-serif;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: 1.5fr 0.8fr 1.2fr 1.2fr;
+    gap: 50px;
+}
+
+/* El Logo en el Footer */
+.footer-logo-main {
+    height: 80px;
+    width: 80px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 15px rgba(0, 102, 204, 0.4));
+    transition: 0.4s;
+}
+
+.footer-logo-main:hover {
+    transform: rotate(5deg) scale(1.1);
+}
+
+.brand-name {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.brand-name span {
+    color: var(--belgrano-blue);
+}
+
+.footer-brand p {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Títulos de columnas */
+.footer-industrial h4 {
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    color: var(--belgrano-blue);
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+/* Links */
+.footer-nav-list, .footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li { margin-bottom: 12px; }
+.footer-links ul li a {
+    text-decoration: none;
+    color: rgba(255,255,255,0.7);
+    transition: 0.3s;
+}
+.footer-links ul li a:hover { color: #fff; padding-left: 5px; }
+
+/* Iconos Sociales */
+.social-icons-group {
+    display: flex;
+    gap: 15px;
+}
+
+.social-btn {
+    width: 45px;
+    height: 45px;
+    background: rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: #fff;
+    transition: 0.3s;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.social-btn svg { width: 22px; }
+
+.social-btn:hover {
+    background: var(--belgrano-blue);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 102, 204, 0.3);
+}
+
+/* Parte Inferior */
+.footer-bottom {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+}
+
+.footer-bottom .divider { margin: 0 10px; }
+
+/* Responsive */
+@media (max-width: 992px) {
+    .footer-container { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+    .footer-container { grid-template-columns: 1fr; text-align: center; }
+    .social-icons-group { justify-content: center; }
+}
+
+/* Espaciado en la columna de contacto */
+.footer-contact .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px; /* Aquí controlas la separación entre Dirección, Teléfono y Email */
+}
+
+.footer-contact .icon {
+    color: var(--belgrano-blue);
+    font-style: normal;
+    font-size: 1.1rem;
+    margin-top: 2px;
+}
+
+.footer-contact span {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+    font-size: 0.95rem;
+}
+
+/* Ajuste extra para que los links del sitio no se vean tan apretados */
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+/* --- SECCIÓN UBICACIÓN: DARK MODE PERMANENTE --- */
+.ubicacion-planta {
+    position: relative;
+    line-height: 0; /* Elimina espacios residuales debajo del iframe */
+    background: #080c14;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mapa-container {
+    position: relative;
+    width: 100%;
+    height: 450px; /* Altura estándar industrial */
+    overflow: hidden;
+    
+    /* Filtros optimizados: Invierten el mapa pero mantienen la coherencia visual */
+    /* El hover ha sido eliminado para evitar que el mapa vuelva a ser blanco */
+    filter: grayscale(0.2) contrast(1.1) invert(0.9) hue-rotate(180deg) brightness(0.9);
+}
+
+.mapa-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ESTA ES LA PIEZA QUE FALTA: LA DEFINICIÓN DEL MOVIMIENTO */
+@keyframes scan {
+    0% { top: -100%; }
+    100% { top: 100%; }
+}
+
+/* ESTO ACTIVA EL LÁSER EN CUALQUIER DIV CON ESTA CLASE */
+.plasma-visual::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(0, 242, 255, 0.3), transparent);
+    animation: scan 4s linear infinite;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* ESTO LO VUELVE ROJO PARA EL FEA */
+.fea-laser::after {
+    background: linear-gradient(to bottom, transparent, rgba(255, 0, 0, 0.6), transparent) !important;
+}
+
+.data-card .big-num {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 15px;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(0, 118, 255, 0.4);
+}
+

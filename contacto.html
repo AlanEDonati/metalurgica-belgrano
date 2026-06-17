@@ -1,0 +1,238 @@
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COTIZACIÓN TÉCNICA | Metalúrgica Belgrano</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050608;
+            --belgrano-blue: #004a99; /* El azul fuerte de tu marca */
+            --belgrano-light: #0076ff;
+            --glass: rgba(15, 20, 25, 0.85);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            background-color: var(--bg);
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* FONDO DE REJILLA SOBERBIO */
+        .blueprint-bg {
+            position: fixed; inset: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+
+        /* NAVBAR UNIFICADA */
+        .navbar { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 20px 5%; position: fixed; top: 0; width: 100%; 
+            background: rgba(5, 6, 8, 0.98); backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); z-index: 1000; 
+            box-sizing: border-box;
+        }
+        .logo { font-weight: 900; font-size: 1.3rem; letter-spacing: 1px; }
+        .logo span { color: var(--belgrano-light); }
+
+        .main-wrapper {
+            min-height: 100vh;
+            display: flex; justify-content: center; align-items: center;
+            padding: 120px 5% 80px;
+        }
+
+        .premium-card {
+            width: 100%; max-width: 1000px;
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 60px;
+            position: relative;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+        }
+
+        /* DETALLE LATERAL AZUL BELGRANO */
+        .premium-card::before {
+            content: ""; position: absolute; left: 0; top: 10%; height: 80%; width: 4px;
+            background: var(--belgrano-blue); box-shadow: 0 0 20px var(--belgrano-blue);
+        }
+
+        .header-box { margin-bottom: 50px; }
+        .tag-line { font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; color: var(--belgrano-light); text-transform: uppercase; margin-bottom: 10px; display: block; }
+
+        h1 { 
+            font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; 
+            margin: 0; line-height: 1; letter-spacing: -2px; 
+        }
+        .outline { 
+            color: transparent; -webkit-text-stroke: 1px #fff; opacity: 0.8;
+        }
+
+        /* FORMULARIO INDUSTRIAL */
+        .grid-form { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; }
+
+        .field { display: flex; flex-direction: column; }
+        .field label { 
+            font-size: 0.65rem; font-weight: 900; color: #888; 
+            letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px;
+        }
+
+        .field input, .field select, .field textarea {
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px; color: #fff; font-family: 'Outfit'; 
+            font-size: 0.95rem; transition: 0.3s;
+        }
+
+        .field input:focus, .field select:focus, .field textarea:focus {
+            border-color: var(--belgrano-light);
+            background: rgba(0, 74, 153, 0.1);
+            outline: none;
+        }
+
+        .full { grid-column: span 2; }
+
+        /* BOTÓN INSTITUCIONAL */
+        .submit-btn {
+            grid-column: span 2;
+            background: var(--belgrano-blue);
+            color: white; border: none;
+            padding: 22px; font-weight: 900; font-size: 1rem;
+            letter-spacing: 3px; cursor: pointer;
+            transition: 0.4s; text-transform: uppercase;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: #005bc1;
+            box-shadow: 0 15px 30px rgba(0, 74, 153, 0.4);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .grid-form { grid-template-columns: 1fr; }
+            .premium-card { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="blueprint-bg"></div>
+
+    <nav style="display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; position: fixed; top: 0; width: 100%; background: rgba(5, 6, 8, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); z-index: 9999; box-sizing: border-box; font-family: 'Outfit', sans-serif;">
+        
+        <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+            <div style="font-weight: 900; font-size: 1.3rem; color: #ffffff; letter-spacing: 1px;">
+                METALÚRGICA <span style="color: #0076ff; text-shadow: 0 0 15px rgba(0, 118, 255, 0.5);">BELGRANO</span>
+            </div>
+        </a>
+
+        <div style="display: flex; align-items: center;">
+            <a href="index.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 30px; text-transform: uppercase; letter-spacing: 1.5px;">Inicio</a>
+            <a href="productos.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 30px; text-transform: uppercase; letter-spacing: 1.5px;">Productos</a>
+            <a href="ingenieria.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 30px; text-transform: uppercase; letter-spacing: 1.5px;">Ingeniería</a>
+            <a href="postventa.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 30px; text-transform: uppercase; letter-spacing: 1.5px;">Post-Venta</a>
+            <a href="nosotros.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 30px; text-transform: uppercase; letter-spacing: 1.5px;">Nosotros</a>
+            <a href="contacto.html" style="background: #0076ff; color: white; text-decoration: none; padding: 10px 22px; border-radius: 2px; font-size: 0.75rem; font-weight: 700; margin-left: 30px; text-transform: uppercase; letter-spacing: 1.5px; display: inline-block;">COTIZAR AHORA</a>
+        </div>
+    </nav>
+
+    <main class="main-wrapper">
+        <div class="premium-card">
+            <div class="header-box">
+                <span class="tag-line">Departamento Comercial e Ingeniería</span>
+                <h1>PLIEGO DE <span class="outline">CONDICIONES</span></h1>
+                <p style="color:#aaa; margin-top:20px; max-width:550px; line-height:1.6;">
+                    Complete los datos técnicos para recibir una propuesta formal de fabricación adaptada a sus necesidades operativas.
+                </p>
+            </div>
+
+            <form class="grid-form">
+                <div class="field">
+                    <label>Razón Social / Empresa</label>
+                    <input type="text" placeholder="NOMBRE DE LA FIRMA" required>
+                </div>
+                <div class="field">
+                    <label>Persona de Contacto</label>
+                    <input type="text" placeholder="NOMBRE Y APELLIDO" required>
+                </div>
+                <div class="field">
+                    <label>Correo Electrónico</label>
+                    <input type="email" placeholder="CORREO CORPORATIVO" required>
+                </div>
+                <div class="field">
+                    <label>Tipo de Unidad</label>
+                    <select required>
+                        <option value="">SELECCIONE EQUIPO</option>
+                        <option>SEMIRREMOLQUE TANQUE</option>
+                        <option>ACOPLADO TANQUE</option>
+                        <option>TANQUE SOBRE CAMIÓN</option>
+                        <option>TANQUE ESTACIONARIO</option>
+                    </select>
+                </div>
+                <div class="field full">
+                    <label>Especificaciones y Requerimientos Técnicos</label>
+                    <textarea rows="4" placeholder="CAPACIDAD, MATERIALES, PRODUCTO A TRANSPORTAR..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">SOLICITAR PRESUPUESTO TÉCNICO</button>
+            </form>
+        </div>
+    </main>
+
+    <footer style="background: #000; padding: 100px 5% 40px; border-top: 1px solid rgba(255,255,255,0.05); font-family: 'Outfit', sans-serif; position: relative; overflow: hidden;">
+    
+    <div style="position: absolute; top: 0; right: 0; width: 300px; height: 300px; background: radial-gradient(circle, rgba(0, 74, 153, 0.05) 0%, transparent 70%); pointer-events: none;"></div>
+
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 80px; position: relative; z-index: 2;">
+        
+        <div>
+            <div style="font-weight: 900; font-size: 1.5rem; letter-spacing: 1px; margin-bottom: 25px;">
+                METALÚRGICA <span style="color: #0076ff;">BELGRANO</span>
+            </div>
+            <p style="color: rgba(255,255,255,0.4); line-height: 1.8; font-size: 0.9rem; max-width: 320px; margin: 0;">
+                Líderes en ingeniería de transporte de carga líquida y sólida. Innovación y robustez en cada unidad desde Suipacha para todo el país.
+            </p>
+        </div>
+
+        <div>
+            <h4 style="color: #0076ff; font-size: 0.7rem; font-weight: 900; letter-spacing: 3px; margin-bottom: 25px; text-transform: uppercase;">Planta Industrial</h4>
+            <div style="color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 2;">
+                <span style="display: block;">Ruta Nacional 5, Km 126.5</span>
+                <span style="display: block;">Suipacha, Prov. de Buenos Aires</span>
+                <span style="display: block; color: rgba(255,255,255,0.3);">República Argentina</span>
+            </div>
+        </div>
+
+        <div>
+            <h4 style="color: #0076ff; font-size: 0.7rem; font-weight: 900; letter-spacing: 3px; margin-bottom: 25px; text-transform: uppercase;">Canales Oficiales</h4>
+            <div style="margin-bottom: 15px;">
+                <small style="display: block; color: rgba(255,255,255,0.3); font-size: 0.6rem; text-transform: uppercase; margin-bottom: 5px;">Ventas y Exportación</small>
+                <a href="tel:+542324480111" style="color: #fff; text-decoration: none; font-size: 1.1rem; font-weight: 700;">+54 (2324) 480111</a>
+            </div>
+            <div>
+                <small style="display: block; color: rgba(255,255,255,0.3); font-size: 0.6rem; text-transform: uppercase; margin-bottom: 5px;">Consultas Técnicas</small>
+                <a href="mailto:ventas@metalurgicabelgrano.com.ar" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; border-bottom: 1px solid rgba(0, 118, 255, 0.3); padding-bottom: 2px;">ventas@metalurgicabelgrano.com.ar</a>
+            </div>
+        </div>
+    </div>
+
+    <div style="max-width: 1200px; margin: 80px auto 0; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+        <p style="font-size: 0.65rem; color: rgba(255,255,255,0.2); letter-spacing: 1px; margin: 0;">
+            © 2026 METALÚRGICA BELGRANO - DIVISIÓN INGENIERÍA Y DESARROLLO
+        </p>
+        <div style="display: flex; gap: 20px;">
+             <span style="font-size: 0.6rem; color: rgba(255,255,255,0.4); letter-spacing: 2px;">ISO 9001 CERTIFIED</span>
+             <span style="font-size: 0.6rem; color: rgba(255,255,255,0.4); letter-spacing: 2px;">INDUSTRIA ARGENTINA</span>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

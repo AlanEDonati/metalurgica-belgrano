@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POTENCIA INDUSTRIAL | Metalúrgica Belgrano</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050608;
+            --accent: #0076ff;
+            --cyan: #00f2ff;
+            --panel: rgba(20, 22, 26, 0.8);
+            --border: rgba(255, 255, 255, 0.1);
+            --tech-blue: #0076ff;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* HERO SECTION */
+        /* HERO SECTION */
+.hero-premium {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    background: 
+        linear-gradient(to right, var(--bg) 30%, transparent 70%),
+        radial-gradient(circle at 50% 50%, rgba(0, 118, 255, 0.1), transparent),
+        url('gemini.jpg');; /* Pon aquí el nombre de tu archivo */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+        .hero-premium::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+            pointer-events: none;
+        }
+
+        .hero-content { z-index: 10; position: relative; }
+        .hero-content h1 {
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 900;
+            line-height: 0.8;
+            letter-spacing: -4px;
+            margin: 0;
+        }
+
+        .text-glow {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--cyan);
+            filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.6));
+        }
+
+        /* CERTIFICACIONES (LA BÓVEDA) */
+        .cert-vault {
+            background: linear-gradient(90deg, #0a0b0d, #14161a, #0a0b0d);
+            padding: 60px 10%;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cert-card img {
+            max-height: 45px;
+            filter: grayscale(1) brightness(2);
+            opacity: 0.7;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cert-card:hover img {
+            filter: grayscale(0) brightness(1);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .iso-badge {
+            border: 2px solid var(--accent);
+            padding: 10px 20px;
+            display: inline-block;
+            font-weight: 900;
+            color: var(--accent);
+            letter-spacing: 2px;
+        }
+
+        /* PLASMA IMPACT */
+        .plasma-impact {
+            position: relative;
+            padding: 120px 10%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .plasma-visual {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 118, 255, 0.3);
+            border: 1px solid rgba(0, 242, 255, 0.2);
+        }
+
+        .plasma-visual img { width: 100%; display: block; filter: contrast(1.1) brightness(0.9); }
+
+        /* Efecto de escaneo láser animado */
+        .plasma-visual::after {
+            content: "";
+            position: absolute;
+            top: -100%; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(0, 242, 255, 0.2), transparent);
+            animation: scan 4s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: -100%; }
+            100% { top: 100%; }
+        }
+
+        /* DATA GRID */
+        .data-grid {
+            padding: 100px 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .data-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 50px 40px;
+            border-radius: 4px;
+            border-left: 4px solid var(--accent);
+            transition: 0.4s;
+        }
+
+        .data-card:hover {
+            background: #1a1d23;
+            transform: translateY(-5px);
+            border-left-color: var(--cyan);
+        }
+
+        .data-card h3 {
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            color: var(--cyan);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .data-card .big-num {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+
+        /* FINAL SECTION */
+      .final-cta {
+    padding: 160px 10%;
+    /* Se usa url() y se separa con una coma del gradient */
+    background: linear-gradient(rgba(3,4,6,0.85), rgba(3,4,6,0.85)), 
+                url('gemini.png'); 
+    background-size: cover;
+    background-position: center; /* Añadido para que la imagen no se corte mal */
+    background-attachment: fixed;
+    text-align: center;
+    border-top: 1px solid var(--accent);
+}
+
+        .portal-btn {
+            display: inline-block;
+            background: var(--tech-blue);
+            padding: 25px 60px;
+            text-decoration: none;
+            color: white;
+            border-radius: 4px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            box-shadow: 0 20px 40px rgba(0,102,255,0.3);
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .portal-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0,102,255,0.5);
+            background: #0084ff;
+        }
+
+        @media (max-width: 768px) {
+            .plasma-impact { grid-template-columns: 1fr; padding: 60px 10%; gap: 40px; }
+            .hero-premium { padding: 0 5%; }
+            .hero-content h1 { font-size: 4rem; }
+        }
+    </style>
+</head>
+<body>
+<nav style="display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; position: fixed; top: 0; width: 100%; background: rgba(5, 6, 8, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); z-index: 9999; box-sizing: border-box; font-family: 'Outfit', sans-serif;">
+    
+    <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+        <div style="font-weight: 900; font-size: 1.3rem; color: #ffffff; letter-spacing: 1px; cursor: pointer;">
+            METALÚRGICA <span style="color: #0076ff; text-shadow: 0 0 15px rgba(0, 118, 255, 0.5);">BELGRANO</span>
+        </div>
+    </a>
+
+  <div style="display: flex; align-items: center;">
+    <a href="index.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 25px; text-transform: uppercase; letter-spacing: 1.5px;">Inicio</a>
+    
+    <a href="productos.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 25px; text-transform: uppercase; letter-spacing: 1.5px;">Productos</a>
+    
+    <a href="ingenieria.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 25px; text-transform: uppercase; letter-spacing: 1.5px;">Ingeniería</a>
+    
+    <a href="postventa.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 25px; text-transform: uppercase; letter-spacing: 1.5px;">Post-Venta</a>
+    
+    <a href="nosotros.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 25px; text-transform: uppercase; letter-spacing: 1.5px;">Nosotros</a>
+
+    <a href="contacto.html" style="background: #0076ff; color: white; text-decoration: none; padding: 10px 22px; border-radius: 2px; font-size: 0.75rem; font-weight: 700; margin-left: 25px; text-transform: uppercase; letter-spacing: 1.5px;">Cotizar Ahora</a>
+</div>
+</div>
+    </nav>
+
+<header class="hero-premium">
+    <div class="hero-content">
+        <span style="color: var(--cyan); font-weight: 900; letter-spacing: 5px; font-size: 0.8rem; text-transform: uppercase;">Engineering Division</span>
+        <h1>
+            POTENCIA<br>
+            <span class="text-glow">INDUSTRIAL</span>
+        </h1>
+        <p style="max-width: 600px; font-size: 1.2rem; color: rgba(255,255,255,0.7); margin-top: 30px; line-height: 1.5;">
+            Desarrollamos la arquitectura del transporte pesado mediante simulación de partículas y materiales de grado aeroespacial.
+        </p>
+    </div>
+</header>
+
+
+    <section class="cert-vault">
+        <div class="cert-card">
+            <div class="iso-badge">ISO 9001:2015</div>
+            <p style="font-size: 0.6rem; margin-top: 10px; opacity: 0.5;">GESTIÓN DE CALIDAD</p>
+        </div>
+        <div class="cert-card">
+            <img src="ardox.png">
+        </div>
+        <div class="cert-card">
+            <img src="strenx.jpg" alt="Strenx Performance Steel">
+        </div>
+        <div class="cert-card">
+            <span style="font-weight: 900; font-size: 1.8rem; letter-spacing: -1px; color: #fff;">INTI<span style="color: var(--accent);">.</span></span>
+            <p style="font-size: 0.6rem; opacity: 0.5;">APROBACIÓN DE PLANTA</p>
+        </div>
+    </section>
+
+<section class="plasma-impact">
+    <div class="plasma-visual">
+        <img src="corte.png" alt="Corte Plasma CNC" style="width: 100%; display: block;">
+    </div>
+    <div>
+        <span style="color: var(--accent); font-weight: 900; letter-spacing: 3px; font-size: 0.8rem;">PRECISIÓN ATÓMICA</span>
+        <h2 style="font-size: 4rem; font-weight: 900; margin: 20px 0; line-height: 1;">Corte Plasma High Definition</h2>
+        <p style="color: #888; font-size: 1.2rem; margin-bottom: 30px; line-height: 1.6;">
+            Nuestra mesa de corte CNC procesa chapas de hasta 12 metros con una tolerancia de error inexistente. El uso de gases inertes garantiza un borde libre de escoria para una soldadura de penetración total.
+        </p>
+        <div style="height: 2px; width: 100px; background: var(--cyan); box-shadow: 0 0 10px var(--cyan);"></div>
+    </div>
+</section>
+
+    <section class="data-grid">
+        <div class="data-card">
+            <h3>Materialidad</h3>
+            <div class="big-num">900<span style="font-size: 1.5rem; color: var(--accent);">MPa</span></div>
+            <p>Límite elástico del acero Strenx®, diseñado para soportar flexiones extremas sin fatiga estructural.</p>
+        </div>
+        <div class="data-card">
+            <h3>Capacidad</h3>
+            <div class="big-num">+3.2<span style="font-size: 1.5rem; color: var(--accent);">t</span></div>
+            <p>Incremento de carga neta mediante la optimización de tara lograda con ingeniería sueca.</p>
+        </div>
+        <div class="data-card">
+            <h3>Simulación</h3>
+            <div class="big-num">100<span style="font-size: 1.5rem; color: var(--accent);">%</span></div>
+            <p>Cada componente pasa por un Análisis de Elementos Finitos (FEA) antes de ingresar a producción.</p>
+        </div>
+    </section>
+
+<section style="background: #050608; border-top: 1px solid var(--border); padding: 140px 10% 100px; display: flex; align-items: center; gap: 80px; position: relative; z-index: 1;">
+    
+    <div class="plasma-visual fea-laser" style="flex: 1; min-height: 400px; background: #0a0b0d; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 60, 0, 0.5); position: relative; overflow: hidden; border-radius: 15px;">
+        
+        <img src="simulacion.jpg" alt="Mapa de estrés FEA" style="width: 100%; height: auto; display: block; filter: saturate(1.2);">
+        
+        <div style="position: absolute; bottom: 15px; right: 15px; background: rgba(0,0,0,0.8); padding: 8px 15px; font-size: 0.65rem; color: #ff3c00; border: 1px solid #ff3c00; font-family: monospace; letter-spacing: 1px; z-index: 3;">
+            STRUCTURAL ANALYSIS: ACTIVE
+        </div>
+    </div>
+
+    <div style="flex: 1; text-align: left;">
+        <span style="color: var(--cyan); font-weight: 900; letter-spacing: 3px; font-size: 0.8rem; display: block; margin-bottom: 10px;">VIRTUAL PROTOTYPING</span>
+        <h2 style="font-size: 3.5rem; font-weight: 900; margin: 0 0 20px 0; line-height: 1.1;">Simulación por Elementos Finitos (FEA)</h2>
+        <p style="color: #888; font-size: 1.1rem; line-height: 1.7; margin-bottom: 30px;">
+            Sometemos nuestras estructuras a cargas dinámicas extremas en entornos virtuales. Esto nos permite identificar puntos de fatiga y optimizar el uso de acero Strenx® donde realmente se necesita, reduciendo el peso muerto sin sacrificar seguridad.
+        </p>
+        <ul style="color: var(--cyan); list-style: none; padding: 0; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px;">
+            <li style="margin-bottom: 10px;">> OPTIMIZACIÓN DE TARA</li>
+            <li style="margin-bottom: 10px;">> TEST DE VULNERABILIDAD ESTRUCTURAL</li>
+            <li>> CUMPLIMIENTO NORMAS ADR / ASME</li>
+        </ul>
+    </div>
+</section>
+
+    <section style="padding: 80px 10%; background: #0a0b0d; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div style="text-align: left; border-left: 1px solid rgba(0, 118, 255, 0.3); padding-left: 20px;">
+        <h4 style="color: var(--accent); margin-bottom: 15px; letter-spacing: 2px; font-size: 0.9rem;">NORMAS INTERNACIONALES</h4>
+        <p style="font-size: 0.85rem; color: #777; line-height: 1.6;">Ingeniería certificada bajo lineamientos globales <strong>DOT 406 (USA), ADR (Europa)</strong> y el riguroso <strong>Código ASME Sección VIII Div. 1</strong>.</p>
+    </div>
+    <div style="text-align: left; border-left: 1px solid rgba(0, 118, 255, 0.3); padding-left: 20px;">
+        <h4 style="color: var(--accent); margin-bottom: 15px; letter-spacing: 2px; font-size: 0.9rem;">TECNOLOGÍA DE SOLDEO</h4>
+        <p style="font-size: 0.85rem; color: #777; line-height: 1.6;">Procesos automatizados de <strong>Arco Sumergido</strong> y soldadura <strong>TIG/MIG</strong> con personal calificado bajo normas AWS para máxima integridad.</p>
+    </div>
+    <div style="text-align: left; border-left: 1px solid rgba(0, 118, 255, 0.3); padding-left: 20px;">
+        <h4 style="color: var(--accent); margin-bottom: 15px; letter-spacing: 2px; font-size: 0.9rem;">RESISTENCIA QUÍMICA</h4>
+        <p style="font-size: 0.85rem; color: #777; line-height: 1.6;">Tratamientos de <strong>pasivado y decapado químico</strong> en tanques de acero inoxidable para garantizar la neutralidad y pureza de la carga.</p>
+    </div>
+</section>
+
+    <section class="final-cta">
+        <h2 style="font-size: 4rem; font-weight: 900; margin-bottom: 30px;">INGENIERÍA SIN CONCESIONES</h2>
+        <p style="color: #ccc; font-size: 1.5rem; max-width: 800px; margin: 0 auto 60px; line-height: 1.4;">
+            Desarrollamos soluciones a medida para las flotas más exigentes de la región.
+        </p>
+        <a href="contacto.html" class="portal-btn">SOLICITAR CONSULTORÍA TÉCNICA</a>
+    </section>
+
+</body>
+</html>
