@@ -6,169 +6,242 @@
     <title>Nuestra Historia | Metalúrgica Belgrano</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos-belgrano.css">
+    <link rel="icon" type="image/png" href="favin-mb.jpg">
+    <link rel="apple-touch-icon" href="favin-mb.jpg">
+    <meta name="theme-color" content="#0066cc">
 </head>
-<body style="background-color: #020305;">
+<body>
 
-    <nav style="display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; position: fixed; top: 0; width: 100%; background: rgba(5, 6, 8, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); z-index: 9999; box-sizing: border-box; font-family: 'Outfit', sans-serif;">
-        <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
-            <div style="font-weight: 900; font-size: 1.3rem; color: #ffffff; letter-spacing: 1px;">
-                METALÚRGICA <span style="color: #0076ff; text-shadow: 0 0 15px rgba(0, 118, 255, 0.5);">BELGRANO</span>
-            </div>
+    <nav class="navbar">
+        <a href="index.html" class="logo-link">
+            <div class="logo">METALÚRGICA <span>BELGRANO</span></div>
         </a>
-        <div style="display: flex; align-items: center;">
-            <a href="index.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 25px; text-transform: uppercase; letter-spacing: 1.5px;">Inicio</a>
-            <a href="nosotros.html" style="color: #ffffff; text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 25px; text-transform: uppercase; letter-spacing: 1.5px;">Nosotros</a>
-            <a href="productos.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 25px; text-transform: uppercase; letter-spacing: 1.5px;">Productos</a>
-            <a href="ingenieria.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 25px; text-transform: uppercase; letter-spacing: 1.5px;">Ingeniería</a>
-            <a href="postventa.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 25px; text-transform: uppercase; letter-spacing: 1.5px;">Post-Venta</a>
-            <a href="contacto.html" style="background: #0076ff; color: white; text-decoration: none; padding: 10px 22px; border-radius: 2px; font-size: 0.75rem; font-weight: 700; margin-left: 25px; text-transform: uppercase; letter-spacing: 1.5px;">Cotizar Ahora</a>
+
+        <div class="nav-links">
+            <a href="index.html">INICIO</a>
+            <a href="productos.html">PRODUCTOS</a>
+            <a href="ingenieria.html">INGENIERÍA</a>
+            <a href="postventa.html">POST-VENTA</a>
+            <a href="nosotros.html" class="active">NOSOTROS</a>
+            <a href="contacto.html" class="portal-btn">COTIZAR AHORA</a>
         </div>
     </nav>
 
-   <header style="padding: 200px 10% 100px; background: #020305; position: relative;">
-    
-    <div style="position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.5;"></div>
+    <!-- HERO ELITE -->
+    <header class="about-hero">
+        <div class="about-hero-grid"></div>
 
-    <div style="position: relative; z-index: 2; max-width: 1400px; margin: 0 auto;">
-        
-        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 40px;">
-            <div style="width: 60px; height: 2px; background: #0076ff;"></div>
-            <span style="color: #0076ff; font-weight: 900; letter-spacing: 5px; font-size: 0.75rem; text-transform: uppercase;">
-                Desde 1973 forjando el estándar industrial
-            </span>
+        <div class="about-hero-inner">
+            <div class="about-tag">
+                <div class="tag-line"></div>
+                <span>Desde 1973 forjando el estándar industrial</span>
+            </div>
+
+            <h1 class="about-title">
+                POTENCIA EN <br>
+                <span class="outline-word">INGENIERÍA</span>
+            </h1>
         </div>
+    </header>
 
-        <h1 style="font-size: clamp(3.5rem, 9vw, 7.5rem); font-weight: 900; color: #fff; line-height: 0.9; margin: 0; text-transform: uppercase; letter-spacing: -3px;">
-            POTENCIA EN <br>
-            <span style="color: transparent; -webkit-text-stroke: 1.5px #0076ff; filter: drop-shadow(0 0 15px rgba(0,118,255,0.2));">INGENIERÍA</span>
-        </h1>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 100px; margin-top: 80px; align-items: start;">
-            
-            <div style="position: relative;">
-                <div style="position: absolute; left: -20px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, #0076ff, transparent);"></div>
-                <h2 style="color: #fff; font-size: 1.4rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;">
-                    Legado & Visión
-                </h2>
-                <p style="color: #666; font-size: 1.1rem; line-height: 1.6; max-width: 400px;">
-                    Más de cinco décadas transformando la materia prima en soluciones estratégicas de transporte.
-                </p>
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 30px;">
-                <p style="color: #fff; font-size: 1.4rem; line-height: 1.5; font-weight: 400; margin: 0; border-left: 4px solid #0076ff; padding-left: 30px;">
-                    Lo que comenzó como un desafío entre tres amigos en un pequeño galpón, se convirtió en el referente de <span style="color: #0076ff;">ingeniería metalúrgica</span> de la región.
-                </p>
-                <p style="color: #888; font-size: 1.1rem; line-height: 1.8; margin: 0; padding-left: 34px;">
-                    Metalúrgica Belgrano no solo fabrica unidades; diseña sistemas de alta complejidad bajo normativas internacionales. 
-                    Nuestra historia es un relato de <strong style="color: #bbb;">resiliencia, evolución tecnológica</strong> y un compromiso inquebrantable con la seguridad vial y la durabilidad estructural en cada kilómetro.
-                </p>
-            </div>
-
-        </div>
-    </div>
-           
-</header>
-
-   <section style="padding: 120px 10%; background: #020305; min-height: 100vh;">
-    <div style="display: flex; gap: 80px; flex-wrap: wrap;">
-        
-        <div style="flex: 0.8; min-width: 200px; border-left: 2px solid rgba(255,255,255,0.05); padding-left: 30px; position: sticky; top: 150px; height: fit-content;">
-            <div class="timeline-nav" style="display: flex; flex-direction: column; gap: 15px;">
-                <button onclick="showYear('1973')" class="year-btn active" style="text-align: left; background: none; border: none; color: #0076ff; font-family: 'Outfit'; font-weight: 900; font-size: 2.8rem; cursor: pointer; transition: 0.3s; letter-spacing: -2px;">1973</button>
-                <button onclick="showYear('1975')" class="year-btn" style="text-align: left; background: none; border: none; color: rgba(255,255,255,0.15); font-family: 'Outfit'; font-weight: 900; font-size: 2.8rem; cursor: pointer; transition: 0.3s; letter-spacing: -2px;">1975</button>
-                <button onclick="showYear('1985')" class="year-btn" style="text-align: left; background: none; border: none; color: rgba(255,255,255,0.15); font-family: 'Outfit'; font-weight: 900; font-size: 2.8rem; cursor: pointer; transition: 0.3s; letter-spacing: -2px;">1985</button>
-                <button onclick="showYear('1998')" class="year-btn" style="text-align: left; background: none; border: none; color: rgba(255,255,255,0.15); font-family: 'Outfit'; font-weight: 900; font-size: 2.8rem; cursor: pointer; transition: 0.3s; letter-spacing: -2px;">1998</button>
-                <button onclick="showYear('2000')" class="year-btn" style="text-align: left; background: none; border: none; color: rgba(255,255,255,0.15); font-family: 'Outfit'; font-weight: 900; font-size: 2.8rem; cursor: pointer; transition: 0.3s; letter-spacing: -2px;">2000</button>
-                <button onclick="showYear('2006')" class="year-btn" style="text-align: left; background: none; border: none; color: rgba(255,255,255,0.15); font-family: 'Outfit'; font-weight: 900; font-size: 2.8rem; cursor: pointer; transition: 0.3s; letter-spacing: -2px;">2006</button>
-                <button onclick="showYear('2018')" class="year-btn" style="text-align: left; background: none; border: none; color: rgba(255,255,255,0.15); font-family: 'Outfit'; font-weight: 900; font-size: 2.8rem; cursor: pointer; transition: 0.3s; letter-spacing: -2px;">HOY</button>
-            </div>
-        </div>
-
-        <div style="flex: 2; min-width: 450px;">
-            
-            <div id="content-1973" class="year-content" style="display: block; animation: fadeIn 0.8s;">
-                <div style="width: 100%; height: 450px; background: #111 url('img/historia-1973.jpg') center/cover; border-radius: 2px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.1);"></div>
-                <h2 style="color: #fff; font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 20px;">El Desafío de Tres Amigos</h2>
-                <p style="color: #aaa; font-size: 1.3rem; line-height: 1.8;">Tres amigos emprenden el desafío de unirse en sociedad para fabricar tanques de transporte y almacenamiento para la industria láctea. Con entusiasmo y la experiencia de su labor anterior, proyectan el mercado desde un galpón propio.</p>
-            </div>
-
-            <div id="content-1975" class="year-content" style="display: none; animation: fadeIn 0.8s;">
-                <div style="width: 100%; height: 450px; background: #111 url('img/historia-1975.jpg') center/cover; border-radius: 2px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.1);"></div>
-                <h2 style="color: #fff; font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 20px;">Instalaciones en Ruta 5</h2>
-                <p style="color: #aaa; font-size: 1.3rem; line-height: 1.8;">Gracias al apoyo de industrias lácteas locales, se adquiere el predio actual sobre la Ruta Nacional Nº 5. Se construyen las primeras instalaciones que hoy siguen siendo el corazón de nuestra capacidad productiva.</p>
-            </div>
-
-            <div id="content-1985" class="year-content" style="display: none; animation: fadeIn 0.8s;">
-                <div style="width: 100%; height: 450px; background: #111 url('img/historia-1985.jpg') center/cover; border-radius: 2px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.1);"></div>
-                <h2 style="color: #fff; font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 20px;">Resiliencia y Diversificación</h2>
-                <p style="color: #aaa; font-size: 1.3rem; line-height: 1.8;">Tras superar el estancamiento de los 80, la empresa diversifica su fabricación. Se consolidan equipos de soldadura modernos y personal altamente compenetrado en los objetivos de calidad.</p>
-            </div>
-
-            <div id="content-1998" class="year-content" style="display: none; animation: fadeIn 0.8s;">
-                <div style="width: 100%; height: 450px; background: #111 url('img/historia-1998.jpg') center/cover; border-radius: 2px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.1);"></div>
-                <h2 style="color: #fff; font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 20px;">Certificación ISO 9001</h2>
-                <p style="color: #aaa; font-size: 1.3rem; line-height: 1.8;">Un salto tecnológico y organizativo. En 1998 comienza la ampliación masiva de naves, culminando en 2003 con la certificación ISO 9000:2000, validando la excelencia metalúrgica.</p>
-            </div>
-
-            <div id="content-2000" class="year-content" style="display: none; animation: fadeIn 0.8s;">
-                <div style="width: 100%; height: 450px; background: #111 url('img/historia-2000.jpg') center/cover; border-radius: 2px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.1);"></div>
-                <h2 style="color: #fff; font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 20px;">Sustancias Peligrosas</h2>
-                <p style="color: #aaa; font-size: 1.3rem; line-height: 1.8;">Segunda generación en marcha. Se asume el desafío de fabricar equipos para el transporte de sustancias peligrosas, logrando reconocimiento y exportación regional.</p>
-            </div>
-
-            <div id="content-2006" class="year-content" style="display: none; animation: fadeIn 0.8s;">
-                <div style="width: 100%; height: 450px; background: #111 url('img/historia-2006.jpg') center/cover; border-radius: 2px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.1);"></div>
-                <h2 style="color: #fff; font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 20px;">Legado y Crecimiento</h2>
-                <p style="color: #aaa; font-size: 1.3rem; line-height: 1.8;">Ante el fallecimiento de un socio fundador, la empresa honra su memoria con mayor inversión. Se lanzan nuevas líneas de productos líderes y maquinaria de punta.</p>
-            </div>
-
-            <div id="content-2018" class="year-content" style="display: none; animation: fadeIn 0.8s;">
-                <div style="width: 100%; height: 450px; background: #111 url('img/historia-hoy.jpg') center/cover; border-radius: 2px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.1);"></div>
-                <h2 style="color: #fff; font-size: 2.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 20px;">Industria 4.0</h2>
-                <p style="color: #aaa; font-size: 1.3rem; line-height: 1.8;">Líderes en escalabilidad y seguridad vial. Integramos sistemas electrónicos de frenado y control de estabilidad, proyectando el futuro con asistencia inteligente.</p>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<script>
-function showYear(year) {
-    // Escondemos todos los bloques de texto
-    const contents = document.querySelectorAll('.year-content');
-    contents.forEach(c => c.style.display = 'none');
-    
-    // Mostramos el seleccionado
-    document.getElementById('content-' + year).style.display = 'block';
-    
-    // Cambiamos el color de los botones para resaltar el activo
-    const buttons = document.querySelectorAll('.year-btn');
-    buttons.forEach(b => {
-        b.style.color = 'rgba(255,255,255,0.15)'; // Apagado
-        if(b.innerText === year || (year === '2018' && b.innerText === 'HOY')) {
-            b.style.color = '#0076ff'; // Azul Belgrano activo
-        }
-    });
-}
-</script>
-
-<style>
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.year-btn:hover { color: #fff !important; }
-</style>
-    <footer style="background: #050608; border-top: 1px solid rgba(255, 255, 255, 0.05); width: 100%;">
-        <div style="padding: 45px 0; display: flex; justify-content: center; align-items: center; width: 100%;">
-            <p style="font-size: 11px; color: rgba(255, 255, 255, 0.35); letter-spacing: 4px; margin: 0; text-transform: uppercase; text-align: center;">
-                © 2026 Metalúrgica Belgrano. Todos los derechos reservados. 
-                <span style="margin: 0 15px; opacity: 0.4;">|</span> 
-                Suipacha, Argentina.
+    <!-- MANIFIESTO CENTRAL -->
+    <section class="manifesto-section">
+        <div class="manifesto-container">
+            <p class="manifesto-quote">
+                <span class="deco-quote">&ldquo;</span>Lo que comenzó como un desafío entre tres amigos en un pequeño galpón, se convirtió en el referente de <span class="accent">ingeniería metalúrgica</span> de la región.<span class="deco-quote">&rdquo;</span>
             </p>
+
+            <div class="manifesto-divider"></div>
+
+            <p class="manifesto-support">
+                Metalúrgica Belgrano no solo fabrica unidades; diseña sistemas de alta complejidad bajo normativas internacionales.
+                Nuestra historia es un relato de <strong>resiliencia, evolución tecnológica</strong> y un compromiso inquebrantable con la seguridad vial y la durabilidad estructural en cada kilómetro.
+            </p>
+
+            <div class="manifesto-connector"></div>
+        </div>
+    </section>
+
+    <!-- LÍNEA DE TIEMPO INTERACTIVA -->
+    <section class="history-elite">
+        <div class="history-elite-inner">
+
+            <div class="history-elite-header">
+                <span class="p-line">MÁS DE 50 AÑOS DE TRAYECTORIA</span>
+                <h2>Nuestra Línea de Tiempo</h2>
+            </div>
+
+            <nav class="timeline-nav-elite" aria-label="Selector de años de la historia">
+                <button class="year-btn-elite active" data-year="1973" onclick="showYear('1973', this)">1973</button>
+                <button class="year-btn-elite" data-year="1975" onclick="showYear('1975', this)">1975</button>
+                <button class="year-btn-elite" data-year="1985" onclick="showYear('1985', this)">1985</button>
+                <button class="year-btn-elite" data-year="1998" onclick="showYear('1998', this)">1998</button>
+                <button class="year-btn-elite" data-year="2000" onclick="showYear('2000', this)">2000</button>
+                <button class="year-btn-elite" data-year="2006" onclick="showYear('2006', this)">2006</button>
+                <button class="year-btn-elite" data-year="hoy" onclick="showYear('hoy', this)">HOY</button>
+            </nav>
+
+            <div class="timeline-stage">
+
+                <div id="stage-1973" class="timeline-stage-content era-1973 is-active">
+                    <div class="timeline-visual">
+                        <img src="Tanque.jpg" alt="Fundación de Metalúrgica Belgrano, 1973">
+                        <span class="year-stamp">1973</span>
+                    </div>
+                    <div class="timeline-text">
+                        <h3>El Desafío de Tres Amigos</h3>
+                        <p>Tres amigos emprenden el desafío de unirse en sociedad para fabricar tanques de transporte y almacenamiento para la industria láctea. Con entusiasmo y la experiencia de su labor anterior, proyectan el mercado desde un galpón propio.</p>
+                    </div>
+                </div>
+
+                <div id="stage-1975" class="timeline-stage-content era-1975">
+                    <div class="timeline-visual">
+                        <img src="lineaquimica.jpg" alt="Instalaciones sobre Ruta Nacional 5, 1975">
+                        <span class="year-stamp">1975</span>
+                    </div>
+                    <div class="timeline-text">
+                        <h3>Instalaciones en Ruta 5</h3>
+                        <p>Gracias al apoyo de industrias lácteas locales, se adquiere el predio actual sobre la Ruta Nacional Nº 5. Se construyen las primeras instalaciones que hoy siguen siendo el corazón de nuestra capacidad productiva.</p>
+                    </div>
+                </div>
+
+                <div id="stage-1985" class="timeline-stage-content era-1985">
+                    <div class="timeline-visual">
+                        <img src="alimenticia.jpg" alt="Diversificación productiva, 1985">
+                        <span class="year-stamp">1985</span>
+                    </div>
+                    <div class="timeline-text">
+                        <h3>Resiliencia y Diversificación</h3>
+                        <p>Tras superar el estancamiento de los 80, la empresa diversifica su fabricación. Se consolidan equipos de soldadura modernos y personal altamente compenetrado en los objetivos de calidad.</p>
+                    </div>
+                </div>
+
+                <div id="stage-1998" class="timeline-stage-content era-1998">
+                    <div class="timeline-visual">
+                        <img src="combustible.jpg" alt="Certificación ISO 9001, 1998">
+                        <span class="year-stamp">1998</span>
+                    </div>
+                    <div class="timeline-text">
+                        <h3>Certificación ISO 9001</h3>
+                        <p>Un salto tecnológico y organizativo. En 1998 comienza la ampliación masiva de naves, culminando en 2003 con la certificación ISO 9000:2000, validando la excelencia metalúrgica.</p>
+                    </div>
+                </div>
+
+                <div id="stage-2000" class="timeline-stage-content era-2000">
+                    <div class="timeline-visual">
+                        <img src="gas.jpg" alt="Transporte de sustancias peligrosas, 2000">
+                        <span class="year-stamp">2000</span>
+                    </div>
+                    <div class="timeline-text">
+                        <h3>Sustancias Peligrosas</h3>
+                        <p>Segunda generación en marcha. Se asume el desafío de fabricar equipos para el transporte de sustancias peligrosas, logrando reconocimiento y exportación regional.</p>
+                    </div>
+                </div>
+
+                <div id="stage-2006" class="timeline-stage-content era-2006">
+                    <div class="timeline-visual">
+                        <img src="bitren.jpg" alt="Legado y crecimiento, 2006">
+                        <span class="year-stamp">2006</span>
+                    </div>
+                    <div class="timeline-text">
+                        <h3>Legado y Crecimiento</h3>
+                        <p>Ante el fallecimiento de un socio fundador, la empresa honra su memoria con mayor inversión. Se lanzan nuevas líneas de productos líderes y maquinaria de punta.</p>
+                    </div>
+                </div>
+
+                <div id="stage-hoy" class="timeline-stage-content era-hoy">
+                    <div class="timeline-visual">
+                        <img src="gemini.jpg" alt="Industria 4.0, Metalúrgica Belgrano hoy">
+                        <span class="year-stamp">HOY</span>
+                    </div>
+                    <div class="timeline-text">
+                        <h3>Industria 4.0</h3>
+                        <p>Líderes en escalabilidad y seguridad vial. Integramos sistemas electrónicos de frenado y control de estabilidad, proyectando el futuro con asistencia inteligente.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-industrial">
+        <div class="footer-top">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <div class="brand-text">
+                        <span class="brand-name">METALÚRGICA <span>BELGRANO</span></span>
+                        <p>Ingeniería de vanguardia en transporte de carga a granel. Más de 40 años forjando el estándar de la industria.</p>
+                    </div>
+                </div>
+
+               <div class="footer-links">
+                    <h4>SITIO</h4>
+                    <ul>
+                        <li><a href="productos.html">Unidades</a></li>
+                        <li><a href="ingenieria.html">Ingeniería</a></li>
+                        <li><a href="postventa.html">Post-Venta</a></li>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="contacto.html">Cotizaciones</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>PLANTA INDUSTRIAL</h4>
+                    <div class="contact-item">
+                        <i class="icon">📍</i>
+                        <span>Ruta Nacional 5, Km 126.5<br>Suipacha, Buenos Aires</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="icon">📞</i>
+                        <span>+54 (2324) 480111</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="icon">✉️</i>
+                        <span>info@mbelgrano.com.ar</span>
+                    </div>
+                </div>
+
+                <div class="footer-social">
+                    <h4>CONECTÁ CON NOSOTROS</h4>
+                    <div class="social-icons-group">
+                        <a href="#" class="social-btn" title="Instagram">
+                            <svg viewBox="0 0 24 24"><path d="M7.75 2h8.5C19.42 2 22 4.58 22 7.75v8.5c0 3.17-2.58 5.75-5.75 5.75h-8.5C4.58 22 2 19.42 2 16.25v-8.5C2 4.58 4.58 2 7.75 2zm0 1.5c-2.35 0-4.25 1.9-4.25 4.25v8.5c0 2.35 1.9 4.25 4.25 4.25h8.5c2.35 0 4.25-1.9 4.25-4.25v-8.5c0-2.35-1.9-4.25-4.25-4.25h-8.5zM12 7a5 5 0 100 10 5 5 0 000-10zm0 1.5a3.5 3.5 0 110 7 3.5 3.5 0 010-7zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z" fill="currentColor"/></svg>
+                        </a>
+                        <a href="#" class="social-btn" title="LinkedIn">
+                            <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a2.7 2.7 0 0 0-2.7-2.7c-1.2 0-2 .7-2.3 1.2v-1h-3.3v7.8h3.3v-4.1c0-.6.4-1 1-1 .6 0 1 .4 1 1v4.1h3.3M6.7 8.1A1.9 1.9 0 0 0 8.6 6.2 1.9 1.9 0 0 0 6.7 4.3 1.9 1.9 0 0 0 4.8 6.2c0 1.1.9 1.9 1.9 1.9m1.6 10.4V10.7H5.1v7.8h3.2z" fill="currentColor"/></svg>
+                        </a>
+                        <a href="https://wa.me/542324480111" class="social-btn" title="WhatsApp">
+                            <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2z" fill="currentColor"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Metalúrgica Belgrano. Todos los derechos reservados. <span class="divider">|</span> Suipacha, Argentina.</p>
         </div>
     </footer>
+
+    <div id="ai-agent-trigger" class="ai-agent">
+        <span class="dot"></span>
+        <span>CONSULTAR AL INGENIERO IA</span>
+    </div>
+
+    <script>
+        // Línea de tiempo interactiva: cambia contenido e imagen sin recargar la página
+        function showYear(year, btn) {
+            document.querySelectorAll('.timeline-stage-content').forEach(function (el) {
+                el.classList.remove('is-active');
+            });
+            var target = document.getElementById('stage-' + year);
+            if (target) target.classList.add('is-active');
+
+            document.querySelectorAll('.year-btn-elite').forEach(function (b) {
+                b.classList.remove('active');
+            });
+            btn.classList.add('active');
+        }
+    </script>
 
 </body>
 </html>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COTIZACIÓN TÉCNICA | Metalúrgica Belgrano</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos-belgrano.css">
     <style>
         :root {
             --bg: #050608;
@@ -125,21 +126,17 @@
 
     <div class="blueprint-bg"></div>
 
-    <nav style="display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; position: fixed; top: 0; width: 100%; background: rgba(5, 6, 8, 0.95); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); z-index: 9999; box-sizing: border-box; font-family: 'Outfit', sans-serif;">
-        
-        <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
-            <div style="font-weight: 900; font-size: 1.3rem; color: #ffffff; letter-spacing: 1px;">
-                METALÚRGICA <span style="color: #0076ff; text-shadow: 0 0 15px rgba(0, 118, 255, 0.5);">BELGRANO</span>
-            </div>
+    <nav class="navbar">
+        <a href="index.html" class="logo-link">
+            <div class="logo">METALÚRGICA <span>BELGRANO</span></div>
         </a>
-
-        <div style="display: flex; align-items: center;">
-            <a href="index.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 30px; text-transform: uppercase; letter-spacing: 1.5px;">Inicio</a>
-            <a href="productos.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 30px; text-transform: uppercase; letter-spacing: 1.5px;">Productos</a>
-            <a href="ingenieria.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 30px; text-transform: uppercase; letter-spacing: 1.5px;">Ingeniería</a>
-            <a href="postventa.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 30px; text-transform: uppercase; letter-spacing: 1.5px;">Post-Venta</a>
-            <a href="nosotros.html" style="color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.75rem; font-weight: 700; margin-left: 30px; text-transform: uppercase; letter-spacing: 1.5px;">Nosotros</a>
-            <a href="contacto.html" style="background: #0076ff; color: white; text-decoration: none; padding: 10px 22px; border-radius: 2px; font-size: 0.75rem; font-weight: 700; margin-left: 30px; text-transform: uppercase; letter-spacing: 1.5px; display: inline-block;">COTIZAR AHORA</a>
+        <div class="nav-links">
+            <a href="index.html">INICIO</a>
+            <a href="productos.html">PRODUCTOS</a>
+            <a href="ingenieria.html">INGENIERÍA</a>
+            <a href="postventa.html">POST-VENTA</a>
+            <a href="nosotros.html">NOSOTROS</a>
+            <a href="contacto.html" class="portal-btn active">COTIZAR AHORA</a>
         </div>
     </nav>
 

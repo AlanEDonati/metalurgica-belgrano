@@ -16,35 +16,36 @@
 
     <div class="nav-links">
         <a href="index.html">INICIO</a>
-        <a href="productos.html">PRODUCTOS</a>
+        <a href="productos.html" class="active">PRODUCTOS</a>
         <a href="ingenieria.html">INGENIERÍA</a>
         <a href="postventa.html">POST-VENTA</a>
+        <a href="nosotros.html">NOSOTROS</a>
         <a href="contacto.html" class="portal-btn">COTIZAR AHORA</a>
     </div>
 </nav>
 
-    <header class="filter-container">
-    <span class="pre-title" style="color: var(--belgrano-blue); font-weight: 800; letter-spacing: 2px;">DIVISIÓN TRANSPORTE</span>
-    <div class="catalog-header">
-
-    <img src="metalurgica.png"
-        alt="Metalúrgica Belgrano"
-        class="catalog-logo"
-    >
-
-    <h2 class="catalog-title">Catálogo de Unidades</h2>
-
-</div>
-
-    <div class="filter-group">
-        <button class="filter-btn active" onclick="filterProducts('all', this)">Todos</button>
-        <button class="filter-btn" onclick="filterProducts('asfaltos', this)">Asfaltos</button>
-        <button class="filter-btn" onclick="filterProducts('combustibles', this)">Combustibles</button>
-        <button class="filter-btn" onclick="filterProducts('alimentos', this)">Alimenticios</button>
-        <button class="filter-btn" onclick="filterProducts('almacenamiento', this)">Almacenamiento</button>
-        <button class="filter-btn" onclick="filterProducts('residuos', this)">Residuos Líquidos</button>
-    </div>
-</header>
+    <header class="catalog-hero">
+        <div class="catalog-hero-overlay"></div>
+        <div class="catalog-hero-content">
+            <div class="about-tag" style="justify-content:center;">
+                <div class="tag-line"></div>
+                <span>DIVISIÓN TRANSPORTE</span>
+                <div class="tag-line"></div>
+            </div>
+            <h1 class="catalog-hero-title">
+                CATÁLOGO DE <span class="outline-word">UNIDADES</span>
+            </h1>
+            <p class="catalog-hero-sub">Ingeniería certificada para cada industria. Asfaltos, combustibles, alimentos y más.</p>
+        </div>
+        <div class="catalog-filter-bar">
+            <button class="filter-btn active" onclick="filterProducts('all', this)">Todos</button>
+            <button class="filter-btn" onclick="filterProducts('asfaltos', this)">Asfaltos</button>
+            <button class="filter-btn" onclick="filterProducts('combustibles', this)">Combustibles</button>
+            <button class="filter-btn" onclick="filterProducts('alimentos', this)">Alimenticios</button>
+            <button class="filter-btn" onclick="filterProducts('almacenamiento', this)">Almacenamiento</button>
+            <button class="filter-btn" onclick="filterProducts('residuos', this)">Residuos Líquidos</button>
+        </div>
+    </header>
 
 <section class="catalog-section" style="padding: 20px 5% 100px;">
 
@@ -52,7 +53,7 @@
     <h2 class="category-title">Asfaltos</h2>
     <div class="product-grid-nexura">
         <div class="p-card" data-category="asfaltos" onclick="openProduct('asfalto-11')">
-            <div class="p-img"><img src="IMAGEN_ASFALTO_11"></div>
+            <div class="p-img"><img src="Tanque.jpg" alt="Semirremolque asfalto 1+1 ejes"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA ASFALTOS</span>
                 <h3>Semirremolque 1+1 Ejes</h3>
@@ -60,7 +61,7 @@
             </div>
         </div>
         <div class="p-card" data-category="asfaltos" onclick="openProduct('asfalto-21')">
-            <div class="p-img"><img src="IMAGEN_ASFALTO_21"></div>
+            <div class="p-img"><img src="Tanque.jpg" alt="Semirremolque asfalto 2+1 ejes"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA ASFALTOS</span>
                 <h3>Semirremolque 2+1 Ejes</h3>
@@ -68,7 +69,7 @@
             </div>
         </div>
         <div class="p-card" data-category="asfaltos" onclick="openProduct('asfalto-3t')">
-            <div class="p-img"><img src="IMAGEN_ASFALTO_3EJES"></div>
+            <div class="p-img"><img src="Tanque.jpg" alt="Semirremolque asfalto 3 ejes"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA ASFALTOS</span>
                 <h3>Semirremolque 3 Ejes</h3>
@@ -92,7 +93,7 @@
             </div>
         </div>
         <div class="p-card" data-category="combustibles" onclick="openProduct('combustible-21')">
-            <div class="p-img"><img src="IMAGEN_COMBUSTIBLE_21"></div>
+            <div class="p-img"><img src="combustible.jpg" alt="Semirremolque combustible 2+1 ejes"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA COMBUSTIBLES</span>
                 <h3>Semirremolque Combustible 2+1</h3>
@@ -100,7 +101,7 @@
             </div>
         </div>
         <div class="p-card" data-category="combustibles" onclick="openProduct('petroleo-21')">
-            <div class="p-img"><img src="IMAGEN_PETROLEO_21"></div>
+            <div class="p-img"><img src="combustible.jpg" alt="Semirremolque petróleo 2+1 ejes"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA PETRÓLEO</span>
                 <h3>Semirremolque Petróleo 2+1</h3>
@@ -108,7 +109,7 @@
             </div>
         </div>
         <div class="p-card" data-category="combustibles" onclick="openProduct('tanque-camion')">
-            <div class="p-img"><img src="IMAGEN_TANQUE_CAMION"></div>
+            <div class="p-img"><img src="Tanque.jpg" alt="Tanque para camión"></div>
             <div class="p-info">
                 <span class="p-line">TANQUES CAMIÓN</span>
                 <h3>Tanque para Camión</h3>
@@ -121,7 +122,7 @@
     <h2 class="category-title">Sustancias Alimenticias</h2>
     <div class="product-grid-nexura">
         <div class="p-card" data-category="alimentos" onclick="openProduct('alimentos-semi-sin')">
-            <div class="p-img"><img src="IMAGEN_ALIM_SEMI_SIN"></div>
+            <div class="p-img"><img src="alimenticia.jpg" alt="Semirremolque alimenticio sin aislación"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA ALIMENTICIA</span>
                 <h3>Semi Sin Aislación</h3>
@@ -129,7 +130,7 @@
             </div>
         </div>
         <div class="p-card" data-category="alimentos" onclick="openProduct('alimentos-semi-term')">
-            <div class="p-img"><img src="IMAGEN_ALIM_SEMI_TERM"></div>
+            <div class="p-img"><img src="semitermico.jpg" alt="Semirremolque térmico alimenticio"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA ALIMENTICIA</span>
                 <h3>Semi Térmico 2 Ejes</h3>
@@ -142,7 +143,7 @@
     <h2 class="category-title">Especiales / Almacenamiento</h2>
     <div class="product-grid-nexura">
         <div class="p-card" data-category="almacenamiento" onclick="openProduct('almacenamiento-sin')">
-            <div class="p-img"><img src="IMAGEN_ALM_SIN"></div>
+            <div class="p-img"><img src="Tanque.jpg" alt="Tanque almacenamiento sin aislación"></div>
             <div class="p-info">
                 <span class="p-line">ALMACENAMIENTO</span>
                 <h3>Tanque Almacenamiento Sin Aislación</h3>
@@ -150,7 +151,7 @@
             </div>
         </div>
         <div class="p-card" data-category="almacenamiento" onclick="openProduct('almacenamiento-term-h')">
-            <div class="p-img"><img src="IMAGEN_ALM_TERM_H"></div>
+            <div class="p-img"><img src="lineaquimica.jpg" alt="Tanque térmico horizontal"></div>
             <div class="p-info">
                 <span class="p-line">ALMACENAMIENTO</span>
                 <h3>Tanque Térmico Horizontal</h3>
@@ -158,7 +159,7 @@
             </div>
         </div>
         <div class="p-card" data-category="almacenamiento" onclick="openProduct('almacenamiento-term-v')">
-            <div class="p-img"><img src="IMAGEN_ALM_TERM_V"></div>
+            <div class="p-img"><img src="lineaquimica.jpg" alt="Tanque térmico vertical"></div>
             <div class="p-info">
                 <span class="p-line">ALMACENAMIENTO</span>
                 <h3>Tanque Térmico Vertical</h3>
@@ -171,7 +172,7 @@
     <h2 class="category-title">Residuos Líquidos</h2>
     <div class="product-grid-nexura">
         <div class="p-card" data-category="residuos" onclick="openProduct('residuos-11')">
-            <div class="p-img"><img src="IMAGEN_RESIDUOS_11"></div>
+            <div class="p-img"><img src="gas.jpg" alt="Semirremolque residuos 1+1 ejes"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA RESIDUOS</span>
                 <h3>Semirremolque 1+1 Ejes</h3>
@@ -179,7 +180,7 @@
             </div>
         </div>
         <div class="p-card" data-category="residuos" onclick="openProduct('residuos-21')">
-            <div class="p-img"><img src="IMAGEN_RESIDUOS_21"></div>
+            <div class="p-img"><img src="gas.jpg" alt="Semirremolque residuos 2+1 ejes"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA RESIDUOS</span>
                 <h3>Semirremolque 2+1 Ejes</h3>
@@ -315,62 +316,59 @@ window.onclick = function(event) {
 </script>
 
 <footer class="footer-industrial">
-    <div class="footer-grid">
-
-        <!-- COLUMNA 1 -->
-        <div class="footer-col">
-            <h3>METALÚRGICA BELGRANO</h3>
-            <p>
-                Fabricación de unidades especiales para transporte industrial.
-                Ingeniería aplicada a combustibles, asfaltos, alimentos y residuos.
-            </p>
+        <div class="footer-top">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <div class="brand-text">
+                        <span class="brand-name">METALÚRGICA <span>BELGRANO</span></span>
+                        <p>Ingeniería de vanguardia en transporte de carga a granel. Más de 40 años forjando el estándar de la industria.</p>
+                    </div>
+                </div>
+               <div class="footer-links">
+                    <h4>SITIO</h4>
+                    <ul>
+                        <li><a href="productos.html">Unidades</a></li>
+                        <li><a href="ingenieria.html">Ingeniería</a></li>
+                        <li><a href="postventa.html">Post-Venta</a></li>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="contacto.html">Cotizaciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>PLANTA INDUSTRIAL</h4>
+                    <div class="contact-item">
+                        <i class="icon">📍</i>
+                        <span>Ruta Nacional 5, Km 126.5<br>Suipacha, Buenos Aires</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="icon">📞</i>
+                        <span>+54 (2324) 480111</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="icon">✉️</i>
+                        <span>info@mbelgrano.com.ar</span>
+                    </div>
+                </div>
+                <div class="footer-social">
+                    <h4>CONECTÁ CON NOSOTROS</h4>
+                    <div class="social-icons-group">
+                        <a href="#" class="social-btn" title="Instagram">
+                            <svg viewBox="0 0 24 24"><path d="M7.75 2h8.5C19.42 2 22 4.58 22 7.75v8.5c0 3.17-2.58 5.75-5.75 5.75h-8.5C4.58 22 2 19.42 2 16.25v-8.5C2 4.58 4.58 2 7.75 2zm0 1.5c-2.35 0-4.25 1.9-4.25 4.25v8.5c0 2.35 1.9 4.25 4.25 4.25h8.5c2.35 0 4.25-1.9 4.25-4.25v-8.5c0-2.35-1.9-4.25-4.25-4.25h-8.5zM12 7a5 5 0 100 10 5 5 0 000-10zm0 1.5a3.5 3.5 0 110 7 3.5 3.5 0 010-7zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z" fill="currentColor"/></svg>
+                        </a>
+                        <a href="#" class="social-btn" title="LinkedIn">
+                            <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a2.7 2.7 0 0 0-2.7-2.7c-1.2 0-2 .7-2.3 1.2v-1h-3.3v7.8h3.3v-4.1c0-.6.4-1 1-1 .6 0 1 .4 1 1v4.1h3.3M6.7 8.1A1.9 1.9 0 0 0 8.6 6.2 1.9 1.9 0 0 0 6.7 4.3 1.9 1.9 0 0 0 4.8 6.2c0 1.1.9 1.9 1.9 1.9m1.6 10.4V10.7H5.1v7.8h3.2z" fill="currentColor"/></svg>
+                        </a>
+                        <a href="https://wa.me/542324480111" class="social-btn" title="WhatsApp">
+                            <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2z" fill="currentColor"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- COLUMNA 2 -->
-        <div class="footer-col">
-            <h4>DIVISIONES</h4>
-            <ul>
-                <li>Transporte de Asfaltos</li>
-                <li>Combustibles & Petróleo</li>
-                <li>Sustancias Alimenticias</li>
-                <li>Almacenamiento Industrial</li>
-                <li>Residuos Líquidos</li>
-            </ul>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Metalúrgica Belgrano. Todos los derechos reservados. <span class="divider">|</span> Suipacha, Argentina.</p>
         </div>
-
-        <!-- COLUMNA 3 -->
-        <div class="footer-col">
-            <h4>INGENIERÍA & CALIDAD</h4>
-            <ul>
-                <li>Diseño estructural propio</li>
-                <li>Normativas IRAM / INTI</li>
-                <li>Soldaduras certificadas</li>
-                <li>Ensayos hidráulicos</li>
-                <li>Soporte post-venta técnico</li>
-            </ul>
-        </div>
-
-        <!-- COLUMNA 4 -->
-        <div class="footer-col">
-            <h4>CONTACTO</h4>
-            <p>
-                📍 Buenos Aires, Argentina<br>
-                📞 +54 2324 48-0111<br>
-                ✉️ info@metalurgicabelgrano.com.ar
-            </p>
-
-            <a href="https://wa.me/542324480111"
-               class="footer-cta">
-                Consultar Usados
-            </a>
-        </div>
-
-    </div>
-
-    <div class="footer-bottom">
-        © 2026 Metalúrgica Belgrano · Ingeniería Industrial Argentina
-    </div>
-</footer>
+    </footer>
 
 
 </body>
