@@ -9,20 +9,19 @@
 </head>
 <body>
 
- <nav class="navbar">
-    <a href="index.html" class="logo-link">
-        <div class="logo">METALÚRGICA <span>BELGRANO</span></div>
-    </a>
-
-    <div class="nav-links">
-        <a href="index.html">INICIO</a>
-        <a href="productos.html" class="active">PRODUCTOS</a>
-        <a href="ingenieria.html">INGENIERÍA</a>
-        <a href="postventa.html">POST-VENTA</a>
-        <a href="nosotros.html">NOSOTROS</a>
-        <a href="contacto.html" class="portal-btn">COTIZAR AHORA</a>
-    </div>
-</nav>
+    <nav class="navbar">
+        <a href="index.html" class="logo-link">
+            <div class="logo">METALÚRGICA <span>BELGRANO</span></div>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">INICIO</a>
+            <a href="productos.html" class="active">PRODUCTOS</a>
+            <a href="ingenieria.html">INGENIERÍA</a>
+            <a href="postventa.html">POST-VENTA</a>
+            <a href="nosotros.html">NOSOTROS</a>
+            <a href="contacto.html" class="portal-btn">COTIZAR AHORA</a>
+        </div>
+    </nav>
 
     <header class="catalog-hero">
         <div class="catalog-hero-overlay"></div>
@@ -38,22 +37,21 @@
             <p class="catalog-hero-sub">Ingeniería certificada para cada industria. Asfaltos, combustibles, alimentos y más.</p>
         </div>
         <div class="catalog-filter-bar">
-            <button class="filter-btn active" onclick="filterProducts('all', this)">Todos</button>
-            <button class="filter-btn" onclick="filterProducts('asfaltos', this)">Asfaltos</button>
-            <button class="filter-btn" onclick="filterProducts('combustibles', this)">Combustibles</button>
-            <button class="filter-btn" onclick="filterProducts('alimentos', this)">Alimenticios</button>
-            <button class="filter-btn" onclick="filterProducts('almacenamiento', this)">Almacenamiento</button>
-            <button class="filter-btn" onclick="filterProducts('residuos', this)">Residuos Líquidos</button>
+            <button class="filter-btn active" onclick="filterProducts('all', this, event)">Todos</button>
+            <button class="filter-btn" onclick="filterProducts('asfaltos', this, event)">Asfaltos</button>
+            <button class="filter-btn" onclick="filterProducts('combustibles', this, event)">Combustibles</button>
+            <button class="filter-btn" onclick="filterProducts('alimentos', this, event)">Alimenticios</button>
+            <button class="filter-btn" onclick="filterProducts('almacenamiento', this, event)">Almacenamiento</button>
+            <button class="filter-btn" onclick="filterProducts('residuos', this, event)">Residuos Líquidos</button>
         </div>
     </header>
 
 <section class="catalog-section" style="padding: 20px 5% 100px;">
 
-    <!-- ASFALTOS -->
     <h2 class="category-title">Asfaltos</h2>
     <div class="product-grid-nexura">
         <div class="p-card" data-category="asfaltos" onclick="openProduct('asfalto-11')">
-            <div class="p-img"><img src="Tanque.jpg" alt="Semirremolque asfalto 1+1 ejes"></div>
+            <div class="p-img"><img loading="lazy" src="Tanque.jpg" alt="Tanque cisterna de acero inoxidable – Metalúrgica Belgrano"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA ASFALTOS</span>
                 <h3>Semirremolque 1+1 Ejes</h3>
@@ -61,7 +59,7 @@
             </div>
         </div>
         <div class="p-card" data-category="asfaltos" onclick="openProduct('asfalto-21')">
-            <div class="p-img"><img src="Tanque.jpg" alt="Semirremolque asfalto 2+1 ejes"></div>
+            <div class="p-img"><img loading="lazy" src="Tanque.jpg" alt="Tanque cisterna de acero inoxidable – Metalúrgica Belgrano"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA ASFALTOS</span>
                 <h3>Semirremolque 2+1 Ejes</h3>
@@ -69,7 +67,7 @@
             </div>
         </div>
         <div class="p-card" data-category="asfaltos" onclick="openProduct('asfalto-3t')">
-            <div class="p-img"><img src="Tanque.jpg" alt="Semirremolque asfalto 3 ejes"></div>
+            <div class="p-img"><img loading="lazy" src="Tanque.jpg" alt="Tanque cisterna de acero inoxidable – Metalúrgica Belgrano"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA ASFALTOS</span>
                 <h3>Semirremolque 3 Ejes</h3>
@@ -78,14 +76,12 @@
         </div>
     </div>
 
-    <!-- COMBUSTIBLES Y PETRÓLEOS -->
     <h2 class="category-title">Combustibles y Petróleos</h2>
     <div class="product-grid-nexura">
         <div class="p-card" data-category="combustibles" onclick="openProduct('combustible-11')">
-           <div class="p-img">
-    <img src="combustible.jpg" alt="Semirremolque combustible">
-</div>
-
+            <div class="p-img">
+                <img loading="lazy" src="combustible.jpg" alt="Semirremolque para transporte de combustibles – Metalúrgica Belgrano">
+            </div>
             <div class="p-info">
                 <span class="p-line">LÍNEA COMBUSTIBLES</span>
                 <h3>Semirremolque Combustible 1+1</h3>
@@ -93,7 +89,7 @@
             </div>
         </div>
         <div class="p-card" data-category="combustibles" onclick="openProduct('combustible-21')">
-            <div class="p-img"><img src="combustible.jpg" alt="Semirremolque combustible 2+1 ejes"></div>
+            <div class="p-img"><img loading="lazy" src="combustible.jpg" alt="Semirremolque para transporte de combustibles – Metalúrgica Belgrano"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA COMBUSTIBLES</span>
                 <h3>Semirremolque Combustible 2+1</h3>
@@ -101,7 +97,7 @@
             </div>
         </div>
         <div class="p-card" data-category="combustibles" onclick="openProduct('petroleo-21')">
-            <div class="p-img"><img src="combustible.jpg" alt="Semirremolque petróleo 2+1 ejes"></div>
+            <div class="p-img"><img loading="lazy" src="combustible.jpg" alt="Semirremolque para transporte de combustibles – Metalúrgica Belgrano"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA PETRÓLEO</span>
                 <h3>Semirremolque Petróleo 2+1</h3>
@@ -109,7 +105,7 @@
             </div>
         </div>
         <div class="p-card" data-category="combustibles" onclick="openProduct('tanque-camion')">
-            <div class="p-img"><img src="Tanque.jpg" alt="Tanque para camión"></div>
+            <div class="p-img"><img loading="lazy" src="Tanque.jpg" alt="Tanque cisterna de acero inoxidable – Metalúrgica Belgrano"></div>
             <div class="p-info">
                 <span class="p-line">TANQUES CAMIÓN</span>
                 <h3>Tanque para Camión</h3>
@@ -118,11 +114,10 @@
         </div>
     </div>
 
-    <!-- ALIMENTICIOS -->
     <h2 class="category-title">Sustancias Alimenticias</h2>
     <div class="product-grid-nexura">
         <div class="p-card" data-category="alimentos" onclick="openProduct('alimentos-semi-sin')">
-            <div class="p-img"><img src="alimenticia.jpg" alt="Semirremolque alimenticio sin aislación"></div>
+            <div class="p-img"><img loading="lazy" src="alimenticia.jpg" alt="Semirremolque alimenticio certificado – Metalúrgica Belgrano"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA ALIMENTICIA</span>
                 <h3>Semi Sin Aislación</h3>
@@ -130,7 +125,7 @@
             </div>
         </div>
         <div class="p-card" data-category="alimentos" onclick="openProduct('alimentos-semi-term')">
-            <div class="p-img"><img src="semitermico.jpg" alt="Semirremolque térmico alimenticio"></div>
+            <div class="p-img"><img loading="lazy" src="semitermico.jpg" alt="Semirremolque térmico Metalúrgica Belgrano – Línea Vial"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA ALIMENTICIA</span>
                 <h3>Semi Térmico 2 Ejes</h3>
@@ -139,11 +134,10 @@
         </div>
     </div>
 
-    <!-- ALMACENAMIENTO -->
     <h2 class="category-title">Especiales / Almacenamiento</h2>
     <div class="product-grid-nexura">
         <div class="p-card" data-category="almacenamiento" onclick="openProduct('almacenamiento-sin')">
-            <div class="p-img"><img src="Tanque.jpg" alt="Tanque almacenamiento sin aislación"></div>
+            <div class="p-img"><img loading="lazy" src="Tanque.jpg" alt="Tanque cisterna de acero inoxidable – Metalúrgica Belgrano"></div>
             <div class="p-info">
                 <span class="p-line">ALMACENAMIENTO</span>
                 <h3>Tanque Almacenamiento Sin Aislación</h3>
@@ -151,7 +145,7 @@
             </div>
         </div>
         <div class="p-card" data-category="almacenamiento" onclick="openProduct('almacenamiento-term-h')">
-            <div class="p-img"><img src="lineaquimica.jpg" alt="Tanque térmico horizontal"></div>
+            <div class="p-img"><img loading="lazy" src="lineaquimica.jpg" alt="Tanque cisterna para línea química – Metalúrgica Belgrano"></div>
             <div class="p-info">
                 <span class="p-line">ALMACENAMIENTO</span>
                 <h3>Tanque Térmico Horizontal</h3>
@@ -159,7 +153,7 @@
             </div>
         </div>
         <div class="p-card" data-category="almacenamiento" onclick="openProduct('almacenamiento-term-v')">
-            <div class="p-img"><img src="lineaquimica.jpg" alt="Tanque térmico vertical"></div>
+            <div class="p-img"><img loading="lazy" src="lineaquimica.jpg" alt="Tanque cisterna para línea química – Metalúrgica Belgrano"></div>
             <div class="p-info">
                 <span class="p-line">ALMACENAMIENTO</span>
                 <h3>Tanque Térmico Vertical</h3>
@@ -168,11 +162,10 @@
         </div>
     </div>
 
-    <!-- RESIDUOS LÍQUIDOS -->
     <h2 class="category-title">Residuos Líquidos</h2>
     <div class="product-grid-nexura">
         <div class="p-card" data-category="residuos" onclick="openProduct('residuos-11')">
-            <div class="p-img"><img src="gas.jpg" alt="Semirremolque residuos 1+1 ejes"></div>
+            <div class="p-img"><img loading="lazy" src="gas.jpg" alt="Tanque para transporte de gas y residuos líquidos – Metalúrgica Belgrano"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA RESIDUOS</span>
                 <h3>Semirremolque 1+1 Ejes</h3>
@@ -180,7 +173,7 @@
             </div>
         </div>
         <div class="p-card" data-category="residuos" onclick="openProduct('residuos-21')">
-            <div class="p-img"><img src="gas.jpg" alt="Semirremolque residuos 2+1 ejes"></div>
+            <div class="p-img"><img loading="lazy" src="gas.jpg" alt="Tanque para transporte de gas y residuos líquidos – Metalúrgica Belgrano"></div>
             <div class="p-info">
                 <span class="p-line">LÍNEA RESIDUOS</span>
                 <h3>Semirremolque 2+1 Ejes</h3>
@@ -191,7 +184,6 @@
 
 </section>
 
-<!-- Side Panel y resto del código se mantiene igual -->
 <div id="spec-panel" class="side-panel">
     <button class="btn-close-panel" onclick="closeProduct()">&times;</button>
     <div class="panel-content">
@@ -212,9 +204,7 @@
     <span>CONSULTAR AL INGENIERO IA</span>
 </div>
 
-
-
-   <script>
+<script>
 const productData = {
     'asfalto-11': { title: "Semirremolque 1+1 Ejes", desc: "Asfalto y Fuel Oil – Configuración básica.", sections:[{label:"LÍNEA ASFALTOS", items:[{n:"Tipo", v:"1+1 Ejes"}]}]},
     'asfalto-21': { title: "Semirremolque 2+1 Ejes", desc: "Mayor capacidad con ejes adicionales.", sections:[{label:"LÍNEA ASFALTOS", items:[{n:"Tipo", v:"2+1 Ejes"}]}]},
@@ -232,39 +222,42 @@ const productData = {
     'residuos-21': { title: "Semirremolque 2+1 Ejes", desc: "Opciones versátiles según volumen.", sections:[{label:"LÍNEA RESIDUOS", items:[{n:"Tipo", v:"2+1 Ejes"}]}]}
 };
 
-function filterProducts(category, btn) {
+function filterProducts(category, btn, e) {
+    if (e) e.preventDefault();
+
+    // 1. Limpiar activo y marcar el nuevo
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
+    // 2. Cancelar cualquier timeout pendiente de animaciones previas
+    if (window._filterTimeouts) {
+        window._filterTimeouts.forEach(id => clearTimeout(id));
+    }
+    window._filterTimeouts = [];
+
+    // 3. Mostrar/ocultar cards en un solo frame — sin race conditions
     document.querySelectorAll('.p-card').forEach(card => {
         const match = category === 'all' || card.dataset.category === category;
-
         if (match) {
-            card.style.display = "block";
-            requestAnimationFrame(() => {
-                card.classList.remove('is-hidden');
-            });
+            card.style.display = 'block';
+            void card.offsetWidth;
+            card.classList.remove('is-hidden');
         } else {
             card.classList.add('is-hidden');
-            setTimeout(() => {
-                card.style.display = "none";
-            }, 250);
+            const tid = setTimeout(() => { card.style.display = 'none'; }, 300);
+            window._filterTimeouts.push(tid);
         }
     });
 
-    // Títulos
+    // 4. Títulos de categoría: visibles/ocultos según presencia de cards
     document.querySelectorAll('.category-title').forEach(title => {
         if (category === 'all') {
-            title.style.display = "block";
+            title.style.display = 'block';
             return;
         }
-
         const grid = title.nextElementSibling;
-        const hasVisible = grid &&
-            Array.from(grid.querySelectorAll('.p-card'))
-                .some(c => c.style.display === "block");
-
-        title.style.display = hasVisible ? "block" : "none";
+        const catMatch = grid && grid.querySelector(`.p-card[data-category="${category}"]`);
+        title.style.display = catMatch ? 'block' : 'none';
     });
 }
 
@@ -369,7 +362,6 @@ window.onclick = function(event) {
             <p>&copy; 2026 Metalúrgica Belgrano. Todos los derechos reservados. <span class="divider">|</span> Suipacha, Argentina.</p>
         </div>
     </footer>
-
 
 </body>
 </html>

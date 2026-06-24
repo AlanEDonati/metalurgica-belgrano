@@ -3061,3 +3061,44 @@ body {
         height: clamp(200px, 55vw, 320px);
     }
 }
+
+/* ============================================================
+   FIX — INGENIERÍA: CTA final con imagen distinta al hero
+   Usa corte.png (plasma CNC) en lugar de gemini.jpg (robot)
+   para evitar la repetición visual en la misma página
+============================================================ */
+.final-cta--ingenieria {
+    background:
+        linear-gradient(rgba(2,3,5,0.78), rgba(2,3,5,0.88)),
+        url('corte.png') center 40% / cover no-repeat !important;
+    background-attachment: scroll !important; /* evita el doble-imagen con fixed en algunos browsers */
+    border-top: 1px solid rgba(0,118,255,0.3);
+    position: relative;
+}
+
+/* Línea azul decorativa izquierda sobre el párrafo */
+.final-cta--ingenieria p {
+    border-left: 3px solid #0076ff;
+    padding-left: 18px;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto 50px;
+    font-size: clamp(1rem, 1.6vw, 1.3rem);
+    color: rgba(255,255,255,0.75);
+}
+
+/* Título más compacto para no competir visualmente */
+.final-cta--ingenieria h2 {
+    font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+    margin-bottom: 24px;
+}
+
+/* ============================================================
+   FIX FINAL — CTA Ingeniería: textura acero cepillado propia
+============================================================ */
+.final-cta--ingenieria {
+    background:
+        linear-gradient(rgba(2,3,5,0.62), rgba(2,3,5,0.72)),
+        url('cta-acero.jpg') center center / cover no-repeat !important;
+    background-attachment: scroll !important;
+}
