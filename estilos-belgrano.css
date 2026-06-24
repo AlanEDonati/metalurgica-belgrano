@@ -2462,30 +2462,49 @@ display: grid;
     -webkit-text-stroke: 1px var(--cyan);
     filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.6));
 }
-
 /* Certificaciones / bóveda */
 .cert-vault {
     background: linear-gradient(90deg, #0a0b0d, #14161a, #0a0b0d);
-    padding: 60px 10%;
+    padding: 60px 20px; /* Reducimos el padding lateral para controlar el espacio con max-width */
     border-top: 1px solid rgba(255,255,255,0.1);
     border-bottom: 1px solid rgba(255,255,255,0.1);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 40px;
+    
+    /* Cambiamos Grid por Flexbox centrado */
+    display: flex;
+    justify-content: center;   /* Centra todo el grupo de logos en la pantalla */
     align-items: center;
+    flex-wrap: wrap;           /* Si no entran (en celulares), bajan ordenadamente */
+    gap: 50px;                 /* Distancia fija y controlada entre cada logo */
+    
+    /* Limitamos el ancho total del bloque para que no se dispersen en monitores grandes */
+    max-width: 900px;
+    margin: 0 auto;            /* Centra el contenedor principal */
+    width: 100%;
+}
+
+.cert-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-width: 150px;          /* Evita que los elementos se aplasten demasiado */
     text-align: center;
 }
+
 .cert-card img {
     max-height: 45px;
     filter: grayscale(1) brightness(2);
     opacity: 0.7;
     transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .cert-card:hover img {
     filter: grayscale(0) brightness(1);
     opacity: 1;
     transform: scale(1.05);
 }
+
 .iso-badge {
     border: 2px solid var(--belgrano-blue, #0076ff);
     padding: 10px 20px;
@@ -2494,7 +2513,6 @@ display: grid;
     color: var(--belgrano-blue, #0076ff);
     letter-spacing: 2px;
 }
-
 /* Plasma impact */
 .plasma-impact {
     position: relative;
