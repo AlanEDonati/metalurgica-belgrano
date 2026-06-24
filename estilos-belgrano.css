@@ -2464,29 +2464,31 @@ display: grid;
 }
 /* Certificaciones / bóveda */
 /* 1. CONTENEDOR EXTERIOR: Ocupa todo el ancho de la pantalla con el fondo */
+/* 1. CONTENEDOR EXTERIOR: Ocupa el 100% con el degradado de lado a lado */
 .cert-vault {
     background: linear-gradient(90deg, #0a0b0d, #14161a, #0a0b0d);
     width: 100%;
-    padding: 60px 0; /* Sacamos el padding lateral de acá */
+    padding: 60px 0;
     border-top: 1px solid rgba(255,255,255,0.1);
     border-bottom: 1px solid rgba(255,255,255,0.1);
     display: flex;
-    justify-content: center; /* Centra el bloque de adentro */
+    justify-content: center; /* Centra la grilla interna */
 }
 
-/* 2. CONTENEDOR INTERIOR: Agrupa y limita el ancho de los logos */
+/* 2. CONTENEDOR INTERIOR: Grilla fija de 4 columnas centradas */
 .cert-grid {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    /* Crea 4 columnas iguales con un tamaño mínimo de 150px y máximo de 220px */
+    grid-template-columns: repeat(4, minmax(150px, 220px));
+    justify-content: center;  /* Centra las columnas si sobra espacio */
     align-items: center;
-    flex-wrap: wrap;
-    gap: 60px; /* Espaciado fijo y controlado entre logos */
+    gap: 40px;                /* Separación exacta entre elementos */
     width: 100%;
-    max-width: 950px; /* El ancho ideal para que no se separen de más */
-    padding: 0 20px;  /* Margen interno de seguridad para celulares */
+    max-width: 1000px;        /* Límite para pantallas grandes */
+    padding: 0 20px;          /* Colchón para que no toque los bordes en tablets */
 }
 
-/* 3. TARJETAS INDIVIDUALES */
+/* 3. TARJETAS INDIVIDUALES (Mantenemos tus estilos originales) */
 .cert-card {
     display: flex;
     flex-direction: column;
@@ -2497,6 +2499,7 @@ display: grid;
 
 .cert-card img {
     max-height: 45px;
+    width: auto;
     filter: grayscale(1) brightness(2);
     opacity: 0.7;
     transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -2515,9 +2518,25 @@ display: grid;
     font-weight: 900;
     color: var(--belgrano-blue, #0076ff);
     letter-spacing: 2px;
-    white-space: nowrap; /* Evita que el texto ISO se parta en dos líneas */
+    white-space: nowrap;
 }
-/* Plasma impact */
+
+/* Si usás etiquetas <span> para los subtítulos pequeños de abajo */
+.cert-card span {
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #666;
+    text-transform: uppercase;
+}
+
+/* Responsive: si se achica la pantalla a celulares, pasa a 2 columnas */
+@media (max-width: 680px) {
+    .cert-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+}/* Plasma impact */
 .plasma-impact {
     position: relative;
     padding: clamp(60px, 10vw, 120px) 10%;
