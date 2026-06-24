@@ -2463,32 +2463,35 @@ display: grid;
     filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.6));
 }
 /* Certificaciones / bóveda */
+/* 1. CONTENEDOR EXTERIOR: Ocupa todo el ancho de la pantalla con el fondo */
 .cert-vault {
     background: linear-gradient(90deg, #0a0b0d, #14161a, #0a0b0d);
-    padding: 60px 20px; /* Reducimos el padding lateral para controlar el espacio con max-width */
+    width: 100%;
+    padding: 60px 0; /* Sacamos el padding lateral de acá */
     border-top: 1px solid rgba(255,255,255,0.1);
     border-bottom: 1px solid rgba(255,255,255,0.1);
-    
-    /* Cambiamos Grid por Flexbox centrado */
     display: flex;
-    justify-content: center;   /* Centra todo el grupo de logos en la pantalla */
-    align-items: center;
-    flex-wrap: wrap;           /* Si no entran (en celulares), bajan ordenadamente */
-    gap: 50px;                 /* Distancia fija y controlada entre cada logo */
-    
-    /* Limitamos el ancho total del bloque para que no se dispersen en monitores grandes */
-    max-width: 900px;
-    margin: 0 auto;            /* Centra el contenedor principal */
-    width: 100%;
+    justify-content: center; /* Centra el bloque de adentro */
 }
 
+/* 2. CONTENEDOR INTERIOR: Agrupa y limita el ancho de los logos */
+.cert-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 60px; /* Espaciado fijo y controlado entre logos */
+    width: 100%;
+    max-width: 950px; /* El ancho ideal para que no se separen de más */
+    padding: 0 20px;  /* Margen interno de seguridad para celulares */
+}
+
+/* 3. TARJETAS INDIVIDUALES */
 .cert-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex: 1;
-    min-width: 150px;          /* Evita que los elementos se aplasten demasiado */
     text-align: center;
 }
 
@@ -2512,6 +2515,7 @@ display: grid;
     font-weight: 900;
     color: var(--belgrano-blue, #0076ff);
     letter-spacing: 2px;
+    white-space: nowrap; /* Evita que el texto ISO se parta en dos líneas */
 }
 /* Plasma impact */
 .plasma-impact {
