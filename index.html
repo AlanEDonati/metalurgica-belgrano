@@ -627,106 +627,113 @@ document.getElementById('spec-panel').addEventListener('click', function(e) {
 });
 
 // =========================================================
-// LÓGICA INTERACTIVA DEL CHAT INGENIERO IA (NEXURA STYLE)
+// LÓGICA INTERACTIVA DEL CHAT INGENIERO IA (CORREGIDA)
 // =========================================================
-const chatModal = document.getElementById('ia-chat-modal');
-const openChatBtn = document.getElementById('ai-agent-trigger');
-const closeChatBtn = document.getElementById('close-chat-btn');
-const sendBtn = document.getElementById('send-chat-btn');
-const userInput = document.getElementById('chat-user-input');
-const messagesContainer = document.getElementById('chat-messages');
-const typingIndicator = document.getElementById('chat-typing-indicator');
+document.addEventListener('DOMContentLoaded', () => {
+    const chatModal = document.getElementById('ia-chat-modal');
+    const openChatBtn = document.getElementById('ai-agent-trigger');
+    const closeChatBtn = document.getElementById('close-chat-btn');
+    const sendBtn = document.getElementById('send-chat-btn');
+    const userInput = document.getElementById('chat-user-input');
+    const messagesContainer = document.getElementById('chat-messages');
+    const typingIndicator = document.getElementById('chat-typing-indicator');
 
-if(openChatBtn) {
+    // Verificación de seguridad para evitar que rompa si no encuentra los elementos
+    if (!chatModal || !openChatBtn) return;
+
     openChatBtn.addEventListener('click', (e) => {
         e.preventDefault();
         chatModal.classList.toggle('is-hidden');
         if(!chatModal.classList.contains('is-hidden')) userInput.focus();
     });
-}
 
-if(closeChatBtn) {
-    closeChatBtn.addEventListener('click', () => chatModal.classList.add('is-hidden'));
-}
+    if(closeChatBtn) {
+        closeChatBtn.addEventListener('click', () => chatModal.classList.add('is-hidden'));
+    }
 
-function appendMessage(text, isUser = false) {
-    const msgDiv = document.createElement('div');
-    msgDiv.classList.add('message', isUser ? 'user-message' : 'bot-message');
-    const sender = isUser ? 'Usuario' : 'Ingeniero IA';
-    msgDiv.innerHTML = `<span class="message-meta">${sender} • Ahora</span><p>${text}</p>`;
-    messagesContainer.appendChild(msgDiv);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-}
-
-function typeBotMessage(fullText) {
-    typingIndicator.classList.remove('is-hidden');
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    const thinkTime = Math.min(1400, 400 + fullText.length * 4);
-    
-    setTimeout(() => {
-        typingIndicator.classList.add('is-hidden');
+    function appendMessage(text, isUser = false) {
+        if (!messagesContainer) return;
         const msgDiv = document.createElement('div');
-        msgDiv.classList.add('message', 'bot-message');
-        msgDiv.innerHTML = `<span class="message-meta">Ingeniero IA • Ahora</span><p></p>`;
+        msgDiv.classList.add('message', isUser ? 'user-message' : 'bot-message');
+        const sender = isUser ? 'Usuario' : 'Ingeniero IA';
+        msgDiv.innerHTML = `<span class="message-meta">${sender} • Ahora</span><p>${text}</p>`;
         messagesContainer.appendChild(msgDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function typeBotMessage(fullText) {
+        if (!typingIndicator || !messagesContainer) return;
+        typingIndicator.classList.remove('is-hidden');
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        const thinkTime = Math.min(1400, 400 + fullText.length * 4);
         
-        const pElement = msgDiv.querySelector('p');
-        let index = 0;
-        
-        const interval = setInterval(() => {
-            if (index < fullText.length) {
-                if (fullText[index] === '<') {
-                    const closeIdx = fullText.indexOf('>', index);
-                    pElement.innerHTML += fullText.substring(index, closeIdx + 1);
-                    index = closeIdx + 1;
+        setTimeout(() => {
+            typingIndicator.classList.add('is-hidden');
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('message', 'bot-message');
+            msgDiv.innerHTML = `<span class="message-meta">Ingeniero IA • Ahora</span><p></p>`;
+            messagesContainer.appendChild(msgDiv);
+            
+            const pElement = msgDiv.querySelector('p');
+            let index = 0;
+            
+            const interval = setInterval(() => {
+                if (index < fullText.length) {
+                    if (fullText[index] === '<') {
+                        const closeIdx = fullText.indexOf('>', index);
+                        pElement.innerHTML += fullText.substring(index, closeIdx + 1);
+                        index = closeIdx + 1;
+                    } else {
+                        pElement.innerHTML += fullText[index];
+                        index++;
+                    }
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
                 } else {
-                    pElement.innerHTML += fullText[index];
-                    index++;
+                    clearInterval(interval);
                 }
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            } else {
-                clearInterval(interval);
-            }
-        }, 10);
-    }, thinkTime);
-}
-
-function handleSend() {
-    const text = userInput.value.trim();
-    if(!text) return;
-
-    appendMessage(text, true);
-    userInput.value = '';
-    
-    const response = getEngineeredResponse(text);
-    typeBotMessage(response);
-}
-
-if(sendBtn) {
-    sendBtn.addEventListener('click', handleSend);
-    userInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleSend(); });
-}
-
-function getEngineeredResponse(input) {
-    const query = input.toLowerCase();
-    if (/hola|buen|saludo/i.test(query)) {
-        return "Hola. Un gusto saludarle. ¿Qué proyecto o requerimiento técnico de piezas o estructuras metálicas está coordinando actualmente?";
+            }, 10);
+        }, thinkTime);
     }
-    if (/hardox|strenx|antidesgaste|chapa/i.test(query)) {
-        return "Como miembros oficiales de la red <strong>Hardox® Wearparts</strong>, procesamos chapas de alta resistencia al desgaste e impactos, combinando dobleces limpios con aceros avanzados Strenx®. ¿Tenés planos en formato CAD (DXF/DWG)?";
-    }
-    if (/plasma|corte|laser|cnc/i.test(query)) {
-        return "Nuestra mesa hiperbárica de <strong>Corte Plasma High Definition CNC</strong> trabaja con tolerancias críticas de ±0.5mm, garantizando caras perpendiculares óptimas para soldadura inmediata y sin escoria.";
-    }
-    if (/cotiz|precio|presupuesto|costo/i.test(query)) {
-        return "Para cotizar piezas mecanizadas con precisión, podés ir de forma directa a nuestro <a href='contacto.html' style='color:#0076ff; text-decoration:underline; font-weight:600;'>Módulo de Cotización Avanzada</a> para subir los planos, o dejarme un correo electrónico por acá.";
-    }
-    if (/suipacha|donde|planta/i.test(query)) {
-        return "Nuestra planta industrial de más de 40 años está ubicada estratégicamente en <strong>Suipacha, Provincia de Buenos Aires</strong>, despachando estructuras pesadas a nivel nacional.";
-    }
-    return "Entendido. Registré las variables de tu consulta para nuestra Oficina Técnica. Si buscás un cálculo de fatiga de material o viabilidad estructural específica, ¿podrías indicarme los espesores estimados o dejarme un teléfono de contacto?";
-}
 
+    function handleSend() {
+        if (!userInput) return;
+        const text = userInput.value.trim();
+        if(!text) return;
+
+        appendMessage(text, true);
+        userInput.value = '';
+        
+        const response = getEngineeredResponse(text);
+        typeBotMessage(response);
+    }
+
+    if(sendBtn) {
+        sendBtn.addEventListener('click', handleSend);
+    }
+    if(userInput) {
+        userInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleSend(); });
+    }
+
+    function getEngineeredResponse(input) {
+        const query = input.toLowerCase();
+        if (/hola|buen|saludo/i.test(query)) {
+            return "Hola. Un gusto saludarle. ¿Qué proyecto o requerimiento técnico de piezas o estructuras metálicas está coordinando actualmente?";
+        }
+        if (/hardox|strenx|antidesgaste|chapa/i.test(query)) {
+            return "Como miembros oficiales de la red <strong>Hardox® Wearparts</strong>, procesamos chapas de alta resistencia al desgaste e impactos, combinando dobleces limpios con aceros avanzados Strenx®. ¿Tenés planos en formato CAD (DXF/DWG)?";
+        }
+        if (/plasma|corte|laser|cnc/i.test(query)) {
+            return "Nuestra mesa hiperbárica de <strong>Corte Plasma High Definition CNC</strong> trabaja con tolerancias críticas de ±0.5mm, garantizando caras perpendiculares óptimas para soldadura inmediata y sin escoria.";
+        }
+        if (/cotiz|precio|presupuesto|costo/i.test(query)) {
+            return "Para cotizar piezas mecanizadas con precisión, podés ir de forma directa a nuestro <a href='contacto.html' style='color:#0076ff; text-decoration:underline; font-weight:600;'>Módulo de Cotización Avanzada</a> para subir los planos, o dejarme un correo electrónico por acá.";
+        }
+        if (/suipacha|donde|planta/i.test(query)) {
+            return "Nuestra planta industrial de más de 40 años está ubicada estratégicamente en <strong>Suipacha, Provincia de Buenos Aires</strong>, despachando estructuras pesadas a nivel nacional.";
+        }
+        return "Entendido. Registré las variables de tu consulta para nuestra Oficina Técnico-Comercial. Si buscás un cálculo de fatiga de material o viabilidad estructural específica, ¿podrías indicarme los espesores estimados o dejarme un teléfono de contacto?";
+    }
+});
 </script>
 
 <div id="ia-chat-modal" class="ia-chat-modal is-hidden">
