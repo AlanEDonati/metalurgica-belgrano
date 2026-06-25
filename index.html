@@ -628,7 +628,7 @@ document.getElementById('spec-panel').addEventListener('click', function(e) {
 
 </script>
 
-    <div id="ia-chat-modal" class="ia-chat-modal is-hidden">
+   <div id="ia-chat-modal" class="ia-chat-modal" style="display: none;">
         <div class="chat-header">
             <div class="chat-title-block">
                 <div class="avatar-container">
@@ -636,11 +636,11 @@ document.getElementById('spec-panel').addEventListener('click', function(e) {
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="#0076ff"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4M12,18c-2.67,0-8,1.34-8,4v2h16v-2c0-2.66-5.33-4-8-4Z"/></svg>
                 </div>
                 <div>
-                    <h4>Ingeniero IA</h4>
-                    <p class="status-text">En línea • División Técnica</p>
+                    <h4 style="margin:0; font-size:0.95rem; color:#fff;">Ingeniero IA</h4>
+                    <p class="status-text" style="margin:0; font-size:0.75rem; color:#00ff88;">En línea • División Técnica</p>
                 </div>
             </div>
-            <button id="close-chat-btn" class="close-chat-btn" aria-label="Cerrar Chat">&times;</button>
+            <button id="close-chat-btn" class="close-chat-btn" aria-label="Cerrar Chat">×</button>
         </div>
         
         <div id="chat-messages" class="chat-messages">
@@ -650,7 +650,7 @@ document.getElementById('spec-panel').addEventListener('click', function(e) {
             </div>
         </div>
 
-        <div id="chat-typing-indicator" class="typing-indicator is-hidden">
+        <div id="chat-typing-indicator" class="typing-indicator" style="display: none;">
             <span></span><span></span><span></span>
         </div>
         
@@ -671,26 +671,28 @@ document.getElementById('spec-panel').addEventListener('click', function(e) {
         const messagesContainer = document.getElementById('chat-messages');
         const typingIndicator = document.getElementById('chat-typing-indicator');
 
-        // Selecciona múltiples variantes para asegurar la captura del evento click
+        // Busca todos los disparadores posibles del chat
         const openChatButtons = document.querySelectorAll('[id="ai-agent-trigger"], .ai-agent-trigger, a[href*="ingeniero"]');
 
         if (!chatModal) return;
 
+        // Mostrar chat al hacer clic
         openChatButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                chatModal.classList.remove('is-hidden');
+                chatModal.style.display = 'flex'; // Usamos flex directo para evitar fallas de clase CSS
                 if(userInput) {
                     setTimeout(() => userInput.focus(), 100);
                 }
             });
         });
 
+        // Ocultar chat al cerrar
         if(closeChatBtn) {
             closeChatBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                chatModal.classList.add('is-hidden');
+                chatModal.style.display = 'none';
             });
         }
 
@@ -706,12 +708,12 @@ document.getElementById('spec-panel').addEventListener('click', function(e) {
 
         function typeBotMessage(fullText) {
             if (!typingIndicator || !messagesContainer) return;
-            typingIndicator.classList.remove('is-hidden');
+            typingIndicator.style.display = 'block';
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
             const thinkTime = Math.min(1400, 400 + fullText.length * 4);
             
             setTimeout(() => {
-                typingIndicator.classList.add('is-hidden');
+                typingIndicator.style.display = 'none';
                 const msgDiv = document.createElement('div');
                 msgDiv.classList.add('message', 'bot-message');
                 msgDiv.innerHTML = `<span class="message-meta">Ingeniero IA • Ahora</span><p></p>`;
@@ -757,7 +759,7 @@ document.getElementById('spec-panel').addEventListener('click', function(e) {
             userInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleSend(); });
         }
 
-       function getEngineeredResponse(input) {
+        function getEngineeredResponse(input) {
             const query = input.toLowerCase();
             if (/hola|buen|saludo/i.test(query)) {
                 return "Hola. Un gusto saludarle. ¿Qué proyecto o requerimiento técnico de piezas o estructuras metálicas está coordinando actualmente?";
@@ -773,6 +775,13 @@ document.getElementById('spec-panel').addEventListener('click', function(e) {
             }
             return "Entendido. Para brindarle una respuesta precisa sobre esa configuración o proceso de manufactura, puedo derivar estos parámetros directamente al departamento técnico. ¿Desea dejar un teléfono de contacto?";
         }
+
+        // Cerrar si hace clic fuera del recuadro del chat
+        chatModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+            }
+        });
     });
     </script>
 </body>
