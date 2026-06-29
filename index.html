@@ -500,18 +500,15 @@
             if (e.target === this) this.classList.remove('active');
         });
     </script>
-<!-- ═══════════════════════════════════════════════════
-     TYPEBOT — Ingeniero IA
-════════════════════════════════════════════════════ -->
-<link rel="stylesheet" href="https://unpkg.com/@typebot.io/js@3/dist/web.css" crossorigin="anonymous">
-    <script src="https://unpkg.com/@typebot.io/js@3/dist/web.js" defer crossorigin="anonymous" onload="initTypebot()"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@typebot.io/js@3/dist/web.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@typebot.io/js@3/dist/web.js" defer crossorigin="anonymous" onload="initTypebot()"></script>
 
     <script>
         // ── CONTROLADOR GLOBAL DE TYPEBOT V3 ──────────────────
         var _typebotReady = false;
         var _pendingOpen  = false;
 
-        // Esta función se ejecuta automáticamente cuando el script de arriba termina de cargar
         function initTypebot() {
             try {
                 Typebot.initBubble({
@@ -521,8 +518,8 @@
                     }
                 });
                 _typebotReady = true;
+                console.log("[Typebot] Inicializado correctamente.");
                 
-                // Si el usuario presionó el botón antes de que cargara la librería
                 if (_pendingOpen) {
                     _pendingOpen = false;
                     setTimeout(function() { Typebot.open(); }, 150);
@@ -532,7 +529,6 @@
             }
         }
 
-        // Escucha del clic en tu botón personalizado (#ai-agent-trigger)
         document.addEventListener('click', function(e) {
             if (!e.target.closest('#ai-agent-trigger')) return;
             
@@ -541,17 +537,16 @@
 
             if (_typebotReady) {
                 try { 
-                    Typebot.open(); // Método global nativo de la V3
+                    Typebot.open();
                 } catch (err) { 
                     console.error("[Typebot] Error al abrir la ventana:", err); 
                 }
             } else {
                 _pendingOpen = true;
-                console.log("[Typebot] Conectando con el Ingeniero IA...");
+                console.log("[Typebot] Esperando a que termine de cargar la librería...");
             }
         });
 
-        // Inyección de estilos para ocultar el botón flotante azul por defecto de Typebot
         (function hideBubble() {
             var style = document.createElement('style');
             style.textContent = '#typebot-bubble-button, .typebot-bubble-button, [data-testid="typebot-bubble-button"] { display: none !important; visibility: hidden !important; pointer-events: none !important; }';
