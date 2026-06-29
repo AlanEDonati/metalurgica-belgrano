@@ -9,26 +9,6 @@
     <link rel="icon" type="image/png" href="favin-mb.jpg">
     <link rel="apple-touch-icon" href="favin-mb.jpg">
     <meta name="theme-color" content="#0066cc">
-
-    <!--
-        TYPEBOT — CSS cargado en <head> para evitar FOUC de la burbuja nativa.
-        Se usa unpkg (CDN estable, sirve text/javascript correcto) en lugar de jsDelivr.
-    -->
-    <link rel="stylesheet" href="https://unpkg.com/@typebot.io/js@3/dist/web.css" crossorigin="anonymous">
-
-    <!--
-        Ocultamos la burbuja flotante nativa de Typebot ANTES de que el script
-        la inyecte, evitando el parpadeo (FOUC) de aparición y desaparición.
-    -->
-    <style>
-        #typebot-bubble-button,
-        .typebot-bubble-button,
-        [data-testid="typebot-bubble-button"] {
-            display: none !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-        }
-    </style>
 </head>
 
 <body>
@@ -520,73 +500,24 @@
             if (e.target === this) this.classList.remove('active');
         });
     </script>
+<!-- ═══════════════════════════════════════════════════
+     TYPEBOT — Ingeniero IA
+════════════════════════════════════════════════════ -->
+<script type="module">
+    import Typebot from "https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js";
 
-    <!-- ═══════════════════════════════════════════════════
-         TYPEBOT — Carga estable para Vercel (producción)
-         CDN: unpkg UMD — evita errores MIME de jsDelivr
-    ════════════════════════════════════════════════════ -->
+    // Inicializa el popup del Ingeniero IA
+    const popup = Typebot.initPopup({
+        typebot: "my-typebot-pciia25"
+    });
 
-    <!--
-        defer: el script se descarga en paralelo y se ejecuta
-        DESPUÉS de que el DOM esté completamente parseado.
-        onload: initTypebot() se llama solo cuando Typebot
-        está 100% disponible en window, eliminando la race condition.
-    -->
-    <script
-        src="https://unpkg.com/@typebot.io/js@3/dist/web.js"
-        defer
-        crossorigin="anonymous"
-        onload="initTypebot()"
-    ></script>
-
-    <script>
-        // ── Estado de carga ────────────────────────────────────
-        var _typebotReady = false;  // true cuando initBubble() tuvo éxito
-        var _pendingOpen  = false;  // clic recibido antes de que cargara
-
-        // ── Inicialización (llamada solo desde onload del script) ──
-        function initTypebot() {
-            try {
-                Typebot.initBubble({
-                    typebot: "my-typebot-pciia25",
-                    theme: {
-                        chatWindow: { backgroundColor: "#F8F8F8" }
-                    }
-                });
-                _typebotReady = true;
-
-                // El usuario hizo clic mientras cargaba → abrimos ahora
-                if (_pendingOpen) {
-                    _pendingOpen = false;
-                    setTimeout(function() { Typebot.open(); }, 100);
-                }
-            } catch (err) {
-                console.error("[Typebot] Error en initBubble:", err);
-            }
-        }
-
-        // ── Event Delegation robusta ───────────────────────────
-        // .closest() sube desde cualquier nodo hijo (span.dot, texto, etc.)
-        // hasta #ai-agent-trigger, sin importar qué parte exacta se clicó.
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('#ai-agent-trigger')) return;
-
+    // Abrir el popup desde tu botón personalizado
+    document
+        .getElementById("ai-agent-trigger")
+        .addEventListener("click", function (e) {
             e.preventDefault();
-            e.stopPropagation();
-
-            if (_typebotReady) {
-                try {
-                    Typebot.open();
-                } catch (err) {
-                    console.error("[Typebot] Error al abrir:", err);
-                }
-            } else {
-                // Typebot aún carga (conexión lenta) → marcar intención
-                _pendingOpen = true;
-                console.log("[Typebot] Script pendiente — el bot abrirá al terminar la carga.");
-            }
+            popup.open();
         });
-    </script>
-
+</script>
 </body>
 </html>
