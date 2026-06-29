@@ -628,9 +628,19 @@ document.getElementById('spec-panel').addEventListener('click', function(e) {
 
 </script>
 <script type="module">
-      // CORRECCIÓN: Ruta oficial externa sin carpetas intermedias rotas
+      // Inyectamos dinámicamente el CSS nativo de Typebot para asegurar que la ventana sea visible
+      if (!document.getElementById('typebot-css')) {
+          const link = document.createElement('link');
+          link.id = 'typebot-css';
+          link.rel = 'stylesheet';
+          link.href = 'https://cdn.jsdelivr.net/npm/@typebot.io/js@3/dist/web.css';
+          document.head.appendChild(link);
+      }
+
+      // Importamos la librería v3 limpia
       import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@3'
 
+      // Inicialización oficial
       Typebot.initBubble({
         typebot: "my-typebot-pciia25",
         theme: {
@@ -638,7 +648,7 @@ document.getElementById('spec-panel').addEventListener('click', function(e) {
         },
       });
 
-      // Escuchamos el clic a nivel global en el documento (Event Delegation)
+      // Delegación de eventos global a prueba de errores de DOM
       document.addEventListener('click', (e) => {
           const botonIA = e.target.closest('#ai-agent-trigger') || 
                           (e.target.textContent && e.target.textContent.includes('INGENIERO IA'));
@@ -651,30 +661,21 @@ document.getElementById('spec-panel').addEventListener('click', function(e) {
                   Typebot.open();
               } catch (error) {
                   console.error("Error al abrir Typebot:", error);
-                  const nativeButton = document.querySelector('#typebot-bubble-button, .typebot-bubble-button');
-                  if (nativeButton) nativeButton.click();
+                  // Respaldo por si falla el método .open() directo
+                  const btnNativo = document.querySelector('#typebot-bubble-button, .typebot-bubble-button');
+                  if (btnNativo) btnNativo.click();
               }
           }
       });
 
-      // Le agregamos el cursor pointer apenas cargue la página
+      // Aseguramos el cursor interactivo en tu botón personalizado
       const forzarCursor = () => {
           const btn = document.getElementById('ai-agent-trigger');
           if (btn) btn.style.cursor = 'pointer';
       };
       window.addEventListener('DOMContentLoaded', forzarCursor);
       setTimeout(forzarCursor, 1000);
-    </script>
-
-    <style>
-      /* Oculta por completo la burbuja circular nativa pero la mantiene funcional */
-      #typebot-bubble-button, .typebot-bubble-button { 
-          opacity: 0 !important; 
-          pointer-events: none !important;
-          position: absolute !important;
-          width: 1px !important;
-          height: 1px !important;
-      }
-    </style>
-    </body>
+</script>
+    
+</body>
 </html>

@@ -3196,3 +3196,19 @@ body {
         gap: 24px;
     }
 }
+
+/* Ocultar la burbuja por defecto de Typebot de manera segura */
+#typebot-bubble-button, 
+.typebot-bubble-button { 
+    opacity: 0 !important; 
+    pointer-events: none !important;
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    z-index: -9999 !important;
+}
+
+/* Forzar el cursor interactivo en tu botón del menú */
+#ai-agent-trigger {
+    cursor: pointer !important;
+}
