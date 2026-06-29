@@ -627,55 +627,40 @@ document.getElementById('spec-panel').addEventListener('click', function(e) {
 });
 
 </script>
-<script type="module">
-      // Inyectamos dinámicamente el CSS nativo de Typebot para asegurar que la ventana sea visible
-      if (!document.getElementById('typebot-css')) {
-          const link = document.createElement('link');
-          link.id = 'typebot-css';
-          link.rel = 'stylesheet';
-          link.href = 'https://cdn.jsdelivr.net/npm/@typebot.io/js@3/dist/web.css';
-          document.head.appendChild(link);
-      }
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@typebot.io/js@3/dist/web.css">
 
-      // Importamos la librería v3 limpia
-      import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@3'
+<script src="https://cdn.jsdelivr.net/npm/@typebot.io/js@3/dist/web.js"></script>
 
-      // Inicialización oficial
-      Typebot.initBubble({
+<script>
+    // Inicialización usando el objeto global
+    Typebot.initBubble({
         typebot: "my-typebot-pciia25",
         theme: {
-          chatWindow: { backgroundColor: "#F8F8F8" },
+            chatWindow: { backgroundColor: "#F8F8F8" },
         },
-      });
+    });
 
-      // Delegación de eventos global a prueba de errores de DOM
-      document.addEventListener('click', (e) => {
-          const botonIA = e.target.closest('#ai-agent-trigger') || 
-                          (e.target.textContent && e.target.textContent.includes('INGENIERO IA'));
-          
-          if (botonIA) {
-              e.preventDefault();
-              e.stopPropagation();
-              
-              try {
-                  Typebot.open();
-              } catch (error) {
-                  console.error("Error al abrir Typebot:", error);
-                  // Respaldo por si falla el método .open() directo
-                  const btnNativo = document.querySelector('#typebot-bubble-button, .typebot-bubble-button');
-                  if (btnNativo) btnNativo.click();
-              }
-          }
-      });
-
-      // Aseguramos el cursor interactivo en tu botón personalizado
-      const forzarCursor = () => {
-          const btn = document.getElementById('ai-agent-trigger');
-          if (btn) btn.style.cursor = 'pointer';
-      };
-      window.addEventListener('DOMContentLoaded', forzarCursor);
-      setTimeout(forzarCursor, 1000);
+    // Delegación de eventos global para abrir al hacer clic en el botón
+    document.addEventListener('click', function(e) {
+        const botonIA = e.target.closest('#ai-agent-trigger') || 
+                        (e.target.textContent && e.target.textContent.includes('INGENIERO IA'));
+        
+        if (botonIA) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            try {
+                // Comando nativo oficial para abrir la ventana
+                Typebot.open();
+            } catch (error) {
+                console.error("Error al abrir Typebot:", error);
+                // Respaldo por si el DOM no refrescó el método
+                const btnNativo = document.querySelector('#typebot-bubble-button, .typebot-bubble-button');
+                if (btnNativo) btnNativo.click();
+            }
+        }
+    });
 </script>
-    
+
 </body>
 </html>
