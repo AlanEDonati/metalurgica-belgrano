@@ -500,11 +500,9 @@
             if (e.target === this) this.classList.remove('active');
         });
     </script>
+<script type="module">
+        import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@3/dist/web.js';
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@typebot.io/js@3/dist/web.css" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@typebot.io/js@3/dist/web.js" defer crossorigin="anonymous" onload="initTypebot()"></script>
-
-    <script>
         // ── CONTROLADOR GLOBAL DE TYPEBOT V3 ──────────────────
         var _typebotReady = false;
         var _pendingOpen  = false;
@@ -529,6 +527,10 @@
             }
         }
 
+        // Ejecutar la inicialización inmediatamente ya que el import es síncrono
+        initTypebot();
+
+        // Escucha del botón personalizado
         document.addEventListener('click', function(e) {
             if (!e.target.closest('#ai-agent-trigger')) return;
             
@@ -543,10 +545,11 @@
                 }
             } else {
                 _pendingOpen = true;
-                console.log("[Typebot] Esperando a que termine de cargar la librería...");
+                console.log("[Typebot] Esperando inicialización...");
             }
         });
 
+        // Ocultar botón flotante por defecto
         (function hideBubble() {
             var style = document.createElement('style');
             style.textContent = '#typebot-bubble-button, .typebot-bubble-button, [data-testid="typebot-bubble-button"] { display: none !important; visibility: hidden !important; pointer-events: none !important; }';
