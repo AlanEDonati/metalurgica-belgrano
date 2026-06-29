@@ -627,39 +627,61 @@ document.getElementById('spec-panel').addEventListener('click', function(e) {
 });
 
 </script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@typebot.io/js@3/dist/web.css">
+<link rel="stylesheet" href="https://unpkg.com/@typebot.io/js@3/dist/web.css" crossorigin="anonymous">
 
-<script src="https://cdn.jsdelivr.net/npm/@typebot.io/js@3/dist/web.js"></script>
+<script src="https://unpkg.com/@typebot.io/js@3/dist/web.js" defer crossorigin="anonymous" onload="initTypebot()"></script>
 
 <script>
-    // Inicialización usando el objeto global
-    Typebot.initBubble({
-        typebot: "my-typebot-pciia25",
-        theme: {
-            chatWindow: { backgroundColor: "#F8F8F8" },
-        },
-    });
+    var _typebotReady = false;   // Controla si el bot terminó de cargarse
+    var _pendingOpen  = false;   // Captura si el usuario hizo clic rápido mientras cargaba
 
-    // Delegación de eventos global para abrir al hacer clic en el botón
-    document.addEventListener('click', function(e) {
-        const botonIA = e.target.closest('#ai-agent-trigger') || 
-                        (e.target.textContent && e.target.textContent.includes('INGENIERO IA'));
-        
-        if (botonIA) {
-            e.preventDefault();
-            e.stopPropagation();
+    // 3. Inicialización controlada
+    function initTypebot() {
+        try {
+            Typebot.initBubble({
+                typebot: "my-typebot-pciia25",
+                theme: {
+                    chatWindow: { backgroundColor: "#F8F8F8" }
+                }
+            });
+            _typebotReady = true;
             
-            try {
-                // Comando nativo oficial para abrir la ventana
-                Typebot.open();
-            } catch (error) {
-                console.error("Error al abrir Typebot:", error);
-                // Respaldo por si el DOM no refrescó el método
-                const btnNativo = document.querySelector('#typebot-bubble-button, .typebot-bubble-button');
-                if (btnNativo) btnNativo.click();
+            // Si el usuario cliqueó antes de tiempo, se abre de inmediato
+            if (_pendingOpen) {
+                _pendingOpen = false;
+                setTimeout(function() { Typebot.open(); }, 100);
             }
+        } catch (err) {
+            console.error("[Typebot] Error al inicializar:", err);
+        }
+    }
+
+    // 4. Delegación de eventos robusta para el botón personalizado
+    document.addEventListener('click', function(e) {
+        // Verifica si hizo clic en el trigger o dentro de él
+        if (!e.target.closest('#ai-agent-trigger')) return;
+        
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (_typebotReady) {
+            try {
+                Typebot.open();
+            } catch (err) {
+                console.error("[Typebot] Error al abrir ventana:", err);
+            }
+        } else {
+            _pendingOpen = true;
+            console.log("[Typebot] Conexión en progreso... Abriendo automáticamente al conectar.");
         }
     });
+
+    // 5. Ocultar de raíz la burbuja flotante por defecto de Typebot
+    (function hideBubble() {
+        var style = document.createElement('style');
+        style.textContent = '#typebot-bubble-button, .typebot-bubble-button, [data-testid="typebot-bubble-button"] { display: none !important; visibility: hidden !important; pointer-events: none !important; }';
+        (document.head || document.body).appendChild(style);
+    })();
 </script>
 
 </body>
