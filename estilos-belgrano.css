@@ -3085,19 +3085,22 @@ body {
         height: clamp(200px, 55vw, 320px);
     }
 }
-
 /* ============================================================
-   FIX — INGENIERÍA: CTA final con imagen distinta al hero
-   Usa corte.png (plasma CNC) en lugar de gemini.jpg (robot)
-   para evitar la repetición visual en la misma página
+   FIX — INGENIERÍA: CTA final con textura acero cepillado
 ============================================================ */
 .final-cta--ingenieria {
     background:
-        linear-gradient(rgba(2,3,5,0.78), rgba(2,3,5,0.88)),
-        url('corte.png') center 40% / cover no-repeat !important;
+        linear-gradient(rgba(2,3,5,0.62), rgba(2,3,5,0.72)),
+        url('cta-acero.jpg') center center / cover no-repeat !important;
     background-attachment: scroll !important; /* evita el doble-imagen con fixed en algunos browsers */
     border-top: 1px solid rgba(0,118,255,0.3);
     position: relative;
+}
+
+/* Título más compacto para no competir visualmente */
+.final-cta--ingenieria h2 {
+    font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+    margin-bottom: 24px;
 }
 
 /* Línea azul decorativa izquierda sobre el párrafo */
@@ -3111,21 +3114,6 @@ body {
     color: rgba(255,255,255,0.75);
 }
 
-/* Título más compacto para no competir visualmente */
-.final-cta--ingenieria h2 {
-    font-size: clamp(2.2rem, 5.5vw, 4.2rem);
-    margin-bottom: 24px;
-}
-
-/* ============================================================
-   FIX FINAL — CTA Ingeniería: textura acero cepillado propia
-============================================================ */
-.final-cta--ingenieria {
-    background:
-        linear-gradient(rgba(2,3,5,0.62), rgba(2,3,5,0.72)),
-        url('cta-acero.jpg') center center / cover no-repeat !important;
-    background-attachment: scroll !important;
-}
 
 /* ============================================================
    FIX CRÍTICO — Filtros productos fuera del hero + z-index IA
@@ -3155,6 +3143,7 @@ body {
 
 /* Bajar z-index del botón IA para que NUNCA tape botones clicables */
 #ai-agent-trigger {
+    cursor: pointer !important;
     z-index: 400 !important; /* por debajo de los filtros sticky */
     bottom: 25px !important;
     right: 30px !important;  /* moverlo al extremo derecho, lejos de los filtros */
@@ -3170,85 +3159,10 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease !important;
 }
 
-@media (max-width: 700px) {
-    .catalog-filter-sticky {
-        gap: 8px;
-        padding: 14px 4%;
-        justify-content: flex-start;
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        -webkit-overflow-scrolling: touch;
-        top: 60px;
-    }
-    .filter-btn { flex-shrink: 0; }
-}
 
-/* cert-vault responsive */
-@media (max-width: 700px) {
-    .cert-vault-inner {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 32px;
-    }
-}
-@media (max-width: 400px) {
-    .cert-vault-inner {
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-    }
-}
-
-/* Ocultar la burbuja por defecto de Typebot de manera segura */
-#typebot-bubble-button, 
-.typebot-bubble-button { 
-    opacity: 0 !important; 
-    pointer-events: none !important;
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    z-index: -9999 !important;
-}
-
-/* Forzar el cursor interactivo en tu botón del menú */
-#ai-agent-trigger {
-    cursor: pointer !important;
-}
 /* ==========================================
-   ESTRATEGIA NEXURA: CONTROL DE TYPEBOT 
+   ESTRUCTURA LATERAL INTEGRADA ESTILO NEXURA
    ========================================== */
-
-/* 1. Pulverizar el botón/globo gris nativo de raíz */
-typebot-bubble::part(button) {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-}
-
-/* 2. Darle el estilo corporativo y modo oscuro a la ventana emergente */
-typebot-bubble::part(popup) {
-    background-color: #0d1b2a !important; /* Fondo azul oscuro profundo a tono con la web */
-    border: 1px solid #1e3a8a !important;   /* Borde azul sutil del ecosistema */
-    border-radius: 16px !important;        /* Bordes redondeados modernos */
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 10px 10px -5px rgba(0, 0, 0, 0.7) !important; /* Sombra profunda */
-    overflow: hidden !important;
-}
-
-/* 3. Forzar al iframe interno a heredar los bordes redondeados y fondo oscuro */
-typebot-bubble iframe {
-    border-radius: 16px !important;
-    background-color: #0d1b2a !important;
-}
-
-/* 4. Ajustar la posición global del componente en la pantalla */
-typebot-bubble {
-    bottom: 24px !important;
-    right: 24px !important;
-    z-index: 99999 !important;
-}
-
-/* ========================================================
-   ESTRUCTRURA LATERAL NEXURA ADAPTADA A METALÚRGICA BELGRANO
-   ======================================================== */
 .typebot-sidebar-nexura {
     position: fixed;
     top: 0;
@@ -3265,11 +3179,15 @@ typebot-bubble {
     display: block !important;
     transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    
+    /* Evita bloquear elementos interactivos de la web cuando está cerrado */
+    pointer-events: none;
 }
 
 /* Cuando se activa, entra fluidamente desde la derecha */
 .typebot-sidebar-nexura.active {
     transform: translateX(0);
+    pointer-events: auto; /* Permite clickear dentro del chat */
 }
 
 /* Forzar al contenedor interno e iframe a ocupar el 100% de la barra lateral */
@@ -3279,4 +3197,46 @@ typebot-bubble {
     height: 100% !important;
     border: none !important;
     border-radius: 0 !important; /* Estilo recto y limpio como en Nexura */
+}
+
+
+/* ==========================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================== */
+@media (max-width: 700px) {
+    .catalog-filter-sticky {
+        gap: 8px;
+        padding: 14px 4%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        top: 60px;
+    }
+    .filter-btn { 
+        flex-shrink: 0; 
+    }
+    
+    .cert-vault-inner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+    }
+}
+
+@media (max-width: 400px) {
+    .cert-vault-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+}
+
+/* Ocultar la burbuja residual por defecto de Typebot de manera segura */
+#typebot-bubble-button, 
+.typebot-bubble-button { 
+    opacity: 0 !important; 
+    pointer-events: none !important;
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    z-index: -9999 !important;
 }
