@@ -3212,3 +3212,11 @@ body {
 #ai-agent-trigger {
     cursor: pointer !important;
 }
+
+/* Oculta el botón circular nativo de Typebot sin romper el modal del chat */
+typebot-bubble::part(button) {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
