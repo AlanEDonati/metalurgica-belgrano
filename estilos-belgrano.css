@@ -3245,3 +3245,38 @@ typebot-bubble {
     right: 24px !important;
     z-index: 99999 !important;
 }
+
+/* ========================================================
+   ESTRUCTRURA LATERAL NEXURA ADAPTADA A METALÚRGICA BELGRANO
+   ======================================================== */
+.typebot-sidebar-nexura {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 450px;
+    height: 100vh;
+    max-width: 100vw;
+    background-color: #0d1b2a !important; /* Tu azul oscuro corporativo */
+    border-left: 2px solid #1e3a8a !important; /* Línea divisoria elegante */
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.6);
+    z-index: 99999;
+    
+    /* Estado inicial: oculto hacia la derecha */
+    display: block !important;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Cuando se activa, entra fluidamente desde la derecha */
+.typebot-sidebar-nexura.active {
+    transform: translateX(0);
+}
+
+/* Forzar al contenedor interno e iframe a ocupar el 100% de la barra lateral */
+.typebot-sidebar-nexura iframe,
+.typebot-sidebar-nexura div {
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
+    border-radius: 0 !important; /* Estilo recto y limpio como en Nexura */
+}
