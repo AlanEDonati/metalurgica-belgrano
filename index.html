@@ -504,7 +504,6 @@
 
         function initTypebot() {
             try {
-                // Inicializamos usando la versión tradicional estable
                 Typebot.initBubble({
                     typebot: "my-typebot-pciia25",
                     theme: { 
@@ -523,11 +522,11 @@
             }
         }
 
-        // CARGA ULTRA-ESTABLE: Reemplazamos la URL rota por el bundle empaquetado de jsDelivr
+        // CARGA ULTRA-ESTABLE: URL global oficial para scripts estándar
         (function() {
             var script = document.createElement('script');
             script.type = 'text/javascript';
-            script.src = 'https://cdn.jsdelivr.net/npm/@typebot.io/js@2.2.8/dist/web.js'; 
+            script.src = 'https://assets.typebot.io/next/web.js'; 
             script.async = true;
             script.onload = initTypebot;
             document.head.appendChild(script);
