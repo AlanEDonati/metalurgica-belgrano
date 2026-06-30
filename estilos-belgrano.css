@@ -3235,3 +3235,39 @@ typebot-bubble {
     bottom: 24px !important;
     right: 24px !important;
 }
+
+/* Contenedor del chat inicialmente oculto y flotante */
+.typebot-modal-custom {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 400px;
+    height: 600px;
+    max-width: 90vw;
+    max-height: 80vh;
+    background-color: #0d1b2a !important; /* Fondo azul oscuro corporativo */
+    border: 1px solid #1e3a8a !important;   /* Borde azul sutil */
+    border-radius: 16px !important;        /* Bordes redondeados perfectos */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.5) !important;
+    overflow: hidden;
+    z-index: 99999;
+    
+    /* Animación de transición suave */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+/* Cuando se activa el chat */
+.typebot-modal-custom.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Forzar a que el iframe interno respete los bordes redondeados */
+.typebot-modal-custom iframe, 
+.typebot-modal-custom div {
+    border-radius: 16px !important;
+}

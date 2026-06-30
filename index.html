@@ -492,92 +492,54 @@
         document.getElementById('spec-panel').addEventListener('click', function(e) {
             if (e.target === this) this.classList.remove('active');
         });
-    </script>
+    </script><!-- Contenedor personalizado para el disparador -->
 <div id="ai-agent-trigger" class="ai-agent">
     <span class="dot"></span>
     <span>CONSULTAR AL INGENIERO IA</span>
 </div>
 
+<!-- Contenedor oculto del Chatbot (Vos controlás el diseño acá) -->
+<div id="typebot-container" class="typebot-modal-custom"></div>
+
 <script type="module">
 import Typebot from "https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js";
 
-// Inicializa el chat
-Typebot.initBubble({
-    typebot: "my-typebot-pciia25",
-    theme: {
-        chatWindow: {
-            backgroundColor: "#0d1b2a"
-        }
-    }
+// Inicializa el chat dentro de nuestro propio contenedor DIV
+Typebot.initStandard({
+    targetElement: "#typebot-container",
+    typebot: "my-typebot-pciia25"
 });
 
-// Lógica de apertura y cierre
+console.log("[Typebot] Inicializado en contenedor estándar.");
+
 let isChatOpen = false;
 const triggerBtn = document.getElementById("ai-agent-trigger");
+const chatContainer = document.getElementById("typebot-container");
 
+// Alternar apertura/cierre al hacer click en tu botón
 triggerBtn.addEventListener("click", function(e) {
     e.preventDefault();
     e.stopPropagation();
     
     if (!isChatOpen) {
-        if (typeof Typebot.open === "function") Typebot.open();
-        else if (typeof Typebot.openPopup === "function") Typebot.openPopup();
+        chatContainer.classList.add("active");
         isChatOpen = true;
+        console.log("[Typebot] Chat abierto");
     } else {
-        if (typeof Typebot.close === "function") Typebot.close();
+        chatContainer.classList.remove("active");
         isChatOpen = false;
+        console.log("[Typebot] Chat cerrado");
     }
 });
 
+// Cerrar al hacer click afuera del contenedor del chat
 document.addEventListener("click", function(e) {
-    if (isChatOpen && !triggerBtn.contains(e.target)) {
-        const typebotHost = document.querySelector('typebot-bubble');
-        if (typebotHost && typebotHost.contains(e.target)) return;
-        
-        if (typeof Typebot.close === "function") Typebot.close();
+    if (isChatOpen && !triggerBtn.contains(e.target) && !chatContainer.contains(e.target)) {
+        chatContainer.classList.remove("active");
         isChatOpen = false;
+        console.log("[Typebot] Clic externo, chat cerrado");
     }
 });
-
-// ═════════════════════════════════════════════════════════════
-// INYECTOR NUCLEAR DE ESTILOS AL SHADOW DOM
-// ═════════════════════════════════════════════════════════════
-setInterval(function() {
-    const host = document.querySelector('typebot-bubble');
-    if (host && host.shadowRoot) {
-        // 1. Ocultar el botón original (por si las dudas)
-        const button = host.shadowRoot.querySelector('.typebot-bubble-button, button');
-        if (button && button.style.display !== 'none') {
-            button.style.setProperty('display', 'none', 'important');
-        }
-
-        // 2. Hackear los estilos de la ventana del chat (Popup)
-        // Buscamos el contenedor principal interno de Typebot (.typebot-popup o similar)
-        const popup = host.shadowRoot.querySelector('div'); 
-        if (popup && !popup.classList.contains('custom-styled')) {
-            
-            // Creamos un tag style exclusivo para meter ADENTRO del Shadow DOM
-            const shadowStyle = document.createElement('style');
-            shadowStyle.textContent = `
-                /* Forzamos el contenedor principal a modo oscuro y bordes redondeados */
-                div, [part="popup"], .typebot-popup {
-                    background-color: #0d1b2a !important;
-                    border: 1px solid #1e3a8a !important;
-                    border-radius: 16px !important;
-                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.7) !important;
-                    overflow: hidden !important;
-                }
-                /* Forzamos a que conserve las dimensiones correctas */
-                iframe {
-                    border-radius: 16px !important;
-                }
-            `;
-            host.shadowRoot.appendChild(shadowStyle);
-            popup.classList.add('custom-styled'); // Bandera para no duplicar el estilo
-            console.log("[Typebot] Estilos oscuros inyectados con éxito en el Shadow DOM");
-        }
-    }
-}, 200);
 </script>
 </body>
 </html>
