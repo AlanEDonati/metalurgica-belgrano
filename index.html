@@ -494,69 +494,46 @@
         });
     </script>
 <div id="ai-agent-trigger" class="ai-agent">
-        <span class="dot"></span>
-        <span>CONSULTAR AL INGENIERO IA</span>
-    </div>
+    <span class="dot"></span>
+    <span>CONSULTAR AL INGENIERO IA</span>
+</div>
 
-    <script>
-        var _typebotReady = false;
-        var _pendingOpen  = false;
+<script type="module">
+import Typebot from "https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js";
 
-        function initTypebot() {
-            try {
-                Typebot.initBubble({
-                    typebot: "my-typebot-pciia25",
-                    theme: { 
-                        chatWindow: { backgroundColor: "#F8F8F8" } 
-                    }
-                });
-                _typebotReady = true;
-                console.log("[Typebot] Conectado con éxito.");
-                
-                if (_pendingOpen) {
-                    _pendingOpen = false;
-                    setTimeout(function() { Typebot.open(); }, 100);
-                }
-            } catch (err) {
-                console.error("[Typebot] Error al inicializar:", err);
-            }
+// Inicializa el popup
+Typebot.initPopup({
+    typebot: "my-typebot-pciia25",
+    theme: {
+        chatWindow: {
+            backgroundColor: "#F8F8F8"
         }
+    }
+});
 
-        // CARGA ULTRA-ESTABLE: URL global oficial para scripts estándar
-        (function() {
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = 'https://assets.typebot.io/next/web.js'; 
-            script.async = true;
-            script.onload = initTypebot;
-            document.head.appendChild(script);
-        })();
+console.log("[Typebot] Popup inicializado");
 
-        // Escucha del clic usando .closest() para capturar el texto o el span.dot
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('#ai-agent-trigger')) return;
-            
-            e.preventDefault();
-            e.stopPropagation();
+// Al hacer click en tu botón abre el chatbot
+document.getElementById("ai-agent-trigger").addEventListener("click", function(e) {
+    e.preventDefault();
 
-            if (_typebotReady) {
-                try { 
-                    Typebot.open(); 
-                } catch (err) { 
-                    console.error("[Typebot] Error al abrir la ventana:", err); 
-                }
-            } else {
-                _pendingOpen = true;
-                console.log("[Typebot] La librería está cargando, abriendo automáticamente...");
-            }
-        });
+    console.log("[Typebot] Abriendo popup...");
+    Typebot.open();
+});
 
-        // Ocultar por completo la burbuja azul por defecto de Typebot
-        (function hideBubble() {
-            var style = document.createElement('style');
-            style.textContent = '#typebot-bubble-button, .typebot-bubble-button, [data-testid="typebot-bubble-button"] { display: none !important; visibility: hidden !important; pointer-events: none !important; }';
-            (document.head || document.body).appendChild(style);
-        })();
-    </script>
+// Oculta completamente la burbuja flotante de Typebot
+const style = document.createElement("style");
+style.textContent = `
+#typebot-bubble-button,
+.typebot-bubble-button,
+[data-testid="typebot-bubble-button"]{
+    display:none !important;
+    visibility:hidden !important;
+    pointer-events:none !important;
+}
+`;
+document.head.appendChild(style);
+</script>
+
 </body>
 </html>
