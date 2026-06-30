@@ -3220,3 +3220,18 @@ typebot-bubble::part(button) {
     opacity: 0 !important;
     pointer-events: none !important;
 }
+
+/* Modifica la ventana del chat de Typebot para integrarla a la web */
+typebot-bubble::part(popup) {
+    background-color: #0d1b2a !important; /* Fondo azul oscuro profundo a tono con la web */
+    border: 1px solid #1e3a8a !important;   /* Borde azul sutil del ecosistema */
+    border-radius: 16px !important;        /* Bordes redondeados modernos */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 10px 10px -5px rgba(0, 0, 0, 0.7) !important; /* Sombra profunda */
+    overflow: hidden !important;
+}
+
+/* Opcional: Ajustar la posición o separación de los bordes de la pantalla */
+typebot-bubble {
+    bottom: 24px !important;
+    right: 24px !important;
+}
