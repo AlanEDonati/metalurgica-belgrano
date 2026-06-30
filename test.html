@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<body>
+
+<button id="btn">
+Abrir
+</button>
+
+<script type="module">
+import Typebot from "https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js";
+
+console.log(Typebot);
+
+Typebot.initPopup({
+  typebot: "my-typebot-pciia25"
+});
+
+document.getElementById("btn").onclick = () => {
+  console.log("click");
+};
+</script>
+
+</body>
+</html>
