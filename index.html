@@ -520,7 +520,6 @@ document.getElementById("ai-agent-trigger").addEventListener("click", function(e
 
     console.log("[Typebot] Abriendo chat desde el botón...");
     
-    // Al usar initBubble, el método correcto para abrir es .open()
     if (typeof Typebot.open === "function") {
         Typebot.open();
     } else if (typeof Typebot.openPopup === "function") {
@@ -528,23 +527,28 @@ document.getElementById("ai-agent-trigger").addEventListener("click", function(e
     }
 });
 
-// Oculta por completo CUALQUIER rastro de la burbuja nativa de Typebot (Evita el globo duplicado)
-const style = document.createElement("style");
-style.textContent = `
-  #typebot-bubble-button,
-  .typebot-bubble-button,
-  [data-testid="typebot-bubble-button"],
-  div[class^="typebot-bubble"],
-  iframe[src*="typebot.io/bubble"] { 
-    display: none !important; 
-    visibility: hidden !important; 
-    opacity: 0 !important;
-    pointer-events: none !important; 
-    width: 0 !important;
-    height: 0 !important;
-  }
-`;
-document.head.appendChild(style);
+// DESTRUCTOR DE INTERFAZ: Borra el botón gris usando JavaScript puro
+setInterval(function() {
+    // 1. Remueve selectores estándar si aparecen en el DOM principal
+    const selectors = [
+        '#typebot-bubble-button',
+        '.typebot-bubble-button',
+        '[data-testid="typebot-bubble-button"]',
+        'div[class^="typebot-bubble"]'
+    ];
+    
+    selectors.forEach(selector => {
+        const el = document.querySelector(selector);
+        if (el) el.remove();
+    });
+
+    // 2. Rompe el Shadow DOM atacando la etiqueta contenedora de Typebot
+    const host = document.querySelector('typebot-bubble');
+    if (host) {
+        // Elimina el contenedor completo de la burbuja nativa
+        host.remove(); 
+    }
+}, 100);
 </script>
 
 </body>
