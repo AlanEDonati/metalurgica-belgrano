@@ -513,20 +513,46 @@ Typebot.initBubble({
 
 console.log("[Typebot] Inicializado.");
 
-// Escucha el click en tu botón personalizado
-document.getElementById("ai-agent-trigger").addEventListener("click", function(e) {
-    e.preventDefault();
-    e.stopPropagation();
+// Variable para controlar el estado del chat
+let isChatOpen = false;
 
-    console.log("[Typebot] Abriendo chat...");
+// Escucha el click en tu botón personalizado
+const triggerBtn = document.getElementById("ai-agent-trigger");
+
+triggerBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+    e.stopPropagation(); // Evita que este mismo click active el cierre global
+
+    console.log("[Typebot] Alternando estado del chat...");
     
-    if (typeof Typebot.open === "function") {
-        Typebot.open();
-    } else if (typeof Typebot.openPopup === "function") {
-        Typebot.openPopup();
+    if (!isChatOpen) {
+        if (typeof Typebot.open === "function") Typebot.open();
+        else if (typeof Typebot.openPopup === "function") Typebot.openPopup();
+        isChatOpen = true;
+    } else {
+        if (typeof Typebot.close === "function") Typebot.close();
+        isChatOpen = false;
+    }
+});
+
+// CERRAR AL HACER CLICK AFUERA: Escucha clics en todo el documento
+document.addEventListener("click", function(e) {
+    // Si el chat está abierto y el click NO fue dentro de tu botón personalizado
+    if (isChatOpen && !triggerBtn.contains(e.target)) {
+        
+        // Verificamos si el click no fue dentro del contenedor real del chat de Typebot
+        const typebotHost = document.querySelector('typebot-bubble');
+        if (typebotHost && typebotHost.contains(e.target)) {
+            return; // Si clickea adentro del chat, no hacemos nada
+        }
+
+        console.log("[Typebot] Clic externo detectado, cerrando chat...");
+        if (typeof Typebot.close === "function") {
+            Typebot.close();
+        }
+        isChatOpen = false;
     }
 });
 </script>
-
 </body>
 </html>
