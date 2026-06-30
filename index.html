@@ -501,8 +501,8 @@
 <script type="module">
 import Typebot from "https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js";
 
-// Inicializa el popup
-Typebot.initPopup({
+// Inicializa como Bubble (mantiene el chat oculto y en segundo plano)
+Typebot.initBubble({
     typebot: "my-typebot-pciia25",
     theme: {
         chatWindow: {
@@ -511,29 +511,35 @@ Typebot.initPopup({
     }
 });
 
-console.log("[Typebot] Popup inicializado");
+console.log("[Typebot] Inicializado en modo oculto para disparador manual");
 
-// Al hacer click en tu botón abre el chatbot
+// Escucha el click en tu botón personalizado
 document.getElementById("ai-agent-trigger").addEventListener("click", function(e) {
     e.preventDefault();
+    e.stopPropagation();
 
-    console.log("[Typebot] Abriendo popup...");
-    Typebot.open();
+    console.log("[Typebot] Abriendo chat desde el botón...");
+    
+    // Al usar initBubble, el método correcto para abrir es .open()
+    if (typeof Typebot.open === "function") {
+        Typebot.open();
+    } else if (typeof Typebot.openPopup === "function") {
+        Typebot.openPopup();
+    }
 });
 
-// Oculta completamente la burbuja flotante de Typebot
+// Oculta por completo el botón flotante azul por defecto de Typebot
 const style = document.createElement("style");
 style.textContent = `
 #typebot-bubble-button,
 .typebot-bubble-button,
-[data-testid="typebot-bubble-button"]{
-    display:none !important;
-    visibility:hidden !important;
-    pointer-events:none !important;
+[data-testid="typebot-bubble-button"] {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
 }
 `;
 document.head.appendChild(style);
 </script>
-
 </body>
 </html>
