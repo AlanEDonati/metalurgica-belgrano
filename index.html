@@ -291,13 +291,6 @@
             </div>
         </div>
     </div>
-
-    <!-- BOTÓN PERSONALIZADO DEL INGENIERO IA -->
-    <div id="ai-agent-trigger" class="ai-agent">
-        <span class="dot"></span>
-        <span>CONSULTAR AL INGENIERO IA</span>
-    </div>
-
     <!-- ═══════════════════════════════════════════════════
          SCRIPTS DE LÓGICA — Panel de productos + Typebot
     ════════════════════════════════════════════════════ -->
@@ -500,10 +493,12 @@
             if (e.target === this) this.classList.remove('active');
         });
     </script>
-<script type="module">
-        import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@3/dist/web.js';
+<div id="ai-agent-trigger" class="ai-agent">
+        <span class="dot"></span>
+        <span>CONSULTAR AL INGENIERO IA</span>
+    </div>
 
-        // ── CONTROLADOR GLOBAL DE TYPEBOT V3 ──────────────────
+    <script>
         var _typebotReady = false;
         var _pendingOpen  = false;
 
@@ -516,21 +511,28 @@
                     }
                 });
                 _typebotReady = true;
-                console.log("[Typebot] Inicializado correctamente.");
+                console.log("[Typebot] Conectado con éxito.");
                 
                 if (_pendingOpen) {
                     _pendingOpen = false;
-                    setTimeout(function() { Typebot.open(); }, 150);
+                    setTimeout(function() { Typebot.open(); }, 100);
                 }
             } catch (err) {
                 console.error("[Typebot] Error al inicializar:", err);
             }
         }
 
-        // Ejecutar la inicialización inmediatamente ya que el import es síncrono
-        initTypebot();
+        // Carga dinámica nativa usando los servidores globales de Typebot
+        (function() {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://assets.typebot.io/next/embed.js'; 
+            script.async = true;
+            script.onload = initTypebot;
+            document.head.appendChild(script);
+        })();
 
-        // Escucha del botón personalizado
+        // Escucha del clic usando .closest() para capturar el texto o el span.dot
         document.addEventListener('click', function(e) {
             if (!e.target.closest('#ai-agent-trigger')) return;
             
@@ -539,23 +541,22 @@
 
             if (_typebotReady) {
                 try { 
-                    Typebot.open();
+                    Typebot.open(); 
                 } catch (err) { 
                     console.error("[Typebot] Error al abrir la ventana:", err); 
                 }
             } else {
                 _pendingOpen = true;
-                console.log("[Typebot] Esperando inicialización...");
+                console.log("[Typebot] La librería está cargando, abriendo automáticamente...");
             }
         });
 
-        // Ocultar botón flotante por defecto
+        // Ocultar por completo la burbuja azul por defecto de Typebot
         (function hideBubble() {
             var style = document.createElement('style');
             style.textContent = '#typebot-bubble-button, .typebot-bubble-button, [data-testid="typebot-bubble-button"] { display: none !important; visibility: hidden !important; pointer-events: none !important; }';
             (document.head || document.body).appendChild(style);
         })();
     </script>
-     </body>
-
+</body>
 </html>
