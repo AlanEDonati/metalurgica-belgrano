@@ -3212,8 +3212,11 @@ body {
 #ai-agent-trigger {
     cursor: pointer !important;
 }
+/* ==========================================
+   ESTRATEGIA NEXURA: CONTROL DE TYPEBOT 
+   ========================================== */
 
-/* Oculta el botón circular nativo de Typebot sin romper el modal del chat */
+/* 1. Pulverizar el botón/globo gris nativo de raíz */
 typebot-bubble::part(button) {
     display: none !important;
     visibility: hidden !important;
@@ -3221,7 +3224,7 @@ typebot-bubble::part(button) {
     pointer-events: none !important;
 }
 
-/* Modifica la ventana del chat de Typebot para integrarla a la web */
+/* 2. Darle el estilo corporativo y modo oscuro a la ventana emergente */
 typebot-bubble::part(popup) {
     background-color: #0d1b2a !important; /* Fondo azul oscuro profundo a tono con la web */
     border: 1px solid #1e3a8a !important;   /* Borde azul sutil del ecosistema */
@@ -3230,44 +3233,15 @@ typebot-bubble::part(popup) {
     overflow: hidden !important;
 }
 
-/* Opcional: Ajustar la posición o separación de los bordes de la pantalla */
+/* 3. Forzar al iframe interno a heredar los bordes redondeados y fondo oscuro */
+typebot-bubble iframe {
+    border-radius: 16px !important;
+    background-color: #0d1b2a !important;
+}
+
+/* 4. Ajustar la posición global del componente en la pantalla */
 typebot-bubble {
     bottom: 24px !important;
     right: 24px !important;
-}
-
-/* Contenedor del chat inicialmente oculto y flotante */
-.typebot-modal-custom {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 400px;
-    height: 600px;
-    max-width: 90vw;
-    max-height: 80vh;
-    background-color: #0d1b2a !important; /* Fondo azul oscuro corporativo */
-    border: 1px solid #1e3a8a !important;   /* Borde azul sutil */
-    border-radius: 16px !important;        /* Bordes redondeados perfectos */
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.5) !important;
-    overflow: hidden;
-    z-index: 99999;
-    
-    /* Animación de transición suave */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-}
-
-/* Cuando se activa el chat */
-.typebot-modal-custom.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-/* Forzar a que el iframe interno respete los bordes redondeados */
-.typebot-modal-custom iframe, 
-.typebot-modal-custom div {
-    border-radius: 16px !important;
+    z-index: 99999 !important;
 }
