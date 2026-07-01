@@ -550,84 +550,66 @@
         crossorigin="anonymous"
         onload="initTypebotNexura()"
     ></script>
+<div id="ai-agent-trigger" class="ai-agent">
+    <span class="dot"></span>
+    <span>CONSULTAR AL INGENIERO IA</span>
+</div>
 
-    <script>
-        var _botMounted  = false;
-        var _panelOpen   = false;
-        var _pendingOpen = false;
-        var _trigger, _panel, _closeBtn, _botArea;
+<script type="module">
+import Typebot from "https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js";
 
-        function initTypebotNexura() {
-            _trigger  = document.getElementById('ai-agent-trigger');
-            _panel    = document.getElementById('typebot-container');
-            _closeBtn = document.getElementById('typebot-close-btn');
-            _botArea  = document.getElementById('typebot-bot-area');
+// Inicializa el chat de forma oculta
+Typebot.initBubble({
+    typebot: "my-typebot-pciia25",
+    theme: {
+        chatWindow: {
+            backgroundColor: "#F8F8F8"
+        }
+    }
+});
 
-            if (!_trigger || !_panel || !_botArea) {
-                console.error('[Typebot] Faltan elementos en el DOM:', {
-                    trigger: !!_trigger, panel: !!_panel, botArea: !!_botArea
-                });
-                return;
-            }
+console.log("[Typebot] Inicializado.");
 
-            try {
-                Typebot.initStandard({
-                    typebot: "my-typebot-pciia25",
-                    host: _botArea
-                });
-                _botMounted = true;
-                console.log('[Typebot] ✅ Bot montado correctamente en #typebot-bot-area');
+// Variable para controlar el estado del chat
+let isChatOpen = false;
 
-                if (_pendingOpen) {
-                    _pendingOpen = false;
-                    openPanel();
-                }
-            } catch (err) {
-                console.error('[Typebot] ❌ Error al montar:', err);
-            }
+// Escucha el click en tu botón personalizado
+const triggerBtn = document.getElementById("ai-agent-trigger");
+
+triggerBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+    e.stopPropagation(); // Evita que este mismo click active el cierre global
+
+    console.log("[Typebot] Alternando estado del chat...");
+    
+    if (!isChatOpen) {
+        if (typeof Typebot.open === "function") Typebot.open();
+        else if (typeof Typebot.openPopup === "function") Typebot.openPopup();
+        isChatOpen = true;
+    } else {
+        if (typeof Typebot.close === "function") Typebot.close();
+        isChatOpen = false;
+    }
+});
+
+// CERRAR AL HACER CLICK AFUERA: Escucha clics en todo el documento
+document.addEventListener("click", function(e) {
+    // Si el chat está abierto y el click NO fue dentro de tu botón personalizado
+    if (isChatOpen && !triggerBtn.contains(e.target)) {
+        
+        // Verificamos si el click no fue dentro del contenedor real del chat de Typebot
+        const typebotHost = document.querySelector('typebot-bubble');
+        if (typebotHost && typebotHost.contains(e.target)) {
+            return; // Si clickea adentro del chat, no hacemos nada
         }
 
-        function openPanel() {
-            _panel.classList.add('active');
-            _panelOpen = true;
-            if (_closeBtn) setTimeout(function() { _closeBtn.focus(); }, 400);
+        console.log("[Typebot] Clic externo detectado, cerrando chat...");
+        if (typeof Typebot.close === "function") {
+            Typebot.close();
         }
-
-        function closePanel() {
-            _panel.classList.remove('active');
-            _panelOpen = false;
-            if (_trigger) _trigger.focus();
-        }
-
-        document.addEventListener('click', function(e) {
-            // 1. Clic en el botón disparador
-            if (e.target.closest('#ai-agent-trigger')) {
-                e.preventDefault();
-                e.stopPropagation();
-                if (!_botMounted) {
-                    _pendingOpen = true;
-                    console.log('[Typebot] Script aún cargando — abrirá al terminar');
-                    return;
-                }
-                _panelOpen ? closePanel() : openPanel();
-                return;
-            }
-            // 2. Botón X interno
-            if (e.target.closest('#typebot-close-btn')) {
-                e.preventDefault();
-                closePanel();
-                return;
-            }
-            // 3. Clic fuera del panel → cerrar
-            if (_panelOpen && _panel && !_panel.contains(e.target)) {
-                closePanel();
-            }
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && _panelOpen) closePanel();
-        });
-    </script>
-
+        isChatOpen = false;
+    }
+});
+</script>
 </body>
 </html>
