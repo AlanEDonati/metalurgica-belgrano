@@ -535,86 +535,14 @@
         });
     </script>
 
-    <!-- ═══════════════════════════════════════════════════
-         TYPEBOT — Carga estable para Vercel (producción)
-         CDN: unpkg UMD — evita errores MIME de jsDelivr
-    ════════════════════════════════════════════════════ -->
-
     <!--
-        defer: el script se descarga en paralelo y se ejecuta
-        DESPUÉS de que el DOM esté completamente parseado.
-        onload: initTypebot() se llama solo cuando Typebot
-        está 100% disponible en window, eliminando la race condition.
-    -->
-    <script
-        src="https://unpkg.com/@typebot.io/js@3/dist/web.js"
-        defer
-        crossorigin="anonymous"
-        onload="initTypebot()"
-    ></script>
-
-    <script>
-        // ── Estado de carga ────────────────────────────────────
-        var _typebotReady = false;  // true cuando initBubble() tuvo éxito
-        var _pendingOpen  = false;  // clic recibido antes de que cargara
-
-        // ── Inicialización (llamada solo desde onload del script) ──
-        function initTypebot() {
-            try {
-                Typebot.initBubble({
-                    typebot: "my-typebot-pciia25",
-                    theme: {
-                        chatWindow: { backgroundColor: "#F8F8F8" }
-                    }
-                });
-                _typebotReady = true;
-
-                // El usuario hizo clic mientras cargaba → abrimos ahora
-                if (_pendingOpen) {
-                    _pendingOpen = false;
-                    setTimeout(function() { Typebot.open(); }, 100);
-                }
-            } catch (err) {
-                console.error("[Typebot] Error en initBubble:", err);
-            }
-        }
-
-        // ── Event Delegation robusta ───────────────────────────
-        // .closest() sube desde cualquier nodo hijo (span.dot, texto, etc.)
-        // hasta #ai-agent-trigger, sin importar qué parte exacta se clicó.
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('#ai-agent-trigger')) return;
-
-            e.preventDefault();
-            e.stopPropagation();
-
-            if (_typebotReady) {
-                try {
-                    Typebot.open();
-                } catch (err) {
-                    console.error("[Typebot] Error al abrir:", err);
-                }
-            } else {
-                // Typebot aún carga (conexión lenta) → marcar intención
-                _pendingOpen = true;
-                console.log("[Typebot] Script pendiente — el bot abrirá al terminar la carga.");
-            }
-        });
-    </script>
-
-    <!--
-    ═══════════════════════════════════════════════════════════
-    TYPEBOT V3 — Integración estable para Vercel / producción
-
-    POR QUÉ ESTE APPROACH:
-    • unpkg sirve el bundle UMD con Content-Type: text/javascript
-      correcto (jsDelivr falla en algunos entornos con MIME errors)
-    • initStandard() monta el bot en nuestro div #typebot-bot-area
-      en vez de usar la burbuja flotante nativa
-    • El panel lateral es nuestro propio div — controlamos 100%
-      el diseño, z-index y animaciones
-    • onload garantiza que Typebot está en window antes de llamarlo
-    ═══════════════════════════════════════════════════════════
+    ═══════════════════════════════════════════════════════
+    TYPEBOT V3 — UN SOLO SCRIPT, SIN DUPLICADOS
+    • unpkg UMD: evita errores MIME de jsDelivr en Vercel
+    • initStandard monta el bot en nuestro div lateral
+    • onload garantiza que Typebot existe antes de llamarlo
+    • .closest() captura el clic desde cualquier nodo hijo
+    ═══════════════════════════════════════════════════════
     -->
     <script
         src="https://unpkg.com/@typebot.io/js@3/dist/web.js"
@@ -624,18 +552,11 @@
     ></script>
 
     <script>
-        // ── Estado interno ─────────────────────────────────────
-        var _botMounted  = false;   // true cuando initStandard() montó el iframe
-        var _panelOpen   = false;   // true cuando el panel está visible
-        var _pendingOpen = false;   // clic recibido antes de que el script cargara
+        var _botMounted  = false;
+        var _panelOpen   = false;
+        var _pendingOpen = false;
+        var _trigger, _panel, _closeBtn, _botArea;
 
-        // ── Elementos del DOM ──────────────────────────────────
-        var _trigger   = null;
-        var _panel     = null;
-        var _closeBtn  = null;
-        var _botArea   = null;
-
-        // ── Función principal — llamada por onload del script ──
         function initTypebotNexura() {
             _trigger  = document.getElementById('ai-agent-trigger');
             _panel    = document.getElementById('typebot-container');
@@ -643,79 +564,66 @@
             _botArea  = document.getElementById('typebot-bot-area');
 
             if (!_trigger || !_panel || !_botArea) {
-                console.error('[TypebotNexura] Faltan elementos en el DOM.');
+                console.error('[Typebot] Faltan elementos en el DOM:', {
+                    trigger: !!_trigger, panel: !!_panel, botArea: !!_botArea
+                });
                 return;
             }
 
             try {
-                // Monta el iframe de Typebot dentro de nuestro div
                 Typebot.initStandard({
                     typebot: "my-typebot-pciia25",
-                    host: _botArea   // target real en el DOM (no selector string)
+                    host: _botArea
                 });
                 _botMounted = true;
-                console.log('[TypebotNexura] Bot montado correctamente.');
+                console.log('[Typebot] ✅ Bot montado correctamente en #typebot-bot-area');
 
-                // Si el usuario clicó antes de que cargara, abrimos ahora
                 if (_pendingOpen) {
                     _pendingOpen = false;
                     openPanel();
                 }
             } catch (err) {
-                console.error('[TypebotNexura] Error al montar el bot:', err);
+                console.error('[Typebot] ❌ Error al montar:', err);
             }
         }
 
-        // ── Abrir / cerrar panel ───────────────────────────────
         function openPanel() {
             _panel.classList.add('active');
             _panelOpen = true;
-            // Accesibilidad: foco al botón de cierre
             if (_closeBtn) setTimeout(function() { _closeBtn.focus(); }, 400);
         }
 
         function closePanel() {
             _panel.classList.remove('active');
             _panelOpen = false;
-            // Devolver foco al trigger
             if (_trigger) _trigger.focus();
         }
 
-        // ── Event Delegation — clic en el trigger ──────────────
-        // .closest() sube desde cualquier hijo (span.dot, texto)
-        // hasta #ai-agent-trigger sin importar dónde clicó el usuario
         document.addEventListener('click', function(e) {
-
             // 1. Clic en el botón disparador
             if (e.target.closest('#ai-agent-trigger')) {
                 e.preventDefault();
                 e.stopPropagation();
-
                 if (!_botMounted) {
-                    // Script aún cargando — guardamos intención
                     _pendingOpen = true;
-                    console.log('[TypebotNexura] Carga pendiente — abrirá al terminar.');
+                    console.log('[Typebot] Script aún cargando — abrirá al terminar');
                     return;
                 }
-
                 _panelOpen ? closePanel() : openPanel();
                 return;
             }
-
-            // 2. Clic en el botón X de cierre interno
+            // 2. Botón X interno
             if (e.target.closest('#typebot-close-btn')) {
                 e.preventDefault();
                 closePanel();
                 return;
             }
-
-            // 3. Clic fuera del panel cuando está abierto → cerrar
+            // 3. Clic fuera del panel → cerrar
             if (_panelOpen && _panel && !_panel.contains(e.target)) {
                 closePanel();
             }
         });
 
-        // 4. Tecla ESC para cerrar
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && _panelOpen) closePanel();
         });
