@@ -536,80 +536,197 @@
     </script>
 
     <!--
-    ═══════════════════════════════════════════════════════
-    TYPEBOT V3 — UN SOLO SCRIPT, SIN DUPLICADOS
-    • unpkg UMD: evita errores MIME de jsDelivr en Vercel
-    • initStandard monta el bot en nuestro div lateral
-    • onload garantiza que Typebot existe antes de llamarlo
-    • .closest() captura el clic desde cualquier nodo hijo
-    ═══════════════════════════════════════════════════════
+    ═══════════════════════════════════════════════════════════════
+    TYPEBOT V3 — SOLUCIÓN DEFINITIVA PARA VERCEL / NEXURA STUDIO
+    
+    PROBLEMA RESUELTO: La burbuja nativa de Typebot se inyecta
+    dinámicamente en el DOM DESPUÉS de que el script carga.
+    CSS solo no alcanza — necesitamos MutationObserver para
+    interceptarla en el momento exacto en que aparece.
+    ═══════════════════════════════════════════════════════════════
     -->
+
+    <!-- PASO 1: CSS de emergencia en <head> ya está declarado.
+         Este bloque cubre la burbuja con z-index negativo además
+         de display:none, como doble seguro. -->
+    <style>
+        /* Triple bloqueo: cubre todas las variantes del selector que usa Typebot V3 */
+        #typebot-bubble-button,
+        .typebot-bubble-button,
+        [data-testid="typebot-bubble-button"],
+        typebot-bubble,
+        [id^="typebot-"] > button,
+        .typebot-container > button {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            position: absolute !important;
+            z-index: -9999 !important;
+        }
+    </style>
+
+    <!-- PASO 2: Script Typebot — UMD desde unpkg (sin errores MIME en Vercel) -->
     <script
         src="https://unpkg.com/@typebot.io/js@3/dist/web.js"
         defer
         crossorigin="anonymous"
         onload="initTypebotNexura()"
     ></script>
-<div id="ai-agent-trigger" class="ai-agent">
-    <span class="dot"></span>
-    <span>CONSULTAR AL INGENIERO IA</span>
-</div>
 
-<script type="module">
-import Typebot from "https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js";
+    <script>
+        // ── Estado del panel ───────────────────────────────────
+        var _botMounted  = false;
+        var _panelOpen   = false;
+        var _pendingOpen = false;
+        var _trigger, _panel, _closeBtn, _botArea;
+        var _bubbleObserver = null;
 
-// Inicializa el chat de forma oculta
-Typebot.initBubble({
-    typebot: "my-typebot-pciia25",
-    theme: {
-        chatWindow: {
-            backgroundColor: "#F8F8F8"
+        // ── PASO 3: MutationObserver — mata la burbuja en el
+        // momento exacto en que Typebot la inyecta en el DOM.
+        // Esto es necesario porque display:none en CSS no siempre
+        // bloquea elementos que el SDK inyecta con estilos inline.
+        function killNativeBubble() {
+            _bubbleObserver = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType !== 1) return; // solo elementos
+
+                        // Detectar la burbuja por cualquier variante de selector
+                        var isBubble = (
+                            node.id === 'typebot-bubble-button' ||
+                            (node.classList && node.classList.contains('typebot-bubble-button')) ||
+                            node.tagName === 'TYPEBOT-BUBBLE' ||
+                            (node.dataset && node.dataset.testid === 'typebot-bubble-button')
+                        );
+
+                        if (isBubble) {
+                            node.style.cssText = 'display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;width:0!important;height:0!important;';
+                            // También lo removemos del DOM directamente
+                            if (node.parentNode) node.parentNode.removeChild(node);
+                            console.log('[Typebot] 🗑 Burbuja nativa eliminada del DOM');
+                        }
+
+                        // Buscar también dentro del nodo recién añadido
+                        var inner = node.querySelectorAll && node.querySelectorAll(
+                            '#typebot-bubble-button, .typebot-bubble-button, [data-testid="typebot-bubble-button"]'
+                        );
+                        if (inner && inner.length) {
+                            inner.forEach(function(el) {
+                                el.style.cssText = 'display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;';
+                                if (el.parentNode) el.parentNode.removeChild(el);
+                            });
+                        }
+                    });
+                });
+            });
+
+            _bubbleObserver.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
         }
-    }
-});
 
-console.log("[Typebot] Inicializado.");
+        // ── PASO 4: Inicialización principal ──────────────────
+        function initTypebotNexura() {
+            _trigger  = document.getElementById('ai-agent-trigger');
+            _panel    = document.getElementById('typebot-container');
+            _closeBtn = document.getElementById('typebot-close-btn');
+            _botArea  = document.getElementById('typebot-bot-area');
 
-// Variable para controlar el estado del chat
-let isChatOpen = false;
+            if (!_trigger || !_panel || !_botArea) {
+                console.error('[Typebot] ❌ Elementos faltantes en DOM:', {
+                    '#ai-agent-trigger': !!_trigger,
+                    '#typebot-container': !!_panel,
+                    '#typebot-bot-area': !!_botArea
+                });
+                return;
+            }
 
-// Escucha el click en tu botón personalizado
-const triggerBtn = document.getElementById("ai-agent-trigger");
+            // Activar el observer ANTES de initStandard para interceptar
+            // la burbuja en el mismo frame en que se inyecta
+            killNativeBubble();
 
-triggerBtn.addEventListener("click", function(e) {
-    e.preventDefault();
-    e.stopPropagation(); // Evita que este mismo click active el cierre global
+            try {
+                Typebot.initStandard({
+                    typebot: "my-typebot-pciia25",
+                    host: _botArea
+                });
 
-    console.log("[Typebot] Alternando estado del chat...");
-    
-    if (!isChatOpen) {
-        if (typeof Typebot.open === "function") Typebot.open();
-        else if (typeof Typebot.openPopup === "function") Typebot.openPopup();
-        isChatOpen = true;
-    } else {
-        if (typeof Typebot.close === "function") Typebot.close();
-        isChatOpen = false;
-    }
-});
+                _botMounted = true;
+                console.log('[Typebot] ✅ Bot montado en #typebot-bot-area');
 
-// CERRAR AL HACER CLICK AFUERA: Escucha clics en todo el documento
-document.addEventListener("click", function(e) {
-    // Si el chat está abierto y el click NO fue dentro de tu botón personalizado
-    if (isChatOpen && !triggerBtn.contains(e.target)) {
-        
-        // Verificamos si el click no fue dentro del contenedor real del chat de Typebot
-        const typebotHost = document.querySelector('typebot-bubble');
-        if (typebotHost && typebotHost.contains(e.target)) {
-            return; // Si clickea adentro del chat, no hacemos nada
+                // Si el usuario clicó antes de que cargara
+                if (_pendingOpen) {
+                    _pendingOpen = false;
+                    openPanel();
+                }
+
+                // Detener el observer después de 5 segundos
+                // (la burbuja ya habría aparecido si iba a aparecer)
+                setTimeout(function() {
+                    if (_bubbleObserver) {
+                        _bubbleObserver.disconnect();
+                        _bubbleObserver = null;
+                    }
+                }, 5000);
+
+            } catch (err) {
+                console.error('[Typebot] ❌ Error en initStandard:', err);
+            }
         }
 
-        console.log("[Typebot] Clic externo detectado, cerrando chat...");
-        if (typeof Typebot.close === "function") {
-            Typebot.close();
+        // ── PASO 5: Abrir / cerrar panel ──────────────────────
+        function openPanel() {
+            _panel.classList.add('active');
+            _panelOpen = true;
+            if (_closeBtn) setTimeout(function() { _closeBtn.focus(); }, 380);
         }
-        isChatOpen = false;
-    }
-});
-</script>
+
+        function closePanel() {
+            _panel.classList.remove('active');
+            _panelOpen = false;
+            if (_trigger) _trigger.focus();
+        }
+
+        // ── PASO 6: Event Delegation robusta ──────────────────
+        // .closest() sube desde cualquier nodo hijo del trigger
+        // (span.dot, texto) hasta el div#ai-agent-trigger raíz.
+        document.addEventListener('click', function(e) {
+
+            // A) Clic en el disparador personalizado
+            if (e.target.closest('#ai-agent-trigger')) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!_botMounted) {
+                    _pendingOpen = true;
+                    console.log('[Typebot] ⏳ Aún cargando — abrirá al terminar');
+                    return;
+                }
+                _panelOpen ? closePanel() : openPanel();
+                return;
+            }
+
+            // B) Clic en el botón X del header del panel
+            if (e.target.closest('#typebot-close-btn')) {
+                e.preventDefault();
+                closePanel();
+                return;
+            }
+
+            // C) Clic fuera del panel cuando está abierto → cerrar
+            if (_panelOpen && _panel && !_panel.contains(e.target)) {
+                closePanel();
+            }
+        });
+
+        // D) Tecla ESC para cerrar
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && _panelOpen) closePanel();
+        });
+    </script>
+
 </body>
 </html>
