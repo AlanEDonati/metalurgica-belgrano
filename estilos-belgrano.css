@@ -3330,3 +3330,14 @@ body {
 .typebot-sidebar-nexura button {
     border-radius: 4px !important;
 }
+
+/* Oculta la marca de agua de Typebot */
+.typebot-brand, 
+[class*="typebot-brand"],
+div[style*="justify-content: center"][style*="align-items: center"] a[href*="typebot.io"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    pointer-events: none !important;
+}

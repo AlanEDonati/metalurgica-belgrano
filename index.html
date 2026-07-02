@@ -534,8 +534,7 @@
             if (e.target === this) this.classList.remove('active');
         });
     </script>
-
-    <!--
+<!--
     ═══════════════════════════════════════════════════════════════
     TYPEBOT — IMPLEMENTACIÓN OFICIAL (ESM + Web Component)
     
@@ -549,7 +548,7 @@
     ═══════════════════════════════════════════════════════════════
     -->
 
-    <!-- CSS de la burbuja nativa: ocultar antes de que el script la inyecte -->
+    <!-- CSS de la burbuja nativa y eliminación de marca de agua -->
     <style>
         #typebot-bubble-button,
         .typebot-bubble-button,
@@ -562,6 +561,16 @@
             width: 0 !important;
             height: 0 !important;
         }
+
+        /* Oculta la marca de agua si el Shadow DOM la expone externamente */
+        typebot-standard::part(brand),
+        .typebot-brand {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            pointer-events: none !important;
+        }
     </style>
 
     <script type="module">
@@ -569,13 +578,15 @@
         import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js';
 
         // ── Inicializar el web component <typebot-standard> ───
-        // startGroupId no es obligatorio — lo usamos para que
-        // el bot arranque directo sin pantalla de bienvenida.
         Typebot.initStandard({
-            typebot: 'my-typebot-pciia25'
+            typebot: 'my-typebot-pciia25',
+            // Opción nativa para remover "Made with Typebot"
+            settings: {
+                hideBrand: true
+            }
         });
 
-        console.log('[Typebot] ✅ initStandard ejecutado');
+        console.log('[Typebot] ✅ initStandard ejecutado (sin marca de agua)');
 
         // ── Estado del panel lateral ──────────────────────────
         var _panelOpen = false;
@@ -647,6 +658,5 @@
         obs.observe(document.body, { childList: true, subtree: true });
         setTimeout(function() { obs.disconnect(); }, 8000);
     </script>
-
 </body>
 </html>
