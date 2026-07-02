@@ -533,23 +533,7 @@
         document.getElementById('spec-panel').addEventListener('click', function(e) {
             if (e.target === this) this.classList.remove('active');
         });
-    </script>
-<!--
-    ═══════════════════════════════════════════════════════════════
-    TYPEBOT — IMPLEMENTACIÓN OFICIAL (ESM + Web Component)
-    
-    CAUSA DEL ERROR ANTERIOR:
-    unpkg.com y <script src> sin type="module" = MIME error en Firefox.
-    
-    SOLUCIÓN: usar exactamente el snippet oficial de Typebot:
-    • type="module" con import desde jsDelivr
-    • <typebot-standard> como web component (no un div genérico)
-    • Panel lateral propio controlado con classList.add/remove('active')
-    ═══════════════════════════════════════════════════════════════
-    -->
-
-    <!-- CSS de la burbuja nativa y eliminación de marca de agua -->
-    <style>
+    </script><style>
         #typebot-bubble-button,
         .typebot-bubble-button,
         [data-testid="typebot-bubble-button"],
@@ -577,18 +561,125 @@
         // ── Import oficial según docs de Typebot ──────────────
         import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js';
 
-        // ── Inicializar el web component <typebot-standard> ───
+        // ── 1. Inicializar con tema corporativo Belgrano ──────
         Typebot.initStandard({
             typebot: 'my-typebot-pciia25',
-            // Opción nativa para remover "Made with Typebot"
-            settings: {
-                hideBrand: true
+            theme: {
+                general: {
+                    background: { type: 'Color', content: '#0d1b2a' },
+                    font: 'Outfit'
+                },
+                chat: {
+                    hostBubbles:  { backgroundColor: '#0a1628', color: '#ffffff' },
+                    guestBubbles: { backgroundColor: '#1e3a8a', color: '#ffffff' },
+                    buttons:      { backgroundColor: '#0076ff', color: '#ffffff' },
+                    inputs: {
+                        backgroundColor:  '#0a1628',
+                        color:            '#ffffff',
+                        placeholderColor: 'rgba(255,255,255,0.4)'
+                    },
+                    roundness: 'None'
+                }
             }
         });
 
-        console.log('[Typebot] ✅ initStandard ejecutado (sin marca de agua)');
+        console.log('[Typebot] ✅ initStandard ejecutado (Con configuración avanzada de marca)');
 
-        // ── Estado del panel lateral ──────────────────────────
+        // ── 2. Eliminar "Made with Typebot" del Shadow DOM ────
+        function killBrandInShadow(host) {
+            var root = host && host.shadowRoot;
+            if (!root) return false;
+
+            // A) Inyectar CSS que apunta a todos los selectores conocidos de la marca dentro de la burbuja
+            var style = root.querySelector('#belgrano-brand-kill');
+            if (!style) {
+                style = document.createElement('style');
+                style.id = 'belgrano-brand-kill';
+                style.textContent = [
+                    '[class*="brand"]         { display:none!important; }',
+                    '[class*="Brand"]         { display:none!important; }',
+                    '[class*="powered"]       { display:none!important; }',
+                    '[class*="Powered"]       { display:none!important; }',
+                    '[class*="made-with"]     { display:none!important; }',
+                    '[class*="watermark"]     { display:none!important; }',
+                    'a[href*="typebot.io"]    { display:none!important; }',
+                    'a[href*="typebot"]       { display:none!important; }',
+                    '.bot-container > div:last-child a { display:none!important; }',
+                    'footer                   { display:none!important; }',
+                    '[data-testid*="brand"]   { display:none!important; }',
+                    '[data-testid*="powered"] { display:none!important; }',
+                ].join('\n');
+                root.appendChild(style);
+            }
+
+            // B) Remover nodos directamente si el DOM los expone
+            var brand = root.querySelector(
+                '[class*="brand"],[class*="Brand"],[class*="powered"],' +
+                'a[href*="typebot.io"],footer,[data-testid*="brand"]'
+            );
+            if (brand && brand.parentNode) {
+                brand.parentNode.removeChild(brand);
+                return true;
+            }
+            return false;
+        }
+
+        // ── 3. Observer que vigila DENTRO del Shadow DOM ──────
+        function watchShadowForBrand(host) {
+            var root = host.shadowRoot;
+            if (!root) return;
+
+            var innerObs = new MutationObserver(function() {
+                killBrandInShadow(host);
+            });
+            innerObs.observe(root, {
+                childList:  true,
+                subtree:    true,
+                attributes: false
+            });
+
+            // Intentar eliminar inmediatamente por si ya cargó
+            killBrandInShadow(host);
+
+            // Desconectar el rastreador interno tras 12 segundos
+            setTimeout(function() { innerObs.disconnect(); }, 12000);
+        }
+
+        // ── 4. Observer externo: espera a que <typebot-standard> monte su estructura ──
+        var outerObs = new MutationObserver(function(mutations) {
+            mutations.forEach(function(m) {
+                m.addedNodes.forEach(function(n) {
+                    if (n.nodeType !== 1) return;
+                    var isBubble = n.tagName === 'TYPEBOT-BUBBLE' ||
+                                   n.id       === 'typebot-bubble-button' ||
+                                   (n.classList && n.classList.contains('typebot-bubble-button'));
+                    if (isBubble && n.parentNode) {
+                        n.parentNode.removeChild(n);
+                        console.log('[Typebot] 🗑 Burbuja nativa eliminada');
+                    }
+                });
+            });
+
+            var host = document.querySelector('typebot-standard');
+            if (host && host.shadowRoot) {
+                watchShadowForBrand(host);
+                outerObs.disconnect();
+            }
+        });
+        outerObs.observe(document.body, { childList: true, subtree: true });
+
+        // Ejecutar inmediatamente por si el componente ya estaba listo
+        (function tryImmediate() {
+            var host = document.querySelector('typebot-standard');
+            if (host && host.shadowRoot) {
+                watchShadowForBrand(host);
+                outerObs.disconnect();
+            } else {
+                setTimeout(tryImmediate, 300);
+            }
+        })();
+
+        // ── 5. Lógica de apertura/cierre del panel lateral ────
         var _panelOpen = false;
 
         var _trigger  = document.getElementById('ai-agent-trigger');
@@ -611,10 +702,8 @@
             console.log('[Typebot] Panel cerrado');
         }
 
-        // ── Event Delegation: clic en el disparador ───────────
+        // Event Delegation para clics
         document.addEventListener('click', function(e) {
-
-            // A) Botón disparador personalizado
             if (e.target.closest('#ai-agent-trigger')) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -622,41 +711,21 @@
                 return;
             }
 
-            // B) Botón X del header del panel
             if (e.target.closest('#typebot-close-btn')) {
                 e.preventDefault();
                 closePanel();
                 return;
             }
 
-            // C) Clic fuera del panel → cerrar
             if (_panelOpen && _panel && !_panel.contains(e.target)) {
                 closePanel();
             }
         });
 
-        // D) ESC para cerrar
+        // ESC para cerrar
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && _panelOpen) closePanel();
         });
-
-        // ── MutationObserver: eliminar burbuja nativa si aparece
-        var obs = new MutationObserver(function(muts) {
-            muts.forEach(function(m) {
-                m.addedNodes.forEach(function(n) {
-                    if (n.nodeType !== 1) return;
-                    var isBubble = n.tagName === 'TYPEBOT-BUBBLE' ||
-                        n.id === 'typebot-bubble-button' ||
-                        (n.classList && n.classList.contains('typebot-bubble-button'));
-                    if (isBubble && n.parentNode) {
-                        n.parentNode.removeChild(n);
-                        console.log('[Typebot] 🗑 Burbuja nativa eliminada');
-                    }
-                });
-            });
-        });
-        obs.observe(document.body, { childList: true, subtree: true });
-        setTimeout(function() { obs.disconnect(); }, 8000);
     </script>
 </body>
 </html>
