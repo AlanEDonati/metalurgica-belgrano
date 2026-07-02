@@ -3196,13 +3196,26 @@ body {
         gap: 24px;
     }
 }
-
 /* ============================================================
    TYPEBOT SIDEBAR — Panel lateral estilo Nexura / Belgrano
-   Reemplaza la burbuja flotante nativa de Typebot
+   Versión corregida y unificada — sin duplicados ni conflictos
 ============================================================ */
 
-/* Panel lateral derecho — cerrado por defecto fuera de pantalla */
+/* ── Ocultar burbuja nativa de Typebot ─────────────────────
+   Triple selector para cubrir todas las variantes del SDK   */
+#typebot-bubble-button,
+.typebot-bubble-button,
+[data-testid="typebot-bubble-button"],
+typebot-bubble,
+typebot-bubble-button {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* ── Panel lateral derecho — cerrado fuera de pantalla ─────  */
 .typebot-sidebar-nexura {
     position: fixed;
     top: 0;
@@ -3213,21 +3226,23 @@ body {
     background-color: #0d1b2a;
     border-left: 2px solid #1e3a8a;
     box-shadow: -10px 0 40px rgba(0, 0, 0, 0.7);
-    z-index: 99998;                          /* justo debajo del navbar */
-    transform: translateX(100%);            /* oculto a la derecha */
+    z-index: 99998;
+    transform: translateX(100%);
     transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: none;                   /* no bloquea clics cuando está cerrado */
+    pointer-events: none;
     display: flex;
     flex-direction: column;
+    /* Recorta el "Made with Typebot" que se empuja hacia abajo */
+    overflow: hidden;
 }
 
-/* Panel abierto */
+/* ── Panel abierto ──────────────────────────────────────────  */
 .typebot-sidebar-nexura.active {
     transform: translateX(0);
     pointer-events: auto;
 }
 
-/* Header del panel */
+/* ── Header del panel ───────────────────────────────────────  */
 .typebot-sidebar-nexura .nexura-panel-header {
     display: flex;
     align-items: center;
@@ -3249,8 +3264,8 @@ body {
 
 .typebot-sidebar-nexura .nexura-panel-close {
     background: none;
-    border: 1px solid rgba(255,255,255,0.15);
-    color: rgba(255,255,255,0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.6);
     width: 32px;
     height: 32px;
     border-radius: 2px;
@@ -3259,7 +3274,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: border-color 0.2s, color 0.2s;
+    transition: border-color 0.2s ease, color 0.2s ease;
     flex-shrink: 0;
 }
 
@@ -3268,95 +3283,90 @@ body {
     color: #fff;
 }
 
-/* Área del iframe de Typebot — ocupa todo el espacio restante */
+/* ── Área del bot — ocupa todo el espacio restante ──────────  */
 .typebot-sidebar-nexura .nexura-bot-area {
     flex: 1;
     overflow: hidden;
     position: relative;
 }
 
-/* Forzar que el iframe/web-component de Typebot llene el área */
-.typebot-sidebar-nexura .nexura-bot-area > *,
+/* ── Web component <typebot-standard> ──────────────────────
+   Se estira 50px extra hacia abajo para que el "Made with
+   Typebot" quede fuera del área visible, recortado por el
+   overflow: hidden del contenedor padre.                    */
 .typebot-sidebar-nexura .nexura-bot-area typebot-standard,
-.typebot-sidebar-nexura .nexura-bot-area iframe {
+.typebot-sidebar-nexura .nexura-bot-area > * {
+    display: block !important;
     width: 100% !important;
-    height: 100% !important;
+    height: calc(100% + 50px) !important;
     border: none !important;
     border-radius: 0 !important;
     background: transparent !important;
 }
 
-/* Botón disparador — pointer-events SIEMPRE activo */
-#ai-agent-trigger {
-    position: fixed !important;
-    bottom: 25px !important;
-    right: 30px !important;
-    z-index: 99999 !important;         /* encima de todo incluyendo el panel */
-    cursor: pointer !important;
-    pointer-events: auto !important;   /* NUNCA bloqueado */
-}
-/* Ocultar la burbuja nativa de Typebot — usamos nuestro botón */
-#typebot-bubble-button,
-.typebot-bubble-button,
-[data-testid="typebot-bubble-button"],
-typebot-bubble,
-typebot-bubble-button {
-    display: none !important;
-    pointer-events: none !important;
-    visibility: hidden !important;
-    width: 0 !important;
-    height: 0 !important;
-}
-
-/* Contenedor principal del panel lateral */
-.typebot-sidebar-nexura {
-    /* ... mantené tus propiedades de posición actuales aquí (top, right, width, etc.) ... */
-    
-    /* CRÍTICO: Corta el logo que vamos a empujar hacia abajo */
-    overflow: hidden !important; 
-}
-
-/* Modificadores para el Web Component interno de Typebot */
-.typebot-sidebar-nexura typebot-standard {
-    display: block !important;
+/* Asegurar que el iframe interno también llene el área */
+.typebot-sidebar-nexura .nexura-bot-area iframe {
     width: 100% !important;
-    /* Estira el bot 50px más abajo de la pantalla para ocultar el "Made with Typebot" */
-    height: calc(100vh + 50px) !important; 
-    margin-bottom: -50px !important;
+    height: 100% !important;
+    border: none !important;
+    border-radius: 0 !important;
 }
 
-/* Forzar estilos del Shadow DOM si se exponen externamente */
+/* ── Intentar ocultar la marca via ::part() si está expuesta  */
 typebot-standard::part(brand),
+typebot-standard::part(powered-by),
 .typebot-brand,
-[class*="typebot-brand"] {
+[class*="typebot-brand"],
+[class*="powered-by-typebot"] {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
     height: 0 !important;
+    pointer-events: none !important;
 }
 
-/* Si el botón de opciones sigue viéndose rebelde en el radio, lo pisamos desde afuera */
-.typebot-sidebar-nexura div, 
-.typebot-sidebar-nexura button {
-    border-radius: 4px !important;
+/* ── Botón disparador #ai-agent-trigger ─────────────────────
+   pointer-events: auto garantiza que siempre sea clicable.
+   La clase .panel-is-open lo oculta visualmente cuando el
+   chat está abierto (sin usar display:none para mantener
+   la transición suave de opacity).                          */
+#ai-agent-trigger {
+    position: fixed !important;
+    bottom: 25px !important;
+    right: 30px !important;
+    z-index: 99999 !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    transition: opacity 0.25s ease, transform 0.25s ease,
+                background 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Adaptación para dispositivos móviles */
+#ai-agent-trigger.panel-is-open {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(10px) !important;
+}
+
+/* ── Responsive — Mobile (<480px) ──────────────────────────
+   En móvil el panel sube desde abajo ocupando el 90vh.     */
 @media (max-width: 480px) {
     .typebot-sidebar-nexura {
         width: 100vw;
-        border-left: none;
-        border-top: 2px solid #1e3a8a;
         height: 90vh;
         top: auto;
         bottom: 0;
+        border-left: none;
+        border-top: 2px solid #1e3a8a;
         transform: translateY(100%);
     }
+
     .typebot-sidebar-nexura.active {
         transform: translateY(0);
     }
-    /* Reajuste del alto del bot en mobile para mantener el recorte */
-    .typebot-sidebar-nexura typebot-standard {
-        height: calc(90vh + 50px) !important;
+
+    /* Reajustar el recorte del branding en mobile */
+    .typebot-sidebar-nexura .nexura-bot-area typebot-standard,
+    .typebot-sidebar-nexura .nexura-bot-area > * {
+        height: calc(100% + 50px) !important;
     }
 }

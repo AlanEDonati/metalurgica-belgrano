@@ -10,22 +10,33 @@
     <link rel="apple-touch-icon" href="favin-mb.jpg">
     <meta name="theme-color" content="#0066cc">
 
-    <!--
-        TYPEBOT — CSS cargado en <head> para evitar FOUC de la burbuja nativa.
-        Se usa unpkg (CDN estable, sirve text/javascript correcto) en lugar de jsDelivr.
-    -->
-
-    <!--
-        Ocultamos la burbuja flotante nativa de Typebot ANTES de que el script
-        la inyecte, evitando el parpadeo (FOUC) de aparición y desaparición.
-    -->
     <style>
+        /* Ocultar burbuja nativa de Typebot antes de que aparezca */
         #typebot-bubble-button,
         .typebot-bubble-button,
-        [data-testid="typebot-bubble-button"] {
+        [data-testid="typebot-bubble-button"],
+        typebot-bubble,
+        typebot-bubble-button {
             display: none !important;
             visibility: hidden !important;
             pointer-events: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        /* ── CAMBIO 1: clase que oculta el trigger con transición suave ── */
+        #ai-agent-trigger.panel-is-open {
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transform: translateY(10px) !important;
+            transition: opacity 0.25s ease, transform 0.25s ease !important;
+        }
+
+        /* Estado visible (transición de vuelta) */
+        #ai-agent-trigger {
+            transition: opacity 0.25s ease, transform 0.25s ease,
+                        background 0.3s ease, box-shadow 0.3s ease,
+                        transform 0.3s ease;
         }
     </style>
 </head>
@@ -222,11 +233,7 @@
         <div class="mapa-container">
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3278.435728567156!2d-59.6838149!3d-34.7835356!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDQ3JzAwLjciUyA1OcKwNDEnMDEuNyJX!5e0!3m2!1ses!2sar!4v1708290000000!5m2!1ses!2sar"
-                width="100%"
-                height="100%"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy"
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
                 title="Ubicación Metalúrgica Belgrano – Ruta Nacional 5 Km 126.5 Suipacha">
             </iframe>
@@ -317,167 +324,120 @@
         <span>CONSULTAR AL INGENIERO IA</span>
     </div>
 
-    <!--
-        PANEL LATERAL TYPEBOT — estilo Nexura / Belgrano
-        Estructura: header con cierre + área del bot
-    -->
+    <!-- PANEL LATERAL TYPEBOT -->
     <div id="typebot-container" class="typebot-sidebar-nexura" role="dialog" aria-label="Ingeniero IA Metalúrgica Belgrano">
         <div class="nexura-panel-header">
             <span class="nexura-panel-title">⚙ Ingeniero IA</span>
             <button class="nexura-panel-close" id="typebot-close-btn" aria-label="Cerrar chat">&times;</button>
         </div>
         <div class="nexura-bot-area" id="typebot-bot-area">
-            <!-- Web component oficial de Typebot -->
             <typebot-standard style="width:100%;height:100%;"></typebot-standard>
         </div>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════
-         SCRIPTS DE LÓGICA — Panel de productos + Typebot
-    ════════════════════════════════════════════════════ -->
+    <!-- SCRIPTS DE LÓGICA — Panel de productos -->
     <script>
-        // ── BASE DE DATOS TÉCNICA ──────────────────────────────
         const productData = {
             'vial': {
                 title: "Semirremolque Térmico Vial",
                 sections: [
-                    {
-                        label: "INGENIERÍA DE CARGA",
-                        items: [
-                            { n: "Aplicación",     v: "Asfaltos, Fuel Oil y Crudos" },
-                            { n: "Capacidad",      v: "30.000 a 37.000 Lts" },
-                            { n: "Configuración",  v: "1+1 / 2+1 / 3 Ejes Tándem" },
-                            { n: "Tara mínima",    v: "7.200 Kg (Versión Strenx)" }
-                        ]
-                    },
-                    {
-                        label: "SISTEMA TÉRMICO",
-                        items: [
-                            { n: "Aislamiento",   v: "Lana de vidrio de alta densidad 100mm" },
-                            { n: "Serpentinas",   v: "Doble circuito de vapor de alta eficiencia" },
-                            { n: "Revestimiento", v: "Chapa de Aluminio o Inoxidable Espejo" }
-                        ]
-                    }
+                    { label: "INGENIERÍA DE CARGA", items: [
+                        { n: "Aplicación",    v: "Asfaltos, Fuel Oil y Crudos" },
+                        { n: "Capacidad",     v: "30.000 a 37.000 Lts" },
+                        { n: "Configuración", v: "1+1 / 2+1 / 3 Ejes Tándem" },
+                        { n: "Tara mínima",   v: "7.200 Kg (Versión Strenx)" }
+                    ]},
+                    { label: "SISTEMA TÉRMICO", items: [
+                        { n: "Aislamiento",   v: "Lana de vidrio de alta densidad 100mm" },
+                        { n: "Serpentinas",   v: "Doble circuito de vapor de alta eficiencia" },
+                        { n: "Revestimiento", v: "Chapa de Aluminio o Inoxidable Espejo" }
+                    ]}
                 ]
             },
             'quimica': {
                 title: "Cisterna Química AISI 316L",
                 sections: [
-                    {
-                        label: "CONTENCIÓN Y MATERIALES",
-                        items: [
-                            { n: "Cuerpo",        v: "Acero Inoxidable AISI 316L (Grado Ácido)" },
-                            { n: "Presión Test",  v: "4.0 Bar (Seguridad Certificada)" },
-                            { n: "Capacidad",     v: "28.000 a 33.000 Lts" }
-                        ]
-                    },
-                    {
-                        label: "VALVULERÍA Y SEGURIDAD",
-                        items: [
-                            { n: "Carga/Descarga", v: "Superior e Inferior (Tipo Fort Vale)" },
-                            { n: "Normativa",      v: "ADR / DOT / Res. 195/97" },
-                            { n: "Frenos",         v: "EBS Knorr-Bremse con sensores antivuelco" }
-                        ]
-                    }
+                    { label: "CONTENCIÓN Y MATERIALES", items: [
+                        { n: "Cuerpo",       v: "Acero Inoxidable AISI 316L (Grado Ácido)" },
+                        { n: "Presión Test", v: "4.0 Bar (Seguridad Certificada)" },
+                        { n: "Capacidad",    v: "28.000 a 33.000 Lts" }
+                    ]},
+                    { label: "VALVULERÍA Y SEGURIDAD", items: [
+                        { n: "Carga/Descarga", v: "Superior e Inferior (Tipo Fort Vale)" },
+                        { n: "Normativa",      v: "ADR / DOT / Res. 195/97" },
+                        { n: "Frenos",         v: "EBS Knorr-Bremse con sensores antivuelco" }
+                    ]}
                 ]
             },
             'alimento': {
                 title: "Tanque Sanitario Alimenticio",
                 sections: [
-                    {
-                        label: "GRADO SANITARIO",
-                        items: [
-                            { n: "Material",      v: "Acero Inoxidable AISI 304 / 316" },
-                            { n: "Terminación",   v: "Pulido Espejo Ra < 0.5 (Certificado)" },
-                            { n: "Capacidad",     v: "Hasta 38.500 Lts" }
-                        ]
-                    },
-                    {
-                        label: "EQUIPAMIENTO",
-                        items: [
-                            { n: "Lavado CIP",  v: "Sistema de 5 bochas giratorias 360°" },
-                            { n: "Descarga",    v: "Comando trasero en gabinete estanco" },
-                            { n: "Pasarela",    v: "Antideslizante con baranda rebatible" }
-                        ]
-                    }
+                    { label: "GRADO SANITARIO", items: [
+                        { n: "Material",    v: "Acero Inoxidable AISI 304 / 316" },
+                        { n: "Terminación", v: "Pulido Espejo Ra < 0.5 (Certificado)" },
+                        { n: "Capacidad",   v: "Hasta 38.500 Lts" }
+                    ]},
+                    { label: "EQUIPAMIENTO", items: [
+                        { n: "Lavado CIP", v: "Sistema de 5 bochas giratorias 360°" },
+                        { n: "Descarga",   v: "Comando trasero en gabinete estanco" },
+                        { n: "Pasarela",   v: "Antideslizante con baranda rebatible" }
+                    ]}
                 ]
             },
             'combustible': {
                 title: "Semirremolque Tanque Combustible",
                 sections: [
-                    {
-                        label: "SISTEMA LOGÍSTICO",
-                        items: [
-                            { n: "Sección",          v: "Elíptica Autoportante de bajo centro de gravedad" },
-                            { n: "Compartimientos",  v: "1 a 5 celdas (Carga Multiproducto)" },
-                            { n: "Material",         v: "Acero Microaleado de alta resistencia" }
-                        ]
-                    },
-                    {
-                        label: "TECNOLOGÍA BOTTOM LOADING",
-                        items: [
-                            { n: "Carga Ventral", v: 'Adaptadores API 4" y recuperación de vapores' },
-                            { n: "Prevención",    v: "Sensores ópticos Civacon de sobrellenado" },
-                            { n: "Descarga",      v: "Por gravedad o Bomba hidráulica (Opcional)" }
-                        ]
-                    }
+                    { label: "SISTEMA LOGÍSTICO", items: [
+                        { n: "Sección",         v: "Elíptica Autoportante de bajo centro de gravedad" },
+                        { n: "Compartimientos", v: "1 a 5 celdas (Carga Multiproducto)" },
+                        { n: "Material",        v: "Acero Microaleado de alta resistencia" }
+                    ]},
+                    { label: "TECNOLOGÍA BOTTOM LOADING", items: [
+                        { n: "Carga Ventral", v: 'Adaptadores API 4" y recuperación de vapores' },
+                        { n: "Prevención",    v: "Sensores ópticos Civacon de sobrellenado" },
+                        { n: "Descarga",      v: "Por gravedad o Bomba hidráulica (Opcional)" }
+                    ]}
                 ]
             },
             'bitren-75': {
                 title: "Bitren Tolva Cerealera 75T",
                 sections: [
-                    {
-                        label: "CAPACIDAD OPERATIVA",
-                        items: [
-                            { n: "PBTC",       v: "75 Toneladas (Configuración 2+2+3)" },
-                            { n: "Volumen",    v: "Hasta 75 m³ totales" },
-                            { n: "Carga Útil", v: "Maximizada mediante Acero Strenx 700" }
-                        ]
-                    },
-                    {
-                        label: "DINÁMICA VIAL",
-                        items: [
-                            { n: "Suspensión", v: "Neumática integral con balanza electrónica" },
-                            { n: "Frenos",     v: "EBS + ESC de última generación" },
-                            { n: "Acople",     v: "Quinta rueda desplazable de alta carga" }
-                        ]
-                    }
+                    { label: "CAPACIDAD OPERATIVA", items: [
+                        { n: "PBTC",       v: "75 Toneladas (Configuración 2+2+3)" },
+                        { n: "Volumen",    v: "Hasta 75 m³ totales" },
+                        { n: "Carga Útil", v: "Maximizada mediante Acero Strenx 700" }
+                    ]},
+                    { label: "DINÁMICA VIAL", items: [
+                        { n: "Suspensión", v: "Neumática integral con balanza electrónica" },
+                        { n: "Frenos",     v: "EBS + ESC de última generación" },
+                        { n: "Acople",     v: "Quinta rueda desplazable de alta carga" }
+                    ]}
                 ]
             },
             'gas': {
                 title: "Semirremolque GLP / Amoníaco",
                 sections: [
-                    {
-                        label: "RECIPIENTE DE PRESIÓN",
-                        items: [
-                            { n: "Norma Diseño",  v: "ASME SECCIÓN VIII DIV. 1 (Stamp)" },
-                            { n: "Radiografiado", v: "100% de costuras soldadas por ultrasonido" },
-                            { n: "Presión Diseño",v: "17.58 Kg/cm² (250 PSI)" }
-                        ]
-                    },
-                    {
-                        label: "ACCESORIOS DE CONTROL",
-                        items: [
-                            { n: "Válvulas",   v: "Rego / Fisher de accionamiento neumático" },
-                            { n: "Seguridad",  v: "Doble válvula de alivio y medidor rotogage" }
-                        ]
-                    }
+                    { label: "RECIPIENTE DE PRESIÓN", items: [
+                        { n: "Norma Diseño",   v: "ASME SECCIÓN VIII DIV. 1 (Stamp)" },
+                        { n: "Radiografiado",  v: "100% de costuras soldadas por ultrasonido" },
+                        { n: "Presión Diseño", v: "17.58 Kg/cm² (250 PSI)" }
+                    ]},
+                    { label: "ACCESORIOS DE CONTROL", items: [
+                        { n: "Válvulas",  v: "Rego / Fisher de accionamiento neumático" },
+                        { n: "Seguridad", v: "Doble válvula de alivio y medidor rotogage" }
+                    ]}
                 ]
             }
         };
 
-        // ── ABRIR PANEL DE ESPECIFICACIONES ───────────────────
         function openSpec(productId) {
             const data = productData[productId];
             if (!data) return;
-
             const panel     = document.getElementById('spec-panel');
             const container = panel.querySelector('.ficha-grid');
             const mainBtn   = document.getElementById('main-action-btn');
-
             panel.querySelector('h2').innerText = data.title;
             container.innerHTML = '';
-
             data.sections.forEach(function(section) {
                 let html = '<div class="ficha-section"><h4>' + section.label + '</h4><div class="specs-list">';
                 section.items.forEach(function(item) {
@@ -486,162 +446,119 @@
                 html += '</div></div>';
                 container.innerHTML += html;
             });
-
             if (mainBtn) {
                 mainBtn.href = 'https://wa.me/542324480111?text=Hola!%20Solicito%20cotización%20de:%20' + encodeURIComponent(data.title);
                 mainBtn.innerHTML = '<span style="font-weight:900;letter-spacing:2px;">SOLICITAR COTIZACIÓN</span>';
             }
-
             panel.classList.add('active');
         }
 
-        // ── ABRIR PANEL DE CALIDAD ─────────────────────────────
         function openQualityPanel() {
             const panel     = document.getElementById('spec-panel');
             const container = panel.querySelector('.ficha-grid');
             const mainBtn   = document.getElementById('main-action-btn');
-
             panel.querySelector('h2').innerText = "Estándares de Calidad";
-
             container.innerHTML = [
-                '<div class="ficha-section">',
-                    '<h4>CERTIFICACIONES VIGENTES</h4>',
-                    '<div class="specs-list">',
-                        '<div class="spec-row"><span class="s-name">Gestión de Calidad</span><span class="s-val">ISO 9001:2015</span></div>',
-                        '<div class="spec-row"><span class="s-name">Diseño de Recipientes</span><span class="s-val">ASME Sección VIII</span></div>',
-                        '<div class="spec-row"><span class="s-name">Seguridad Vial (Mercosur)</span><span class="s-val">Normas DOT / ADR</span></div>',
-                    '</div>',
-                '</div>',
-                '<div class="ficha-section" style="margin-top:30px;">',
-                    '<h4>POLÍTICA DE INGENIERÍA</h4>',
-                    '<p style="color:rgba(255,255,255,0.6);font-size:0.9rem;line-height:1.6;">',
-                        'Todas nuestras unidades son sometidas a ensayos no destructivos (Tintas penetrantes y Ultrasonido) ',
-                        'para garantizar la integridad estructural en el transporte de sustancias peligrosas y alimenticias.',
-                    '</p>',
+                '<div class="ficha-section"><h4>CERTIFICACIONES VIGENTES</h4><div class="specs-list">',
+                '<div class="spec-row"><span class="s-name">Gestión de Calidad</span><span class="s-val">ISO 9001:2015</span></div>',
+                '<div class="spec-row"><span class="s-name">Diseño de Recipientes</span><span class="s-val">ASME Sección VIII</span></div>',
+                '<div class="spec-row"><span class="s-name">Seguridad Vial (Mercosur)</span><span class="s-val">Normas DOT / ADR</span></div>',
+                '</div></div>',
+                '<div class="ficha-section" style="margin-top:30px;"><h4>POLÍTICA DE INGENIERÍA</h4>',
+                '<p style="color:rgba(255,255,255,0.6);font-size:0.9rem;line-height:1.6;">Todas nuestras unidades son sometidas a ensayos no destructivos (Tintas penetrantes y Ultrasonido) para garantizar la integridad estructural en el transporte de sustancias peligrosas y alimenticias.</p>',
                 '</div>'
             ].join('');
-
             if (mainBtn) {
                 mainBtn.href = 'contacto.html';
                 mainBtn.innerHTML = '<span style="font-weight:900;letter-spacing:2px;">SOLICITAR DOSSIER DE CALIDAD</span>';
             }
-
             panel.classList.add('active');
         }
 
-        // ── CERRAR PANEL AL HACER CLIC EN EL OVERLAY ──────────
         document.getElementById('spec-panel').addEventListener('click', function(e) {
             if (e.target === this) this.classList.remove('active');
         });
     </script>
-   <style>
- #typebot-bubble-button,
-.typebot-bubble-button,
-[data-testid="typebot-bubble-button"],
-typebot-bubble,
-typebot-bubble-button {
- display: none !important;
- visibility: hidden !important;
- pointer-events: none !important;
- width: 0 !important;
- height: 0 !important;
- }
 
-/* Oculta la marca de agua si el Shadow DOM la expone externamente */
- typebot-standard::part(brand),
- .typebot-brand {
- display: none !important;
- visibility: hidden !important;
- opacity: 0 !important;
- height: 0 !important;
- pointer-events: none !important;
- }
- </style>
+    <!-- ═══════════════════════════════════════════════════
+         TYPEBOT — Script ESM oficial + lógica del panel
+    ════════════════════════════════════════════════════ -->
+    <script type="module">
+        import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js';
 
- <script type="module">
- // ── Import oficial según docs de Typebot ──────────────
- import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js';
+        Typebot.initStandard({
+            typebot: 'my-typebot-pciia25',
+            settings: { hideBrand: true }
+        });
 
- // ── Inicializar el web component <typebot-standard> ───
- Typebot.initStandard({
- typebot: 'my-typebot-pciia25',
- // Opción nativa para remover "Made with Typebot"
- settings: {
- hideBrand: true
- }
- });
+        // ── Referencias DOM ────────────────────────────────────
+        var _panelOpen = false;
+        var _trigger   = document.getElementById('ai-agent-trigger');
+        var _panel     = document.getElementById('typebot-container');
+        var _closeBtn  = document.getElementById('typebot-close-btn');
 
- console.log('[Typebot] ✅ initStandard ejecutado (sin marca de agua)');
+        // ── CAMBIO 2: openPanel oculta el trigger ──────────────
+        function openPanel() {
+            if (!_panel) return;
+            _panel.classList.add('active');
+            _panelOpen = true;
+            // Ocultar el botón "CONSULTAR AL INGENIERO IA"
+            // para que no superponga ni tape el contenido del chat
+            if (_trigger) _trigger.classList.add('panel-is-open');
+            if (_closeBtn) setTimeout(function() { _closeBtn.focus(); }, 380);
+        }
 
- // ── Estado del panel lateral ──────────────────────────
- var _panelOpen = false;
+        // ── CAMBIO 3: closePanel vuelve a mostrar el trigger ───
+        function closePanel() {
+            if (!_panel) return;
+            _panel.classList.remove('active');
+            _panelOpen = false;
+            // Restaurar el botón "CONSULTAR AL INGENIERO IA"
+            if (_trigger) {
+                _trigger.classList.remove('panel-is-open');
+                _trigger.focus();
+            }
+        }
 
- var _trigger  = document.getElementById('ai-agent-trigger');
- var _panel    = document.getElementById('typebot-container');
- var _closeBtn = document.getElementById('typebot-close-btn');
+        // ── Event Delegation ───────────────────────────────────
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('#ai-agent-trigger')) {
+                e.preventDefault();
+                e.stopPropagation();
+                _panelOpen ? closePanel() : openPanel();
+                return;
+            }
+            if (e.target.closest('#typebot-close-btn')) {
+                e.preventDefault();
+                closePanel();
+                return;
+            }
+            if (_panelOpen && _panel && !_panel.contains(e.target)) {
+                closePanel();
+            }
+        });
 
- function openPanel() {
- if (!_panel) return;
- _panel.classList.add('active');
- _panelOpen = true;
- if (_closeBtn) setTimeout(function() { _closeBtn.focus(); }, 380);
- console.log('[Typebot] Panel abierto');
- }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && _panelOpen) closePanel();
+        });
 
- function closePanel() {
- if (!_panel) return;
- _panel.classList.remove('active');
- _panelOpen = false;
- if (_trigger) _trigger.focus();
- console.log('[Typebot] Panel cerrado');
- }
+        // ── MutationObserver: eliminar burbuja nativa ──────────
+        var obs = new MutationObserver(function(muts) {
+            muts.forEach(function(m) {
+                m.addedNodes.forEach(function(n) {
+                    if (n.nodeType !== 1) return;
+                    var isBubble = n.tagName === 'TYPEBOT-BUBBLE' ||
+                                   n.id       === 'typebot-bubble-button' ||
+                                   (n.classList && n.classList.contains('typebot-bubble-button'));
+                    if (isBubble && n.parentNode) {
+                        n.parentNode.removeChild(n);
+                    }
+                });
+            });
+        });
+        obs.observe(document.body, { childList: true, subtree: true });
+        setTimeout(function() { obs.disconnect(); }, 8000);
+    </script>
 
- // ── Event Delegation: clic en el disparador ───────────
- document.addEventListener('click', function(e) {
-
-// A) Botón disparador personalizado
-if (e.target.closest('#ai-agent-trigger')) {
- e.preventDefault();
- e.stopPropagation();
- _panelOpen ? closePanel() : openPanel();
- return;
- }
-
- // B) Botón X del header del panel
- if (e.target.closest('#typebot-close-btn')) {
- e.preventDefault();
- closePanel();
- return;
- }
-
- // C) Clic fuera del panel → cerrar
- if (_panelOpen && _panel && !_panel.contains(e.target)) {
- closePanel();
- }
- });
-
- // D) ESC para cerrar
- document.addEventListener('keydown', function(e) {
- if (e.key === 'Escape' && _panelOpen) closePanel();
- });
-
- // ── MutationObserver: eliminar burbuja nativa si aparece
- var obs = new MutationObserver(function(muts) {
- muts.forEach(function(m) {
- m.addedNodes.forEach(function(n) {
- if (n.nodeType !== 1) return;
- var isBubble = n.tagName === 'TYPEBOT-BUBBLE' ||
- n.id === 'typebot-bubble-button' ||
- (n.classList && n.classList.contains('typebot-bubble-button'));
- if (isBubble && n.parentNode) {
- n.parentNode.removeChild(n);
- console.log('[Typebot] 🗑 Burbuja nativa eliminada');
- }
- });
- });
- });
- obs.observe(document.body, { childList: true, subtree: true });
- setTimeout(function() { obs.disconnect(); }, 8000);
-  </script>
 </body>
 </html>
