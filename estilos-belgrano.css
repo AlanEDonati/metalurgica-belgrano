@@ -3318,3 +3318,15 @@ body {
         transform: translateY(0);
     }
 }
+
+/* Hack para mimetizar y camuflar la marca de agua de Typebot */
+.typebot-sidebar-nexura iframe {
+    background-color: #0d1b2a !important;
+    color-scheme: dark !important; /* Fuerza a los elementos internos y barras a renderizar en oscuro */
+}
+
+/* Opcional: Si el botón de opciones sigue viéndose rebelde en el radio, lo pisamos desde afuera */
+.typebot-sidebar-nexura div, 
+.typebot-sidebar-nexura button {
+    border-radius: 4px !important;
+}
