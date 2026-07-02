@@ -3295,15 +3295,53 @@ body {
     cursor: pointer !important;
     pointer-events: auto !important;   /* NUNCA bloqueado */
 }
-
 /* Ocultar la burbuja nativa de Typebot — usamos nuestro botón */
 #typebot-bubble-button,
 .typebot-bubble-button,
-[data-testid="typebot-bubble-button"] {
+[data-testid="typebot-bubble-button"],
+typebot-bubble,
+typebot-bubble-button {
     display: none !important;
     pointer-events: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
+/* Contenedor principal del panel lateral */
+.typebot-sidebar-nexura {
+    /* ... mantené tus propiedades de posición actuales aquí (top, right, width, etc.) ... */
+    
+    /* CRÍTICO: Corta el logo que vamos a empujar hacia abajo */
+    overflow: hidden !important; 
+}
+
+/* Modificadores para el Web Component interno de Typebot */
+.typebot-sidebar-nexura typebot-standard {
+    display: block !important;
+    width: 100% !important;
+    /* Estira el bot 50px más abajo de la pantalla para ocultar el "Made with Typebot" */
+    height: calc(100vh + 50px) !important; 
+    margin-bottom: -50px !important;
+}
+
+/* Forzar estilos del Shadow DOM si se exponen externamente */
+typebot-standard::part(brand),
+.typebot-brand,
+[class*="typebot-brand"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+}
+
+/* Si el botón de opciones sigue viéndose rebelde en el radio, lo pisamos desde afuera */
+.typebot-sidebar-nexura div, 
+.typebot-sidebar-nexura button {
+    border-radius: 4px !important;
+}
+
+/* Adaptación para dispositivos móviles */
 @media (max-width: 480px) {
     .typebot-sidebar-nexura {
         width: 100vw;
@@ -3317,27 +3355,8 @@ body {
     .typebot-sidebar-nexura.active {
         transform: translateY(0);
     }
-}
-
-/* Hack para mimetizar y camuflar la marca de agua de Typebot */
-.typebot-sidebar-nexura iframe {
-    background-color: #0d1b2a !important;
-    color-scheme: dark !important; /* Fuerza a los elementos internos y barras a renderizar en oscuro */
-}
-
-/* Opcional: Si el botón de opciones sigue viéndose rebelde en el radio, lo pisamos desde afuera */
-.typebot-sidebar-nexura div, 
-.typebot-sidebar-nexura button {
-    border-radius: 4px !important;
-}
-
-/* Oculta la marca de agua de Typebot */
-.typebot-brand, 
-[class*="typebot-brand"],
-div[style*="justify-content: center"][style*="align-items: center"] a[href*="typebot.io"] {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    height: 0 !important;
-    pointer-events: none !important;
+    /* Reajuste del alto del bot en mobile para mantener el recorte */
+    .typebot-sidebar-nexura typebot-standard {
+        height: calc(90vh + 50px) !important;
+    }
 }
