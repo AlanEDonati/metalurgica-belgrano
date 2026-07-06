@@ -3370,3 +3370,24 @@ typebot-standard::part(powered-by),
         height: calc(100% + 50px) !important;
     }
 }
+
+/* ============================================================
+   FIX — productos.html: reducir espacio vacío bajo los filtros
+============================================================ */
+.catalog-hero {
+    min-height: 45vh !important;
+    padding-top: 120px !important;
+    padding-bottom: 40px !important;
+}
+
+.catalog-filter-sticky {
+    margin-top: 0 !important;
+}
+
+.catalog-section {
+    padding-top: 0 !important;
+}
+
+.catalog-section .category-title:first-of-type {
+    margin-top: 40px !important;
+}

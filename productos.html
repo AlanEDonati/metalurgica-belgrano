@@ -6,6 +6,9 @@
     <title>Catálogo Industrial | Metalúrgica Belgrano</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos-belgrano.css">
+    <link rel="icon" type="image/png" href="favin-mb.jpg">
+    <link rel="apple-touch-icon" href="favin-mb.jpg">
+    <meta name="theme-color" content="#0066cc">
 </head>
 <body>
 
@@ -23,6 +26,7 @@
         </div>
     </nav>
 
+    <!-- HERO — sin los botones de filtro adentro -->
     <header class="catalog-hero">
         <div class="catalog-hero-overlay"></div>
         <div class="catalog-hero-content">
@@ -36,279 +40,285 @@
             </h1>
             <p class="catalog-hero-sub">Ingeniería certificada para cada industria. Asfaltos, combustibles, alimentos y más.</p>
         </div>
-        <div class="catalog-filter-bar">
-            <button class="filter-btn active" onclick="filterProducts('all', this, event)">Todos</button>
-            <button class="filter-btn" onclick="filterProducts('asfaltos', this, event)">Asfaltos</button>
-            <button class="filter-btn" onclick="filterProducts('combustibles', this, event)">Combustibles</button>
-            <button class="filter-btn" onclick="filterProducts('alimentos', this, event)">Alimenticios</button>
-            <button class="filter-btn" onclick="filterProducts('almacenamiento', this, event)">Almacenamiento</button>
-            <button class="filter-btn" onclick="filterProducts('residuos', this, event)">Residuos Líquidos</button>
-        </div>
     </header>
 
-<section class="catalog-section" style="padding: 20px 5% 100px;">
+    <!-- BARRA DE FILTROS STICKY — fuera del hero, siempre visible y clicable -->
+    <div class="catalog-filter-sticky">
+        <button class="filter-btn active" onclick="filterProducts('all', this, event)">TODOS</button>
+        <button class="filter-btn" onclick="filterProducts('asfaltos', this, event)">ASFALTOS</button>
+        <button class="filter-btn" onclick="filterProducts('combustibles', this, event)">COMBUSTIBLES</button>
+        <button class="filter-btn" onclick="filterProducts('alimentos', this, event)">ALIMENTICIOS</button>
+        <button class="filter-btn" onclick="filterProducts('almacenamiento', this, event)">ALMACENAMIENTO</button>
+        <button class="filter-btn" onclick="filterProducts('residuos', this, event)">RESIDUOS LÍQUIDOS</button>
+    </div>
 
-    <h2 class="category-title">Asfaltos</h2>
-    <div class="product-grid-nexura">
-        <div class="p-card" data-category="asfaltos" onclick="openProduct('asfalto-11')">
-            <div class="p-img"><img loading="lazy" src="Tanque.jpg" alt="Tanque cisterna de acero inoxidable – Metalúrgica Belgrano"></div>
-            <div class="p-info">
-                <span class="p-line">LÍNEA ASFALTOS</span>
-                <h3>Semirremolque 1+1 Ejes</h3>
-                <p>Asfalto y Fuel Oil – Configuración básica.</p>
+    <section class="catalog-section" style="padding: 20px 5% 100px;">
+
+        <h2 class="category-title">Asfaltos</h2>
+        <div class="product-grid-nexura">
+            <div class="p-card" data-category="asfaltos" onclick="openProduct('asfalto-11')">
+                <div class="p-img"><img loading="lazy" src="Tanque.jpg" alt="Tanque cisterna de acero inoxidable – Metalúrgica Belgrano"></div>
+                <div class="p-info">
+                    <span class="p-line">LÍNEA ASFALTOS</span>
+                    <h3>Semirremolque 1+1 Ejes</h3>
+                    <p>Asfalto y Fuel Oil – Configuración básica.</p>
+                </div>
+            </div>
+            <div class="p-card" data-category="asfaltos" onclick="openProduct('asfalto-21')">
+                <div class="p-img"><img loading="lazy" src="Tanque.jpg" alt="Tanque cisterna de acero inoxidable – Metalúrgica Belgrano"></div>
+                <div class="p-info">
+                    <span class="p-line">LÍNEA ASFALTOS</span>
+                    <h3>Semirremolque 2+1 Ejes</h3>
+                    <p>Mayor capacidad con ejes adicionales.</p>
+                </div>
+            </div>
+            <div class="p-card" data-category="asfaltos" onclick="openProduct('asfalto-3t')">
+                <div class="p-img"><img loading="lazy" src="Tanque.jpg" alt="Tanque cisterna de acero inoxidable – Metalúrgica Belgrano"></div>
+                <div class="p-info">
+                    <span class="p-line">LÍNEA ASFALTOS</span>
+                    <h3>Semirremolque 3 Ejes</h3>
+                    <p>Configuración tándem para grandes volúmenes.</p>
+                </div>
             </div>
         </div>
-        <div class="p-card" data-category="asfaltos" onclick="openProduct('asfalto-21')">
-            <div class="p-img"><img loading="lazy" src="Tanque.jpg" alt="Tanque cisterna de acero inoxidable – Metalúrgica Belgrano"></div>
-            <div class="p-info">
-                <span class="p-line">LÍNEA ASFALTOS</span>
-                <h3>Semirremolque 2+1 Ejes</h3>
-                <p>Mayor capacidad con ejes adicionales.</p>
+
+        <h2 class="category-title">Combustibles y Petróleos</h2>
+        <div class="product-grid-nexura">
+            <div class="p-card" data-category="combustibles" onclick="openProduct('combustible-11')">
+                <div class="p-img"><img loading="lazy" src="combustible.jpg" alt="Semirremolque para transporte de combustibles – Metalúrgica Belgrano"></div>
+                <div class="p-info">
+                    <span class="p-line">LÍNEA COMBUSTIBLES</span>
+                    <h3>Semirremolque Combustible 1+1</h3>
+                    <p>Transporte seguro de combustibles.</p>
+                </div>
+            </div>
+            <div class="p-card" data-category="combustibles" onclick="openProduct('combustible-21')">
+                <div class="p-img"><img loading="lazy" src="combustible.jpg" alt="Semirremolque para transporte de combustibles – Metalúrgica Belgrano"></div>
+                <div class="p-info">
+                    <span class="p-line">LÍNEA COMBUSTIBLES</span>
+                    <h3>Semirremolque Combustible 2+1</h3>
+                    <p>Capacidad ampliada para rutas largas.</p>
+                </div>
+            </div>
+            <div class="p-card" data-category="combustibles" onclick="openProduct('petroleo-21')">
+                <div class="p-img"><img loading="lazy" src="combustible.jpg" alt="Semirremolque para transporte de combustibles – Metalúrgica Belgrano"></div>
+                <div class="p-info">
+                    <span class="p-line">LÍNEA PETRÓLEO</span>
+                    <h3>Semirremolque Petróleo 2+1</h3>
+                    <p>Diseñado para hidrocarburos pesados.</p>
+                </div>
+            </div>
+            <div class="p-card" data-category="combustibles" onclick="openProduct('tanque-camion')">
+                <div class="p-img"><img loading="lazy" src="Tanque.jpg" alt="Tanque cisterna de acero inoxidable – Metalúrgica Belgrano"></div>
+                <div class="p-info">
+                    <span class="p-line">TANQUES CAMIÓN</span>
+                    <h3>Tanque para Camión</h3>
+                    <p>Carga de combustibles y líquidos especiales.</p>
+                </div>
             </div>
         </div>
-        <div class="p-card" data-category="asfaltos" onclick="openProduct('asfalto-3t')">
-            <div class="p-img"><img loading="lazy" src="Tanque.jpg" alt="Tanque cisterna de acero inoxidable – Metalúrgica Belgrano"></div>
-            <div class="p-info">
-                <span class="p-line">LÍNEA ASFALTOS</span>
-                <h3>Semirremolque 3 Ejes</h3>
-                <p>Configuración tándem para grandes volúmenes.</p>
+
+        <h2 class="category-title">Sustancias Alimenticias</h2>
+        <div class="product-grid-nexura">
+            <div class="p-card" data-category="alimentos" onclick="openProduct('alimentos-semi-sin')">
+                <div class="p-img"><img loading="lazy" src="alimenticia.jpg" alt="Semirremolque alimenticio certificado – Metalúrgica Belgrano"></div>
+                <div class="p-info">
+                    <span class="p-line">LÍNEA ALIMENTICIA</span>
+                    <h3>Semi Sin Aislación</h3>
+                    <p>Unidades para productos alimenticios básicos.</p>
+                </div>
+            </div>
+            <div class="p-card" data-category="alimentos" onclick="openProduct('alimentos-semi-term')">
+                <div class="p-img"><img loading="lazy" src="semitermico.jpg" alt="Semirremolque térmico Metalúrgica Belgrano – Línea Vial"></div>
+                <div class="p-info">
+                    <span class="p-line">LÍNEA ALIMENTICIA</span>
+                    <h3>Semi Térmico 2 Ejes</h3>
+                    <p>Aislación avanzada para lácteos y derivados.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title">Especiales / Almacenamiento</h2>
+        <div class="product-grid-nexura">
+            <div class="p-card" data-category="almacenamiento" onclick="openProduct('almacenamiento-sin')">
+                <div class="p-img"><img loading="lazy" src="Tanque.jpg" alt="Tanque cisterna de acero inoxidable – Metalúrgica Belgrano"></div>
+                <div class="p-info">
+                    <span class="p-line">ALMACENAMIENTO</span>
+                    <h3>Tanque Almacenamiento Sin Aislación</h3>
+                    <p>Tanque robusto para almacenamiento general.</p>
+                </div>
+            </div>
+            <div class="p-card" data-category="almacenamiento" onclick="openProduct('almacenamiento-term-h')">
+                <div class="p-img"><img loading="lazy" src="lineaquimica.jpg" alt="Tanque cisterna para línea química – Metalúrgica Belgrano"></div>
+                <div class="p-info">
+                    <span class="p-line">ALMACENAMIENTO</span>
+                    <h3>Tanque Térmico Horizontal</h3>
+                    <p>Con aislación térmica para productos sensibles.</p>
+                </div>
+            </div>
+            <div class="p-card" data-category="almacenamiento" onclick="openProduct('almacenamiento-term-v')">
+                <div class="p-img"><img loading="lazy" src="lineaquimica.jpg" alt="Tanque cisterna para línea química – Metalúrgica Belgrano"></div>
+                <div class="p-info">
+                    <span class="p-line">ALMACENAMIENTO</span>
+                    <h3>Tanque Térmico Vertical</h3>
+                    <p>Alta capacidad para líquidos industriales.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="category-title">Residuos Líquidos</h2>
+        <div class="product-grid-nexura">
+            <div class="p-card" data-category="residuos" onclick="openProduct('residuos-11')">
+                <div class="p-img"><img loading="lazy" src="gas.jpg" alt="Tanque para transporte de gas y residuos líquidos – Metalúrgica Belgrano"></div>
+                <div class="p-info">
+                    <span class="p-line">LÍNEA RESIDUOS</span>
+                    <h3>Semirremolque 1+1 Ejes</h3>
+                    <p>Unidad para líquidos de desecho.</p>
+                </div>
+            </div>
+            <div class="p-card" data-category="residuos" onclick="openProduct('residuos-21')">
+                <div class="p-img"><img loading="lazy" src="gas.jpg" alt="Tanque para transporte de gas y residuos líquidos – Metalúrgica Belgrano"></div>
+                <div class="p-info">
+                    <span class="p-line">LÍNEA RESIDUOS</span>
+                    <h3>Semirremolque 2+1 Ejes</h3>
+                    <p>Opciones versátiles según volumen.</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- PANEL LATERAL DE ESPECIFICACIONES -->
+    <div id="spec-panel" class="side-panel">
+        <button class="btn-close-panel" onclick="closeProduct()">&times;</button>
+        <div class="panel-content">
+            <div id="dynamic-content"></div>
+            <div class="ficha-actions" style="margin-top: 40px; display: grid; gap: 15px;">
+                <a href="#" id="main-action-btn" class="btn-primary-belgrano"
+                   style="text-align: center; text-decoration: none; padding: 20px; display: block;">
+                    SOLICITAR COTIZACIÓN
+                </a>
+                <button class="btn-ghost"
+                        onclick="window.location.href='https://wa.me/542324480111'"
+                        style="width: 100%; border: 1px solid var(--belgrano-blue); background: rgba(0,102,204,0.1); color: #fff; padding: 15px; font-weight: 700; border-radius: 4px; cursor: pointer;">
+                    ADAPTAR A MI UNIDAD
+                </button>
             </div>
         </div>
     </div>
 
-    <h2 class="category-title">Combustibles y Petróleos</h2>
-    <div class="product-grid-nexura">
-        <div class="p-card" data-category="combustibles" onclick="openProduct('combustible-11')">
-            <div class="p-img">
-                <img loading="lazy" src="combustible.jpg" alt="Semirremolque para transporte de combustibles – Metalúrgica Belgrano">
-            </div>
-            <div class="p-info">
-                <span class="p-line">LÍNEA COMBUSTIBLES</span>
-                <h3>Semirremolque Combustible 1+1</h3>
-                <p>Transporte seguro de combustibles.</p>
-            </div>
-        </div>
-        <div class="p-card" data-category="combustibles" onclick="openProduct('combustible-21')">
-            <div class="p-img"><img loading="lazy" src="combustible.jpg" alt="Semirremolque para transporte de combustibles – Metalúrgica Belgrano"></div>
-            <div class="p-info">
-                <span class="p-line">LÍNEA COMBUSTIBLES</span>
-                <h3>Semirremolque Combustible 2+1</h3>
-                <p>Capacidad ampliada para rutas largas.</p>
-            </div>
-        </div>
-        <div class="p-card" data-category="combustibles" onclick="openProduct('petroleo-21')">
-            <div class="p-img"><img loading="lazy" src="combustible.jpg" alt="Semirremolque para transporte de combustibles – Metalúrgica Belgrano"></div>
-            <div class="p-info">
-                <span class="p-line">LÍNEA PETRÓLEO</span>
-                <h3>Semirremolque Petróleo 2+1</h3>
-                <p>Diseñado para hidrocarburos pesados.</p>
-            </div>
-        </div>
-        <div class="p-card" data-category="combustibles" onclick="openProduct('tanque-camion')">
-            <div class="p-img"><img loading="lazy" src="Tanque.jpg" alt="Tanque cisterna de acero inoxidable – Metalúrgica Belgrano"></div>
-            <div class="p-info">
-                <span class="p-line">TANQUES CAMIÓN</span>
-                <h3>Tanque para Camión</h3>
-                <p>Carga de combustibles y líquidos especiales.</p>
-            </div>
-        </div>
+    <div id="ai-agent-trigger" class="ai-agent">
+        <span class="dot"></span>
+        <span>CONSULTAR AL INGENIERO IA</span>
     </div>
 
-    <h2 class="category-title">Sustancias Alimenticias</h2>
-    <div class="product-grid-nexura">
-        <div class="p-card" data-category="alimentos" onclick="openProduct('alimentos-semi-sin')">
-            <div class="p-img"><img loading="lazy" src="alimenticia.jpg" alt="Semirremolque alimenticio certificado – Metalúrgica Belgrano"></div>
-            <div class="p-info">
-                <span class="p-line">LÍNEA ALIMENTICIA</span>
-                <h3>Semi Sin Aislación</h3>
-                <p>Unidades para productos alimenticios básicos.</p>
-            </div>
-        </div>
-        <div class="p-card" data-category="alimentos" onclick="openProduct('alimentos-semi-term')">
-            <div class="p-img"><img loading="lazy" src="semitermico.jpg" alt="Semirremolque térmico Metalúrgica Belgrano – Línea Vial"></div>
-            <div class="p-info">
-                <span class="p-line">LÍNEA ALIMENTICIA</span>
-                <h3>Semi Térmico 2 Ejes</h3>
-                <p>Aislación avanzada para lácteos y derivados.</p>
-            </div>
-        </div>
-    </div>
+    <script>
+        // ── BASE DE DATOS TÉCNICA ──────────────────────────────
+        const productData = {
+            'asfalto-11':        { title: "Semirremolque 1+1 Ejes",              desc: "Asfalto y Fuel Oil – Configuración básica.",           sections:[{label:"LÍNEA ASFALTOS",    items:[{n:"Tipo", v:"1+1 Ejes"}]}]},
+            'asfalto-21':        { title: "Semirremolque 2+1 Ejes",              desc: "Mayor capacidad con ejes adicionales.",                sections:[{label:"LÍNEA ASFALTOS",    items:[{n:"Tipo", v:"2+1 Ejes"}]}]},
+            'asfalto-3t':        { title: "Semirremolque 3 Ejes",               desc: "Configuración tándem para grandes volúmenes.",         sections:[{label:"LÍNEA ASFALTOS",    items:[{n:"Tipo", v:"3 Ejes"}]}]},
+            'combustible-11':    { title: "Semirremolque Combustible 1+1",       desc: "Transporte seguro de combustibles.",                   sections:[{label:"LÍNEA COMBUSTIBLES",items:[{n:"Tipo", v:"1+1 Ejes"}]}]},
+            'combustible-21':    { title: "Semirremolque Combustible 2+1",       desc: "Capacidad ampliada para rutas largas.",                sections:[{label:"LÍNEA COMBUSTIBLES",items:[{n:"Tipo", v:"2+1 Ejes"}]}]},
+            'petroleo-21':       { title: "Semirremolque Petróleo 2+1",          desc: "Diseñado para hidrocarburos pesados.",                 sections:[{label:"LÍNEA PETRÓLEO",    items:[{n:"Tipo", v:"2+1 Ejes"}]}]},
+            'tanque-camion':     { title: "Tanque para Camión",                  desc: "Carga de combustibles y líquidos especiales.",         sections:[{label:"TANQUES CAMIÓN",    items:[{n:"Capacidad", v:"Variable según modelo"}]}]},
+            'alimentos-semi-sin':{ title: "Semi Sin Aislación",                  desc: "Unidades para productos alimenticios básicos.",        sections:[{label:"LÍNEA ALIMENTICIA", items:[{n:"Aislación", v:"Sin aislamiento"}]}]},
+            'alimentos-semi-term':{ title: "Semi Térmico 2 Ejes",               desc: "Aislación avanzada para lácteos y derivados.",         sections:[{label:"LÍNEA ALIMENTICIA", items:[{n:"Aislación", v:"Térmica"}]}]},
+            'almacenamiento-sin':{ title: "Tanque Almacenamiento Sin Aislación", desc: "Tanque robusto para almacenamiento general.",          sections:[{label:"ALMACENAMIENTO",    items:[{n:"Aislación", v:"Sin aislamiento"}]}]},
+            'almacenamiento-term-h':{ title: "Tanque Térmico Horizontal",        desc: "Con aislación térmica para productos sensibles.",      sections:[{label:"ALMACENAMIENTO",    items:[{n:"Orientación", v:"Horizontal"},{n:"Aislación", v:"Térmica"}]}]},
+            'almacenamiento-term-v':{ title: "Tanque Térmico Vertical",          desc: "Alta capacidad para líquidos industriales.",           sections:[{label:"ALMACENAMIENTO",    items:[{n:"Orientación", v:"Vertical"},{n:"Aislación", v:"Térmica"}]}]},
+            'residuos-11':       { title: "Semirremolque 1+1 Ejes",              desc: "Unidad para líquidos de desecho.",                     sections:[{label:"LÍNEA RESIDUOS",    items:[{n:"Tipo", v:"1+1 Ejes"}]}]},
+            'residuos-21':       { title: "Semirremolque 2+1 Ejes",              desc: "Opciones versátiles según volumen.",                   sections:[{label:"LÍNEA RESIDUOS",    items:[{n:"Tipo", v:"2+1 Ejes"}]}]}
+        };
 
-    <h2 class="category-title">Especiales / Almacenamiento</h2>
-    <div class="product-grid-nexura">
-        <div class="p-card" data-category="almacenamiento" onclick="openProduct('almacenamiento-sin')">
-            <div class="p-img"><img loading="lazy" src="Tanque.jpg" alt="Tanque cisterna de acero inoxidable – Metalúrgica Belgrano"></div>
-            <div class="p-info">
-                <span class="p-line">ALMACENAMIENTO</span>
-                <h3>Tanque Almacenamiento Sin Aislación</h3>
-                <p>Tanque robusto para almacenamiento general.</p>
-            </div>
-        </div>
-        <div class="p-card" data-category="almacenamiento" onclick="openProduct('almacenamiento-term-h')">
-            <div class="p-img"><img loading="lazy" src="lineaquimica.jpg" alt="Tanque cisterna para línea química – Metalúrgica Belgrano"></div>
-            <div class="p-info">
-                <span class="p-line">ALMACENAMIENTO</span>
-                <h3>Tanque Térmico Horizontal</h3>
-                <p>Con aislación térmica para productos sensibles.</p>
-            </div>
-        </div>
-        <div class="p-card" data-category="almacenamiento" onclick="openProduct('almacenamiento-term-v')">
-            <div class="p-img"><img loading="lazy" src="lineaquimica.jpg" alt="Tanque cisterna para línea química – Metalúrgica Belgrano"></div>
-            <div class="p-info">
-                <span class="p-line">ALMACENAMIENTO</span>
-                <h3>Tanque Térmico Vertical</h3>
-                <p>Alta capacidad para líquidos industriales.</p>
-            </div>
-        </div>
-    </div>
+        // ── FILTRADO DE PRODUCTOS ──────────────────────────────
+       function filterProducts(category, btn, e) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
 
-    <h2 class="category-title">Residuos Líquidos</h2>
-    <div class="product-grid-nexura">
-        <div class="p-card" data-category="residuos" onclick="openProduct('residuos-11')">
-            <div class="p-img"><img loading="lazy" src="gas.jpg" alt="Tanque para transporte de gas y residuos líquidos – Metalúrgica Belgrano"></div>
-            <div class="p-info">
-                <span class="p-line">LÍNEA RESIDUOS</span>
-                <h3>Semirremolque 1+1 Ejes</h3>
-                <p>Unidad para líquidos de desecho.</p>
-            </div>
-        </div>
-        <div class="p-card" data-category="residuos" onclick="openProduct('residuos-21')">
-            <div class="p-img"><img loading="lazy" src="gas.jpg" alt="Tanque para transporte de gas y residuos líquidos – Metalúrgica Belgrano"></div>
-            <div class="p-info">
-                <span class="p-line">LÍNEA RESIDUOS</span>
-                <h3>Semirremolque 2+1 Ejes</h3>
-                <p>Opciones versátiles según volumen.</p>
-            </div>
-        </div>
-    </div>
-
-</section>
-
-<div id="spec-panel" class="side-panel">
-    <button class="btn-close-panel" onclick="closeProduct()">&times;</button>
-    <div class="panel-content">
-        <div id="dynamic-content"></div>
-        <div class="ficha-actions" style="margin-top: 40px; display: grid; gap: 15px;">
-            <a href="#" id="main-action-btn" class="btn-primary-belgrano" style="text-align: center; text-decoration: none; padding: 20px; display: block;">
-                SOLICITAR COTIZACIÓN
-            </a>
-            <button class="btn-ghost" onclick="window.location.href='https://wa.me/542324480111'" style="width: 100%; border: 1px solid var(--belgrano-blue); background: rgba(0, 102, 204, 0.1); color: #fff; padding: 15px; font-weight: 700; border-radius: 4px; cursor: pointer;">
-                ADAPTAR A MI UNIDAD
-            </button>
-        </div>
-    </div>
-</div>
-
-<div id="ai-agent-trigger" class="ai-agent">
-    <span class="dot"></span>
-    <span>CONSULTAR AL INGENIERO IA</span>
-</div>
-
-<script>
-const productData = {
-    'asfalto-11': { title: "Semirremolque 1+1 Ejes", desc: "Asfalto y Fuel Oil – Configuración básica.", sections:[{label:"LÍNEA ASFALTOS", items:[{n:"Tipo", v:"1+1 Ejes"}]}]},
-    'asfalto-21': { title: "Semirremolque 2+1 Ejes", desc: "Mayor capacidad con ejes adicionales.", sections:[{label:"LÍNEA ASFALTOS", items:[{n:"Tipo", v:"2+1 Ejes"}]}]},
-    'asfalto-3t': { title: "Semirremolque 3 Ejes", desc: "Configuración tándem para grandes volúmenes.", sections:[{label:"LÍNEA ASFALTOS", items:[{n:"Tipo", v:"3 Ejes"}]}]},
-    'combustible-11': { title: "Semirremolque Combustible 1+1", desc: "Transporte seguro de combustibles.", sections:[{label:"LÍNEA COMBUSTIBLES", items:[{n:"Tipo", v:"1+1 Ejes"}]}]},
-    'combustible-21': { title: "Semirremolque Combustible 2+1", desc: "Capacidad ampliada para rutas largas.", sections:[{label:"LÍNEA COMBUSTIBLES", items:[{n:"Tipo", v:"2+1 Ejes"}]}]},
-    'petroleo-21': { title: "Semirremolque Petróleo 2+1", desc: "Diseñado para hidrocarburos pesados.", sections:[{label:"LÍNEA PETRÓLEO", items:[{n:"Tipo", v:"2+1 Ejes"}]}]},
-    'tanque-camion': { title: "Tanque para Camión", desc: "Carga de combustibles y líquidos especiales.", sections:[{label:"TANQUES CAMIÓN", items:[{n:"Capacidad", v:"Variable según modelo"}]}]},
-    'alimentos-semi-sin': { title: "Semi Sin Aislación", desc: "Unidades para productos alimenticios básicos.", sections:[{label:"LÍNEA ALIMENTICIA", items:[{n:"Aislación", v:"Sin aislamiento"}]}]},
-    'alimentos-semi-term': { title: "Semi Térmico 2 Ejes", desc: "Aislación avanzada para lácteos y derivados.", sections:[{label:"LÍNEA ALIMENTICIA", items:[{n:"Aislación", v:"Térmica"}]}]},
-    'almacenamiento-sin': { title: "Tanque Almacenamiento Sin Aislación", desc: "Tanque robusto para almacenamiento general.", sections:[{label:"ALMACENAMIENTO", items:[{n:"Aislación", v:"Sin aislamiento"}]}]},
-    'almacenamiento-term-h': { title: "Tanque Térmico Horizontal", desc: "Con aislación térmica para productos sensibles.", sections:[{label:"ALMACENAMIENTO", items:[{n:"Orientación", v:"Horizontal"},{n:"Aislación", v:"Térmica"}]}]},
-    'almacenamiento-term-v': { title: "Tanque Térmico Vertical", desc: "Alta capacidad para líquidos industriales.", sections:[{label:"ALMACENAMIENTO", items:[{n:"Orientación", v:"Vertical"},{n:"Aislación", v:"Térmica"}]}]},
-    'residuos-11': { title: "Semirremolque 1+1 Ejes", desc: "Unidad para líquidos de desecho.", sections:[{label:"LÍNEA RESIDUOS", items:[{n:"Tipo", v:"1+1 Ejes"}]}]},
-    'residuos-21': { title: "Semirremolque 2+1 Ejes", desc: "Opciones versátiles según volumen.", sections:[{label:"LÍNEA RESIDUOS", items:[{n:"Tipo", v:"2+1 Ejes"}]}]}
-};
-
-function filterProducts(category, btn, e) {
-    if (e) e.preventDefault();
-
-    // 1. Limpiar activo y marcar el nuevo
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    // Marcar botón activo
+    document.querySelectorAll('.filter-btn').forEach(function(b) {
+        b.classList.remove('active');
+    });
     btn.classList.add('active');
 
-    // 2. Cancelar cualquier timeout pendiente de animaciones previas
-    if (window._filterTimeouts) {
-        window._filterTimeouts.forEach(id => clearTimeout(id));
-    }
-    window._filterTimeouts = [];
-
-    // 3. Mostrar/ocultar cards en un solo frame — sin race conditions
-    document.querySelectorAll('.p-card').forEach(card => {
-        const match = category === 'all' || card.dataset.category === category;
-        if (match) {
-            card.style.display = 'block';
-            void card.offsetWidth;
-            card.classList.remove('is-hidden');
-        } else {
-            card.classList.add('is-hidden');
-            const tid = setTimeout(() => { card.style.display = 'none'; }, 300);
-            window._filterTimeouts.push(tid);
-        }
+    // Mostrar u ocultar cada card
+    document.querySelectorAll('.p-card').forEach(function(card) {
+        var match = (category === 'all') || (card.getAttribute('data-category') === category);
+        card.style.display = match ? 'block' : 'none';
     });
 
-    // 4. Títulos de categoría: visibles/ocultos según presencia de cards
-    document.querySelectorAll('.category-title').forEach(title => {
+    // Ocultar TAMBIÉN el título y el grid completo cuando no matchea
+    // así el margin-top del título no genera el espacio vacío negro
+    document.querySelectorAll('.category-title').forEach(function(title) {
         if (category === 'all') {
             title.style.display = 'block';
+            var grid = title.nextElementSibling;
+            if (grid) grid.style.display = 'grid';
             return;
         }
-        const grid = title.nextElementSibling;
-        const catMatch = grid && grid.querySelector(`.p-card[data-category="${category}"]`);
-        title.style.display = catMatch ? 'block' : 'none';
+        var grid = title.nextElementSibling;
+        var hasMatch = grid && grid.querySelector('.p-card[data-category="' + category + '"]');
+        title.style.display = hasMatch ? 'block' : 'none';
+        if (grid) grid.style.display = hasMatch ? 'grid' : 'none';
     });
+
+    // Scroll automático al inicio de las cards para que siempre
+    // arranquen desde arriba, igual que Asfaltos
+    var section = document.querySelector('.catalog-section');
+    if (section) {
+        var offset = section.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: offset, behavior: 'smooth' });
+    }
 }
 
-function openProduct(id) {
-    const data = productData[id];
-    if(!data) return;
+        // ── ABRIR PANEL DE ESPECIFICACIONES ───────────────────
+        function openProduct(id) {
+            const data = productData[id];
+            if (!data) return;
 
-    const panel = document.getElementById('spec-panel');
-    const content = document.getElementById('dynamic-content');
-    const actionBtn = document.getElementById('main-action-btn');
+            const panel    = document.getElementById('spec-panel');
+            const content  = document.getElementById('dynamic-content');
+            const actionBtn= document.getElementById('main-action-btn');
 
-    let html = `
-        <div class="ficha-header">
-            <span class="p-line" style="color: var(--belgrano-blue); font-weight: 800; letter-spacing: 2px; font-size: 0.8rem;">ESPECIFICACIONES DE INGENIERÍA</span>
-            <h2 style="font-size: 2.2rem; font-weight: 900; margin-top: 10px; color: white;">${data.title}</h2>
-            <div class="line-decorator" style="margin-top: 15px; width: 50px; height: 3px; background: var(--belgrano-blue); opacity: 0.8;"></div>
-        </div>
-        <p style="color: rgba(255,255,255,0.7); line-height: 1.6; margin: 25px 0;">${data.desc}</p>
-    `;
-
-    data.sections.forEach(sec => {
-        html += `
-            <div class="ficha-section" style="margin-top: 30px;">
-                <h4 style="color: rgba(255,255,255,0.4); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">${sec.label}</h4>
-                <div class="specs-list">
-                    ${sec.items.map(i => `
-                        <div class="spec-row" style="display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
-                            <span style="color: rgba(255,255,255,0.6);">${i.n}</span>
-                            <span style="color: #fff; font-weight: 700;">${i.v}</span>
-                        </div>
-                    `).join('')}
+            let html = `
+                <div class="ficha-header">
+                    <span class="p-line" style="color:var(--belgrano-blue);font-weight:800;letter-spacing:2px;font-size:0.8rem;">ESPECIFICACIONES DE INGENIERÍA</span>
+                    <h2 style="font-size:2.2rem;font-weight:900;margin-top:10px;color:white;">${data.title}</h2>
+                    <div class="line-decorator" style="margin-top:15px;width:50px;height:3px;background:var(--belgrano-blue);opacity:0.8;"></div>
                 </div>
-            </div>`;
-    });
+                <p style="color:rgba(255,255,255,0.7);line-height:1.6;margin:25px 0;">${data.desc}</p>
+            `;
 
-    content.innerHTML = html;
-    actionBtn.href = `https://wa.me/542324480111?text=Hola! Solicito cotización de: ${data.title}`;
-    panel.classList.add('active');
-}
+            data.sections.forEach(sec => {
+                html += `<div class="ficha-section" style="margin-top:30px;">
+                    <h4 style="color:rgba(255,255,255,0.4);font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:15px;">${sec.label}</h4>
+                    <div class="specs-list">
+                        ${sec.items.map(i => `
+                            <div class="spec-row" style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+                                <span style="color:rgba(255,255,255,0.6);">${i.n}</span>
+                                <span style="color:#fff;font-weight:700;">${i.v}</span>
+                            </div>`).join('')}
+                    </div>
+                </div>`;
+            });
 
-function closeProduct() {
-    document.getElementById('spec-panel').classList.remove('active');
-}
+            content.innerHTML = html;
+            actionBtn.href = `https://wa.me/542324480111?text=Hola! Solicito cotización de: ${data.title}`;
+            panel.classList.add('active');
+        }
 
-window.onclick = function(event) {
-    const panel = document.getElementById('spec-panel');
-    if (event.target == panel) closeProduct();
-}
-</script>
+        // ── CERRAR PANEL ───────────────────────────────────────
+        function closeProduct() {
+            document.getElementById('spec-panel').classList.remove('active');
+        }
 
-<footer class="footer-industrial">
+        // Cerrar al hacer clic en el overlay
+        document.getElementById('spec-panel').addEventListener('click', function(e) {
+            if (e.target === this) closeProduct();
+        });
+    </script>
+
+    <footer class="footer-industrial">
         <div class="footer-top">
             <div class="footer-container">
                 <div class="footer-brand">
@@ -317,7 +327,7 @@ window.onclick = function(event) {
                         <p>Ingeniería de vanguardia en transporte de carga a granel. Más de 40 años forjando el estándar de la industria.</p>
                     </div>
                 </div>
-               <div class="footer-links">
+                <div class="footer-links">
                     <h4>SITIO</h4>
                     <ul>
                         <li><a href="productos.html">Unidades</a></li>
