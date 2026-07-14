@@ -159,6 +159,91 @@
         <span class="dot"></span>
         <span>CONSULTAR AL INGENIERO IA</span>
     </div>
+<!-- BOTÓN DISPARADOR DEL INGENIERO IA -->
+<div id="ai-agent-trigger" class="ai-agent">
+    <span class="dot"></span>
+    <span>CONSULTAR AL INGENIERO IA</span>
+</div>
 
+<!-- PANEL LATERAL TYPEBOT -->
+<div id="typebot-container" class="typebot-sidebar-nexura"
+     role="dialog" aria-label="Ingeniero IA Metalúrgica Belgrano">
+    <div class="nexura-panel-header">
+        <span class="nexura-panel-title">⚙ Ingeniero IA</span>
+        <button class="nexura-panel-close" id="typebot-close-btn"
+                aria-label="Cerrar chat">&times;</button>
+    </div>
+    <div class="nexura-bot-area" id="typebot-bot-area">
+        <typebot-standard style="width:100%;height:100%;"></typebot-standard>
+    </div>
+</div>
+
+<!-- TYPEBOT -->
+<script type="module">
+    import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js';
+
+    Typebot.initStandard({
+        typebot: 'my-typebot-pciia25',
+        settings: { hideBrand: true }
+    });
+
+    var _panelOpen = false;
+    var _trigger   = document.getElementById('ai-agent-trigger');
+    var _panel     = document.getElementById('typebot-container');
+    var _closeBtn  = document.getElementById('typebot-close-btn');
+
+    function openPanel() {
+        if (!_panel) return;
+        _panel.classList.add('active');
+        _panelOpen = true;
+        if (_trigger) _trigger.classList.add('panel-is-open');
+        if (_closeBtn) setTimeout(function() { _closeBtn.focus(); }, 380);
+    }
+
+    function closePanel() {
+        if (!_panel) return;
+        _panel.classList.remove('active');
+        _panelOpen = false;
+        if (_trigger) {
+            _trigger.classList.remove('panel-is-open');
+            _trigger.focus();
+        }
+    }
+
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('#ai-agent-trigger')) {
+            e.preventDefault();
+            e.stopPropagation();
+            _panelOpen ? closePanel() : openPanel();
+            return;
+        }
+        if (e.target.closest('#typebot-close-btn')) {
+            e.preventDefault();
+            closePanel();
+            return;
+        }
+        if (_panelOpen && _panel && !_panel.contains(e.target)) {
+            closePanel();
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && _panelOpen) closePanel();
+    });
+
+    var obs = new MutationObserver(function(muts) {
+        muts.forEach(function(m) {
+            m.addedNodes.forEach(function(n) {
+                if (n.nodeType !== 1) return;
+                var isBubble = n.tagName === 'TYPEBOT-BUBBLE' ||
+                               n.id === 'typebot-bubble-button' ||
+                               (n.classList && n.classList.contains('typebot-bubble-button'));
+                if (isBubble && n.parentNode) n.parentNode.removeChild(n);
+            });
+        });
+    });
+    obs.observe(document.body, { childList: true, subtree: true });
+    setTimeout(function() { obs.disconnect(); }, 8000);
+</script>
 </body>
 </html>
