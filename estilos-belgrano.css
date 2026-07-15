@@ -3391,3 +3391,350 @@ typebot-standard::part(powered-by),
 .catalog-section .category-title:first-of-type {
     margin-top: 40px !important;
 }
+/* ============================================================
+   METALÚRGICA BELGRANO — MOBILE RESPONSIVE
+   Agregar al final de estilos-belgrano.css
+   Solo reglas correctivas, sin renombrar clases existentes
+============================================================ */
+
+/* ── HAMBURGUESA: oculta en desktop, visible en mobile ───── */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 10001;
+    flex-shrink: 0;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+}
+
+/* Animación X al abrir */
+.hamburger.is-open .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.is-open .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.is-open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+
+    /* ══════════════════════════════════════════════════════
+       1. NAVBAR Y MENÚ HAMBURGUESA
+    ══════════════════════════════════════════════════════ */
+
+    .hamburger {
+        display: flex;
+    }
+
+    /* Ocultar el menú horizontal y convertirlo en drawer lateral */
+    .nav-links {
+        position: fixed !important;
+        top: 0;
+        right: -100%;
+        width: 80vw;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(5, 6, 8, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-left: 1px solid rgba(0, 118, 255, 0.3);
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        padding: 90px 32px 40px;
+        gap: 0 !important;
+        transition: right 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 10000;
+        display: flex !important; /* sobreescribir el display:none del 900px */
+        overflow-y: auto;
+    }
+
+    .nav-links.nav-is-open {
+        right: 0;
+    }
+
+    .nav-links a {
+        width: 100%;
+        padding: 14px 0;
+        font-size: 0.9rem !important;
+        letter-spacing: 2px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        margin-left: 0 !important;
+    }
+
+    .nav-links a:last-child {
+        border-bottom: none;
+    }
+
+    .nav-links .portal-btn {
+        margin-top: 24px;
+        margin-left: 0 !important;
+        width: 100%;
+        text-align: center;
+        padding: 14px 0;
+        border-radius: 2px;
+    }
+
+    /* Overlay oscuro detrás del drawer */
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 9999;
+    }
+    .nav-overlay.is-visible {
+        display: block;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       2. HERO — BOTONES Y ESTADÍSTICAS
+    ══════════════════════════════════════════════════════ */
+
+    /* El grid hero pasa a una sola columna */
+    .hero-container {
+        grid-template-columns: 1fr !important;
+        padding: 0 6% !important;
+        gap: 40px;
+    }
+
+    .hero-elite {
+        padding-top: 80px;
+        min-height: auto;
+        height: auto;
+        padding-bottom: 60px;
+    }
+
+    /* Título más compacto */
+    .main-title {
+        font-size: clamp(2.6rem, 12vw, 4rem) !important;
+        letter-spacing: -2px !important;
+    }
+
+    .hero-description {
+        font-size: 1rem !important;
+        margin-bottom: 32px;
+    }
+
+    /* Botones del hero: apilados verticalmente, ancho completo */
+    .hero-elite .hero-cta-group {
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100%;
+    }
+
+    .hero-elite .hero-cta-group a {
+        width: 100% !important;
+        height: 52px !important;
+        justify-content: center;
+        border-radius: 4px;
+    }
+
+    /* Estadísticas: fila horizontal scrollable en lugar de columna fija */
+    .hero-stats {
+        flex-direction: row !important;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-left: 0 !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+        padding-bottom: 8px;
+    }
+
+    .stat-item {
+        width: auto !important;
+        min-width: 130px;
+        flex-shrink: 0;
+        padding: 14px 18px !important;
+        gap: 12px !important;
+    }
+
+    .stat-item .stat-num {
+        font-size: 1.6rem !important;
+        min-width: auto !important;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       3. SECCIÓN CAPABILITIES / MATERIA PRIMA
+    ══════════════════════════════════════════════════════ */
+
+    .industrial-capabilities {
+        padding: 60px 6% !important;
+    }
+
+    .capabilities-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    /* Logos de Strenx/Hardox: wrap y tamaño legible */
+    .partner-logos {
+        flex-wrap: wrap !important;
+        gap: 20px !important;
+        justify-content: flex-start;
+        margin-top: 16px;
+    }
+
+    .partner-logos img {
+        height: 28px !important;
+        max-width: 140px;
+    }
+
+    /* Título y header de capabilities */
+    .cap-header h2 {
+        font-size: clamp(1.6rem, 7vw, 2.4rem) !important;
+    }
+
+    .cap-header > div {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 16px !important;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       4. GRILLA DE PRODUCTOS
+    ══════════════════════════════════════════════════════ */
+
+    .product-grid-nexura {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    .catalog-section {
+        padding: 20px 5% 60px !important;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       5. SECCIÓN "CORTE Y PLEGADO" — una columna
+    ══════════════════════════════════════════════════════ */
+
+    .tarjeta-corte-unificada {
+        grid-template-columns: 1fr !important;
+    }
+
+    .tarjeta-corte-unificada .product-visual {
+        min-height: 260px !important;
+        height: 260px;
+    }
+
+    .tarjeta-corte-unificada .product-visual img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .tarjeta-corte-unificada .product-detail {
+        padding: 36px 6% !important;
+    }
+
+    .tarjeta-corte-unificada h2 {
+        font-size: 1.6rem !important;
+    }
+
+    .action-buttons {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    .btn-contact-elite,
+    .btn-pdf-elite {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       6. SIDE PANEL — 100% ancho en mobile
+    ══════════════════════════════════════════════════════ */
+
+    .panel-content {
+        max-width: 100vw !important;
+        width: 100% !important;
+        padding: 70px 6% 40px !important;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       7. FOOTER
+    ══════════════════════════════════════════════════════ */
+
+    .footer-container {
+        grid-template-columns: 1fr !important;
+        gap: 36px !important;
+        text-align: left;
+    }
+
+    .social-icons-group {
+        justify-content: flex-start !important;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       8. MAPA Y SECCIONES GENERALES
+    ══════════════════════════════════════════════════════ */
+
+    .mapa-container {
+        height: 280px !important;
+    }
+
+    .seccion-corte-final {
+        padding: 40px 5% !important;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       9. BOTÓN IA — reposicionado para no tapar contenido
+    ══════════════════════════════════════════════════════ */
+
+    #ai-agent-trigger {
+        bottom: 16px !important;
+        right: 16px !important;
+        font-size: 0.6rem !important;
+        padding: 10px 16px !important;
+        letter-spacing: 1px !important;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       10. PANEL TYPEBOT — desde abajo en mobile
+    ══════════════════════════════════════════════════════ */
+
+    .typebot-sidebar-nexura {
+        width: 100vw !important;
+        height: 90vh !important;
+        top: auto !important;
+        bottom: 0 !important;
+        border-left: none !important;
+        border-top: 2px solid #1e3a8a !important;
+        transform: translateY(100%) !important;
+    }
+
+    .typebot-sidebar-nexura.active {
+        transform: translateY(0) !important;
+    }
+}
+
+/* ── Extra pequeño (iPhone SE, etc.) ─────────────────────── */
+@media (max-width: 390px) {
+    .main-title {
+        font-size: 2.4rem !important;
+        letter-spacing: -1px !important;
+    }
+
+    .stat-item {
+        min-width: 110px;
+        padding: 12px 14px !important;
+    }
+
+    .stat-item .stat-num {
+        font-size: 1.4rem !important;
+    }
+}

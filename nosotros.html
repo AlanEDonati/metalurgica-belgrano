@@ -16,7 +16,11 @@
         <a href="index.html" class="logo-link">
             <div class="logo">METALÚRGICA <span>BELGRANO</span></div>
         </a>
-
+ <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
         <div class="nav-links">
             <a href="index.html">INICIO</a>
             <a href="productos.html">PRODUCTOS</a>
@@ -26,7 +30,7 @@
             <a href="contacto.html" class="portal-btn">COTIZAR AHORA</a>
         </div>
     </nav>
-
+<div class="nav-overlay" id="nav-overlay"></div>
     <!-- HERO ELITE -->
     <header class="about-hero">
         <div class="about-hero-grid"></div>
@@ -327,6 +331,46 @@
     });
     obs.observe(document.body, { childList: true, subtree: true });
     setTimeout(function() { obs.disconnect(); }, 8000);
+</script>
+<script>
+    (function() {
+        var btn     = document.getElementById('hamburger-btn');
+        var nav     = document.getElementById('nav-links');
+        var overlay = document.getElementById('nav-overlay');
+
+        function openMenu() {
+            btn.classList.add('is-open');
+            nav.classList.add('nav-is-open');
+            overlay.classList.add('is-visible');
+            document.body.style.overflow = 'hidden'; // evita scroll del fondo
+            btn.setAttribute('aria-expanded', 'true');
+        }
+
+        function closeMenu() {
+            btn.classList.remove('is-open');
+            nav.classList.remove('nav-is-open');
+            overlay.classList.remove('is-visible');
+            document.body.style.overflow = '';
+            btn.setAttribute('aria-expanded', 'false');
+        }
+
+        btn.addEventListener('click', function() {
+            nav.classList.contains('nav-is-open') ? closeMenu() : openMenu();
+        });
+
+        // Cerrar al hacer clic en el overlay
+        overlay.addEventListener('click', closeMenu);
+
+        // Cerrar al hacer clic en cualquier link del menú
+        nav.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Cerrar con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeMenu();
+        });
+    })();
 </script>
 </body>
 </html>
