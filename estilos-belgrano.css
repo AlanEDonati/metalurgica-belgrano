@@ -3738,3 +3738,80 @@ typebot-standard::part(powered-by),
         font-size: 1.4rem !important;
     }
 }
+/* ============================================================
+   FIX MOBILE — Hamburger + Stats Carousel
+   Solo correctivo, no toca nada de desktop
+============================================================ */
+
+@media (max-width: 768px) {
+
+    /* ── FIX 1: STATS — scroll horizontal con snap ───────── */
+
+    .hero-stats {
+        /* Scroll horizontal fluido con snap */
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        -webkit-overflow-scrolling: touch !important;
+
+        /* Snap: cada tarjeta se centra al hacer scroll */
+        scroll-snap-type: x mandatory !important;
+        scroll-behavior: smooth !important;
+
+        /* Padding lateral para que la primera y última tarjeta
+           no queden pegadas al borde de la pantalla */
+        padding-left: 6vw !important;
+        padding-right: 6vw !important;
+        padding-bottom: 12px !important;
+
+        gap: 14px !important;
+        align-items: stretch !important;
+
+        /* Ocultar scrollbar visualmente pero mantener funcionalidad */
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+
+    .hero-stats::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Cada tarjeta: ancho fijo y snap al centro */
+    .stat-item {
+        flex: 0 0 72vw !important;   /* ocupa 72% del ancho para ver el siguiente */
+        max-width: 280px !important;
+        width: auto !important;
+        scroll-snap-align: center !important;
+        scroll-snap-stop: always !important;
+        padding: 18px 20px !important;
+        gap: 14px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* ── FIX 2: HAMBURGER — asegurar visibilidad y orden ─── */
+
+    .navbar {
+        /* Espacio para que logo y hamburger queden en los extremos */
+        justify-content: space-between !important;
+    }
+
+    .hamburger {
+        display: flex !important;     /* visible en mobile */
+        order: 3;                     /* siempre a la derecha del logo */
+        z-index: 10001 !important;
+    }
+
+    /* Forzar que el nav-links empiece oculto en mobile
+       (por si el @media 900px con display:none no carga a tiempo) */
+    .nav-links:not(.nav-is-open) {
+        right: -100% !important;
+        pointer-events: none !important;
+    }
+
+    .nav-links.nav-is-open {
+        right: 0 !important;
+        pointer-events: auto !important;
+    }
+}

@@ -565,41 +565,44 @@
     </script>
 
     <script>
-    (function() {
+    (function () {
+        /* ── HAMBURGER MENU ────────────────────────────── */
         var btn     = document.getElementById('hamburger-btn');
         var nav     = document.getElementById('nav-links');
         var overlay = document.getElementById('nav-overlay');
 
+        /* Salir silenciosamente si algún elemento no existe en esta página */
+        if (!btn || !nav) return;
+
         function openMenu() {
             btn.classList.add('is-open');
             nav.classList.add('nav-is-open');
-            overlay.classList.add('is-visible');
-            document.body.style.overflow = 'hidden'; // evita scroll del fondo
+            if (overlay) overlay.classList.add('is-visible');
+            document.body.style.overflow = 'hidden';
             btn.setAttribute('aria-expanded', 'true');
         }
 
         function closeMenu() {
             btn.classList.remove('is-open');
             nav.classList.remove('nav-is-open');
-            overlay.classList.remove('is-visible');
+            if (overlay) overlay.classList.remove('is-visible');
             document.body.style.overflow = '';
             btn.setAttribute('aria-expanded', 'false');
         }
 
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
             nav.classList.contains('nav-is-open') ? closeMenu() : openMenu();
         });
 
-        // Cerrar al hacer clic en el overlay
-        overlay.addEventListener('click', closeMenu);
+        if (overlay) overlay.addEventListener('click', closeMenu);
 
-        // Cerrar al hacer clic en cualquier link del menú
-        nav.querySelectorAll('a').forEach(function(link) {
+        /* Cerrar al tocar cualquier link del menú */
+        nav.querySelectorAll('a').forEach(function (link) {
             link.addEventListener('click', closeMenu);
         });
 
-        // Cerrar con ESC
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeMenu();
         });
     })();
