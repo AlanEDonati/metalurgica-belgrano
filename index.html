@@ -564,10 +564,9 @@
         setTimeout(function() { obs.disconnect(); }, 8000);
     </script>
 
-    <script>
+   <script>
 (function () {
     var btn     = document.getElementById('hamburger-btn');
-    // ▼ CAMBIO CRÍTICO: querySelector por CLASE, no getElementById
     var nav     = document.querySelector('.nav-links');
     var overlay = document.getElementById('nav-overlay');
 
@@ -589,20 +588,53 @@
         btn.setAttribute('aria-expanded', 'false');
     }
 
-    btn.addEventListener('click', function (e) {
-        e.stopPropagation();
+    // ── Sin e.stopPropagation() en el botón para no bloquear nada ──
+    btn.addEventListener('click', function () {
         nav.classList.contains('nav-is-open') ? closeMenu() : openMenu();
     });
 
+    // ── Overlay cierra el menú ──────────────────────────────────────
     if (overlay) overlay.addEventListener('click', closeMenu);
 
+    // ── Links: cerrar menú PERO dejar que el navegador navegue ──────
+    // No llamamos e.preventDefault() ni e.stopPropagation()
+    // closeMenu() solo quita clases CSS — la navegación del <a> sigue igual
     nav.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', closeMenu);
+        link.addEventListener('click', function () {
+            closeMenu();
+            // Sin preventDefault → el href funciona normalmente
+        });
     });
 
+    // ── Teclado ────────────────────────────────────────────────────
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') closeMenu();
     });
+
+    // ── Panel lateral: botón de cierre ─────────────────────────────
+    // Busca por múltiples selectores por si el ID/clase varía
+    var closePanel = document.querySelector(
+        '.btn-close-panel, #closePanel, .close-panel, [data-close-panel]'
+    );
+    if (closePanel) {
+        closePanel.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var panel = document.getElementById('spec-panel');
+            if (panel) panel.classList.remove('active');
+        });
+    }
+
+    // ── Panel lateral: cerrar tocando el overlay del panel ──────────
+    var specPanel = document.getElementById('spec-panel');
+    if (specPanel) {
+        specPanel.addEventListener('click', function (e) {
+            // Solo cerrar si el tap fue en el fondo (overlay), no en el contenido
+            if (e.target === specPanel) {
+                specPanel.classList.remove('active');
+            }
+        });
+    }
+
 })();
 </script>
 </body>

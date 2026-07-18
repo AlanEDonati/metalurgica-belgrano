@@ -3948,3 +3948,83 @@ typebot-standard::part(powered-by),
         animation: none !important;
     }
 }
+
+/* ============================================================
+   FIX MOBILE — Navegación hamburger + cierre del side panel
+============================================================ */
+
+@media (max-width: 768px) {
+
+    /* ── SIDE PANEL: botón de cierre siempre clicable ──────── */
+
+    /* El panel activo debe permitir scroll y touch en su contenido */
+    .side-panel.active {
+        pointer-events: auto !important;
+        /* Asegurar que ocupa toda la pantalla para detectar tap fuera */
+        right: 0 !important;
+        width: 100% !important;
+    }
+
+    /* El contenido del panel no intercepta clics del overlay */
+    .side-panel.active .panel-content {
+        pointer-events: auto !important;
+        /* En mobile: ancho completo para que sea legible */
+        max-width: 100vw !important;
+        width: 100% !important;
+        padding: 24px 6% 60px !important;
+        /* Posición fija desde arriba para no depender del transform */
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        height: 100vh !important;
+        overflow-y: auto !important;
+    }
+
+    /* Botón de cierre: grande, clicable, siempre visible */
+    .btn-close-panel {
+        position: sticky !important;
+        top: 16px !important;
+        z-index: 9999 !important;
+        pointer-events: auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        /* Área de toque mínima recomendada: 44x44px */
+        min-width: 44px !important;
+        min-height: 44px !important;
+        padding: 10px 16px !important;
+        font-size: 1rem !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 4px !important;
+        color: #fff !important;
+        cursor: pointer !important;
+        margin-bottom: 20px !important;
+        /* Float a la derecha para que sea alcanzable con el pulgar */
+        float: right !important;
+        clear: both !important;
+    }
+
+    /* ── OVERLAY del drawer: no bloquea links de navegación ── */
+    /* El overlay solo cubre el área fuera del drawer */
+    .nav-overlay.is-visible {
+        /* Asegurar que está debajo del drawer */
+        z-index: 9998 !important;
+        pointer-events: auto !important;
+    }
+
+    /* El drawer está encima del overlay */
+    .nav-links.nav-is-open {
+        z-index: 9999 !important;
+        pointer-events: auto !important;
+    }
+
+    /* Links del menú: área de toque generosa */
+    .nav-links a {
+        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        /* pointer-events activo siempre para que el tap llegue */
+        pointer-events: auto !important;
+    }
+}
