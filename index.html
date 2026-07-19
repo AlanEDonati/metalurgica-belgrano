@@ -564,7 +564,7 @@
         setTimeout(function() { obs.disconnect(); }, 8000);
     </script>
 
-   <script>
+<script>
 (function () {
     var btn     = document.getElementById('hamburger-btn');
     var nav     = document.querySelector('.nav-links');
@@ -575,9 +575,12 @@
     function openMenu() {
         btn.classList.add('is-open');
         nav.classList.add('nav-is-open');
-        if (overlay) overlay.classList.add('is-visible');
+        if (overlay) {
+            overlay.classList.add('is-visible');
+            // El overlay va DETRÁS del nav, nunca encima
+            overlay.style.zIndex = '9998';
+        }
         document.body.style.overflow = 'hidden';
-        btn.setAttribute('aria-expanded', 'true');
     }
 
     function closeMenu() {
@@ -585,50 +588,37 @@
         nav.classList.remove('nav-is-open');
         if (overlay) overlay.classList.remove('is-visible');
         document.body.style.overflow = '';
-        btn.setAttribute('aria-expanded', 'false');
     }
 
-    // ── Sin e.stopPropagation() en el botón para no bloquear nada ──
     btn.addEventListener('click', function () {
         nav.classList.contains('nav-is-open') ? closeMenu() : openMenu();
     });
 
-    // ── Overlay cierra el menú ──────────────────────────────────────
     if (overlay) overlay.addEventListener('click', closeMenu);
 
-    // ── Links: cerrar menú PERO dejar que el navegador navegue ──────
-    // No llamamos e.preventDefault() ni e.stopPropagation()
-    // closeMenu() solo quita clases CSS — la navegación del <a> sigue igual
+    // Links: solo cerrar el menú, sin bloquear la navegación
     nav.querySelectorAll('a').forEach(function (link) {
         link.addEventListener('click', function () {
             closeMenu();
-            // Sin preventDefault → el href funciona normalmente
+            // SIN preventDefault — deja que el <a href> navegue normal
         });
     });
 
-    // ── Teclado ────────────────────────────────────────────────────
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') closeMenu();
     });
 
-    // ── Panel lateral: botón de cierre ─────────────────────────────
-    // Busca por múltiples selectores por si el ID/clase varía
-    var closePanel = document.querySelector(
-        '.btn-close-panel, #closePanel, .close-panel, [data-close-panel]'
-    );
-    if (closePanel) {
-        closePanel.addEventListener('click', function (e) {
-            e.stopPropagation();
-            var panel = document.getElementById('spec-panel');
-            if (panel) panel.classList.remove('active');
-        });
-    }
+    // ── Cierre del side panel ──────────────────────────────
+    // closeProduct() no estaba definida — la definimos acá
+    window.closeProduct = function () {
+        var panel = document.getElementById('spec-panel');
+        if (panel) panel.classList.remove('active');
+    };
 
-    // ── Panel lateral: cerrar tocando el overlay del panel ──────────
+    // Cerrar tocando el fondo del panel (fuera del contenido)
     var specPanel = document.getElementById('spec-panel');
     if (specPanel) {
         specPanel.addEventListener('click', function (e) {
-            // Solo cerrar si el tap fue en el fondo (overlay), no en el contenido
             if (e.target === specPanel) {
                 specPanel.classList.remove('active');
             }
