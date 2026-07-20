@@ -566,66 +566,95 @@
 
 <script>
 (function () {
-    var btn     = document.getElementById('hamburger-btn');
-    var nav     = document.querySelector('.nav-links');
-    var overlay = document.getElementById('nav-overlay');
+    'use strict';
 
-    if (!btn || !nav) return;
+    /* ── REFERENCIAS AL DOM ──────────────────────────────── */
+    var hamburgerBtn = document.getElementById('hamburger-btn');
+    var navLinks     = document.querySelector('.nav-links');
+    var navOverlay   = document.getElementById('nav-overlay');
+    var specPanel    = document.getElementById('spec-panel');
+    var closePanelBtn= document.querySelector('.btn-close-panel');
 
-    function openMenu() {
-        btn.classList.add('is-open');
-        nav.classList.add('nav-is-open');
-        if (overlay) {
-            overlay.classList.add('is-visible');
-            // El overlay va DETRÁS del nav, nunca encima
-            overlay.style.zIndex = '9998';
+    /* ══════════════════════════════════════════════════════
+       MENÚ HAMBURGUESA
+    ══════════════════════════════════════════════════════ */
+    if (hamburgerBtn && navLinks) {
+
+        function openMenu() {
+            hamburgerBtn.classList.add('is-open');
+            navLinks.classList.add('nav-is-open');
+            if (navOverlay) navOverlay.classList.add('is-visible');
+            document.body.style.overflow = 'hidden';
         }
-        document.body.style.overflow = 'hidden';
-    }
 
-    function closeMenu() {
-        btn.classList.remove('is-open');
-        nav.classList.remove('nav-is-open');
-        if (overlay) overlay.classList.remove('is-visible');
-        document.body.style.overflow = '';
-    }
+        function closeMenu() {
+            hamburgerBtn.classList.remove('is-open');
+            navLinks.classList.remove('nav-is-open');
+            if (navOverlay) navOverlay.classList.remove('is-visible');
+            document.body.style.overflow = '';
+        }
 
-    btn.addEventListener('click', function () {
-        nav.classList.contains('nav-is-open') ? closeMenu() : openMenu();
-    });
-
-    if (overlay) overlay.addEventListener('click', closeMenu);
-
-    // Links: solo cerrar el menú, sin bloquear la navegación
-    nav.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', function () {
-            closeMenu();
-            // SIN preventDefault — deja que el <a href> navegue normal
+        /* Clic en el botón hamburguesa — toggle */
+        hamburgerBtn.addEventListener('click', function () {
+            if (navLinks.classList.contains('nav-is-open')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
         });
-    });
 
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeMenu();
-    });
+        /* Clic en el overlay oscuro → cerrar */
+        if (navOverlay) {
+            navOverlay.addEventListener('click', closeMenu);
+        }
 
-    // ── Cierre del side panel ──────────────────────────────
-    // closeProduct() no estaba definida — la definimos acá
-    window.closeProduct = function () {
-        var panel = document.getElementById('spec-panel');
-        if (panel) panel.classList.remove('active');
-    };
+        /*
+         * Links del menú: cerrar el drawer Y dejar navegar.
+         * NO usamos preventDefault ni stopPropagation.
+         * closeMenu() solo quita clases CSS — el href del <a>
+         * funciona con total normalidad después.
+         */
+        navLinks.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                closeMenu();
+                /* El navegador procesa el href normalmente */
+            });
+        });
 
-    // Cerrar tocando el fondo del panel (fuera del contenido)
-    var specPanel = document.getElementById('spec-panel');
+        /* ESC cierra el menú */
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeMenu();
+        });
+    }
+
+    /* ══════════════════════════════════════════════════════
+       SIDE PANEL — BOTÓN DE CIERRE
+    ══════════════════════════════════════════════════════ */
+    if (closePanelBtn && specPanel) {
+
+        closePanelBtn.addEventListener('click', function (e) {
+            /*
+             * stopPropagation solo para que el clic no llegue
+             * al listener del panel (que también cierra).
+             * NO preventDefault — no hay comportamiento nativo
+             * que bloquear en un <button>.
+             */
+            e.stopPropagation();
+            specPanel.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+
+    /* Tocar el fondo oscuro del panel también lo cierra */
     if (specPanel) {
         specPanel.addEventListener('click', function (e) {
             if (e.target === specPanel) {
                 specPanel.classList.remove('active');
+                document.body.style.overflow = '';
             }
         });
     }
 
-})();
-</script>
+})();</script>
 </body>
 </html>

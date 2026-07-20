@@ -3430,503 +3430,145 @@ typebot-standard::part(powered-by),
 
 @media (max-width: 768px) {
 
-    /* ══════════════════════════════════════════════════════
-       1. NAVBAR Y MENÚ HAMBURGUESA
-    ══════════════════════════════════════════════════════ */
-
-    .hamburger {
-        display: flex;
-    }
-
-    /* Ocultar el menú horizontal y convertirlo en drawer lateral */
-    .nav-links {
-        position: fixed !important;
-        top: 0;
-        right: -100%;
-        width: 80vw;
-        max-width: 300px;
-        height: 100vh;
-        background: rgba(5, 6, 8, 0.98);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-left: 1px solid rgba(0, 118, 255, 0.3);
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        justify-content: flex-start !important;
-        padding: 90px 32px 40px;
-        gap: 0 !important;
-        transition: right 0.38s cubic-bezier(0.16, 1, 0.3, 1);
-        z-index: 10000;
-        display: flex !important; /* sobreescribir el display:none del 900px */
-        overflow-y: auto;
-    }
-
-    .nav-links.nav-is-open {
-        right: 0;
-    }
-
-    .nav-links a {
-        width: 100%;
-        padding: 14px 0;
-        font-size: 0.9rem !important;
-        letter-spacing: 2px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        margin-left: 0 !important;
-    }
-
-    .nav-links a:last-child {
-        border-bottom: none;
-    }
-
-    .nav-links .portal-btn {
-        margin-top: 24px;
-        margin-left: 0 !important;
-        width: 100%;
-        text-align: center;
-        padding: 14px 0;
-        border-radius: 2px;
-    }
-
-    /* Overlay oscuro detrás del drawer */
-    .nav-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: 9999;
-    }
-    .nav-overlay.is-visible {
-        display: block;
-    }
-
-    /* ══════════════════════════════════════════════════════
-       2. HERO — BOTONES Y ESTADÍSTICAS
-    ══════════════════════════════════════════════════════ */
-
-    /* El grid hero pasa a una sola columna */
-    .hero-container {
-        grid-template-columns: 1fr !important;
-        padding: 0 6% !important;
-        gap: 40px;
-    }
-
-    .hero-elite {
-        padding-top: 80px;
-        min-height: auto;
-        height: auto;
-        padding-bottom: 60px;
-    }
-
-    /* Título más compacto */
-    .main-title {
-        font-size: clamp(2.6rem, 12vw, 4rem) !important;
-        letter-spacing: -2px !important;
-    }
-
-    .hero-description {
-        font-size: 1rem !important;
-        margin-bottom: 32px;
-    }
-
-    /* Botones del hero: apilados verticalmente, ancho completo */
-    .hero-elite .hero-cta-group {
-        flex-direction: column !important;
-        gap: 12px !important;
-        width: 100%;
-    }
-
-    .hero-elite .hero-cta-group a {
-        width: 100% !important;
-        height: 52px !important;
-        justify-content: center;
-        border-radius: 4px;
-    }
-
-    /* Estadísticas: fila horizontal scrollable en lugar de columna fija */
-    .hero-stats {
-        flex-direction: row !important;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-left: 0 !important;
-        align-items: stretch !important;
-        gap: 12px !important;
-        padding-bottom: 8px;
-    }
-
-    .stat-item {
-        width: auto !important;
-        min-width: 130px;
-        flex-shrink: 0;
-        padding: 14px 18px !important;
-        gap: 12px !important;
-    }
-
-    .stat-item .stat-num {
-        font-size: 1.6rem !important;
-        min-width: auto !important;
-    }
-
-    /* ══════════════════════════════════════════════════════
-       3. SECCIÓN CAPABILITIES / MATERIA PRIMA
-    ══════════════════════════════════════════════════════ */
-
-    .industrial-capabilities {
-        padding: 60px 6% !important;
-    }
-
-    .capabilities-grid {
-        grid-template-columns: 1fr !important;
-        gap: 16px !important;
-    }
-
-    /* Logos de Strenx/Hardox: wrap y tamaño legible */
-    .partner-logos {
-        flex-wrap: wrap !important;
-        gap: 20px !important;
-        justify-content: flex-start;
-        margin-top: 16px;
-    }
-
-    .partner-logos img {
-        height: 28px !important;
-        max-width: 140px;
-    }
-
-    /* Título y header de capabilities */
-    .cap-header h2 {
-        font-size: clamp(1.6rem, 7vw, 2.4rem) !important;
-    }
-
-    .cap-header > div {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 16px !important;
-    }
-
-    /* ══════════════════════════════════════════════════════
-       4. GRILLA DE PRODUCTOS
-    ══════════════════════════════════════════════════════ */
-
-    .product-grid-nexura {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
-    }
-
-    .catalog-section {
-        padding: 20px 5% 60px !important;
-    }
-
-    /* ══════════════════════════════════════════════════════
-       5. SECCIÓN "CORTE Y PLEGADO" — una columna
-    ══════════════════════════════════════════════════════ */
-
-    .tarjeta-corte-unificada {
-        grid-template-columns: 1fr !important;
-    }
-
-    .tarjeta-corte-unificada .product-visual {
-        min-height: 260px !important;
-        height: 260px;
-    }
-
-    .tarjeta-corte-unificada .product-visual img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-    }
-
-    .tarjeta-corte-unificada .product-detail {
-        padding: 36px 6% !important;
-    }
-
-    .tarjeta-corte-unificada h2 {
-        font-size: 1.6rem !important;
-    }
-
-    .action-buttons {
-        flex-direction: column !important;
-        gap: 12px !important;
-    }
-
-    .btn-contact-elite,
-    .btn-pdf-elite {
-        width: 100%;
-        text-align: center;
-    }
-
-    /* ══════════════════════════════════════════════════════
-       6. SIDE PANEL — 100% ancho en mobile
-    ══════════════════════════════════════════════════════ */
-
-    .panel-content {
-        max-width: 100vw !important;
-        width: 100% !important;
-        padding: 70px 6% 40px !important;
-    }
-
-    /* ══════════════════════════════════════════════════════
-       7. FOOTER
-    ══════════════════════════════════════════════════════ */
-
-    .footer-container {
-        grid-template-columns: 1fr !important;
-        gap: 36px !important;
-        text-align: left;
-    }
-
-    .social-icons-group {
-        justify-content: flex-start !important;
-    }
-
-    /* ══════════════════════════════════════════════════════
-       8. MAPA Y SECCIONES GENERALES
-    ══════════════════════════════════════════════════════ */
-
-    .mapa-container {
-        height: 280px !important;
-    }
-
-    .seccion-corte-final {
-        padding: 40px 5% !important;
-    }
-
-    /* ══════════════════════════════════════════════════════
-       9. BOTÓN IA — reposicionado para no tapar contenido
-    ══════════════════════════════════════════════════════ */
-
-    #ai-agent-trigger {
-        bottom: 16px !important;
-        right: 16px !important;
-        font-size: 0.6rem !important;
-        padding: 10px 16px !important;
-        letter-spacing: 1px !important;
-    }
-
-    /* ══════════════════════════════════════════════════════
-       10. PANEL TYPEBOT — desde abajo en mobile
-    ══════════════════════════════════════════════════════ */
-
-    .typebot-sidebar-nexura {
-        width: 100vw !important;
-        height: 90vh !important;
-        top: auto !important;
-        bottom: 0 !important;
-        border-left: none !important;
-        border-top: 2px solid #1e3a8a !important;
-        transform: translateY(100%) !important;
-    }
-
-    .typebot-sidebar-nexura.active {
-        transform: translateY(0) !important;
-    }
-}
-
-/* ── Extra pequeño (iPhone SE, etc.) ─────────────────────── */
-@media (max-width: 390px) {
-    .main-title {
-        font-size: 2.4rem !important;
-        letter-spacing: -1px !important;
-    }
-
-    .stat-item {
-        min-width: 110px;
-        padding: 12px 14px !important;
-    }
-
-    .stat-item .stat-num {
-        font-size: 1.4rem !important;
-    }
-}
-/* ============================================================
-   FIX MOBILE — Hamburger + Stats Carousel
-   Solo correctivo, no toca nada de desktop
+ /* ============================================================
+   BLOQUE MOBILE UNIFICADO Y DEFINITIVO (sin parches duplicados)
 ============================================================ */
-
 @media (max-width: 768px) {
 
-    /* ── FIX 1: STATS — scroll horizontal con snap ───────── */
-
-    .hero-stats {
-        /* Scroll horizontal fluido con snap */
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        overflow-y: visible !important;
-        -webkit-overflow-scrolling: touch !important;
-
-        /* Snap: cada tarjeta se centra al hacer scroll */
-        scroll-snap-type: x mandatory !important;
-        scroll-behavior: smooth !important;
-
-        /* Padding lateral para que la primera y última tarjeta
-           no queden pegadas al borde de la pantalla */
-        padding-left: 6vw !important;
-        padding-right: 6vw !important;
-        padding-bottom: 12px !important;
-
-        gap: 14px !important;
-        align-items: stretch !important;
-
-        /* Ocultar scrollbar visualmente pero mantener funcionalidad */
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-    }
-
-    .hero-stats::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* Cada tarjeta: ancho fijo y snap al centro */
-    .stat-item {
-        flex: 0 0 72vw !important;   /* ocupa 72% del ancho para ver el siguiente */
-        max-width: 280px !important;
-        width: auto !important;
-        scroll-snap-align: center !important;
-        scroll-snap-stop: always !important;
-        padding: 18px 20px !important;
-        gap: 14px !important;
-        box-sizing: border-box !important;
-    }
-
-    /* ── FIX 2: HAMBURGER — asegurar visibilidad y orden ─── */
-
+    /* ── 1. NAVBAR Y HAMBURGER ────────────────────────────── */
     .navbar {
-        /* Espacio para que logo y hamburger queden en los extremos */
         justify-content: space-between !important;
     }
 
     .hamburger {
-        display: flex !important;     /* visible en mobile */
-        order: 3;                     /* siempre a la derecha del logo */
+        display: flex !important;
+        order: 3;
         z-index: 10001 !important;
+        cursor: pointer;
     }
 
-    /* Forzar que el nav-links empiece oculto en mobile
-       (por si el @media 900px con display:none no carga a tiempo) */
-    .nav-links:not(.nav-is-open) {
-        right: -100% !important;
-        pointer-events: none !important;
+    /* Overlay oscuro */
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(4px);
+        z-index: 9998 !important;
     }
 
-    .nav-links.nav-is-open {
-        right: 0 !important;
-        pointer-events: auto !important;
-    }
-}
-/* ============================================================
-   FIX DEFINITIVO MOBILE — Hamburger + Stats Carousel
-   Reemplaza/completa los bloques mobile anteriores
-============================================================ */
-
-@media (max-width: 768px) {
-
-    /* ── HAMBURGER: mostrar botón ──────────────────────────── */
-    .hamburger {
-        display: flex !important;
+    .nav-overlay.is-visible {
+        display: block !important;
     }
 
-    /* ── NAV DRAWER: solución sin conflicto con display:none ─
-       Usamos visibility + transform en vez de right + display
-       para evitar el conflicto con el @media 900px existente  */
+    /* Drawer de links */
     .nav-links {
-        /* Anular el display:none del @media 900px */
         display: flex !important;
-        /* Estado cerrado: fuera de pantalla por la derecha */
         position: fixed !important;
         top: 0 !important;
         right: 0 !important;
         width: 80vw !important;
         max-width: 300px !important;
         height: 100vh !important;
-        /* Oculto con transform en vez de display:none */
-        transform: translateX(100%) !important;
-        visibility: hidden !important;
-        /* Layout interno */
+        background: rgba(5, 6, 8, 0.98) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border-left: 1px solid rgba(0, 118, 255, 0.3) !important;
         flex-direction: column !important;
         align-items: flex-start !important;
         justify-content: flex-start !important;
         padding: 90px 32px 40px !important;
         gap: 0 !important;
-        background: rgba(5, 6, 8, 0.98) !important;
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
-        border-left: 1px solid rgba(0, 118, 255, 0.3) !important;
-        z-index: 10000 !important;
+        z-index: 9999 !important;
         overflow-y: auto !important;
-        transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
-                    visibility 0.38s !important;
+        
+        /* Animación suave de entrada/salida */
+        transform: translateX(100%) !important;
+        visibility: hidden !important;
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s linear !important;
     }
 
-    /* Estado abierto: entra desde la derecha */
     .nav-links.nav-is-open {
         transform: translateX(0) !important;
         visibility: visible !important;
     }
 
-    /* Links dentro del drawer */
     .nav-links a {
         width: 100% !important;
-        padding: 14px 0 !important;
-        font-size: 0.9rem !important;
+        min-height: 48px !important;
+        padding: 12px 0 !important;
+        font-size: 0.95rem !important;
         letter-spacing: 2px !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
         margin-left: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        color: #fff !important;
     }
 
     .nav-links .portal-btn {
         margin-top: 24px !important;
         margin-left: 0 !important;
         width: 100% !important;
-        text-align: center !important;
+        justify-content: center !important;
         padding: 14px 0 !important;
-        display: block !important;
+        border-radius: 4px !important;
     }
 
-    /* Overlay oscuro detrás del drawer */
-    .nav-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: 9999;
-    }
-    .nav-overlay.is-visible {
-        display: block;
+    /* ── 2. SIDE PANEL (DETALLES UNIDADES) ────────────────── */
+    .panel-content {
+        max-width: 100vw !important;
+        width: 100% !important;
+        padding: 80px 6% 40px !important;
     }
 
-    /* ── STATS CAROUSEL con scroll-snap ───────────────────── */
+    .btn-close-panel {
+        position: fixed !important;
+        top: 20px !important;
+        right: 20px !important;
+        z-index: 100005 !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
+        padding: 0 16px !important;
+        background: #0076ff !important;
+        border: none !important;
+        border-radius: 4px !important;
+        color: #ffffff !important;
+        font-size: 1.1rem !important;
+        font-weight: bold !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.6) !important;
+    }
+
+    /* ── 3. HERO Y STATS (CAROUSEL) ───────────────────────── */
+    .hero-container {
+        grid-template-columns: 1fr !important;
+        padding: 0 6% !important;
+        gap: 40px;
+    }
+
+    .main-title {
+        font-size: clamp(2.4rem, 10vw, 3.8rem) !important;
+        letter-spacing: -1px !important;
+    }
+
     .hero-stats {
         display: flex !important;
         flex-direction: row !important;
         flex-wrap: nowrap !important;
         overflow-x: auto !important;
-        overflow-y: visible !important;
         -webkit-overflow-scrolling: touch !important;
         scroll-snap-type: x mandatory !important;
         scroll-behavior: smooth !important;
-        /* Padding lateral: evita que la 1ª y última tarjeta
-           queden pegadas al borde — THIS es el fix del corte */
-        padding-left: 6vw !important;
-        padding-right: 6vw !important;
-        padding-bottom: 12px !important;
-        padding-top: 4px !important;
+        padding: 8px 6% 16px !important;
         gap: 14px !important;
-        align-items: stretch !important;
-        /* Quitar propiedades de desktop que generan el corte */
-        padding-left: 0 !important;
-        justify-content: flex-start !important;
-        /* Ocultar scrollbar */
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-        /* Margen negativo para que llegue al borde del viewport */
         margin-left: -6% !important;
         margin-right: -6% !important;
         width: calc(100% + 12%) !important;
-        /* Padding interno para compensar el margen negativo */
-        padding-left: 6% !important;
-        padding-right: 6% !important;
+        scrollbar-width: none !important;
     }
 
     .hero-stats::-webkit-scrollbar {
@@ -3935,196 +3577,27 @@ typebot-standard::part(powered-by),
 
     .stat-item {
         flex: 0 0 75vw !important;
-        max-width: 260px !important;
-        width: auto !important;
-        min-width: unset !important;
+        max-width: 270px !important;
         scroll-snap-align: start !important;
         scroll-snap-stop: always !important;
         padding: 18px 20px !important;
-        gap: 14px !important;
         box-sizing: border-box !important;
-        /* Quitar la animación de revealIn que interfiere en mobile */
         opacity: 1 !important;
         animation: none !important;
     }
-}
 
-/* ============================================================
-   FIX MOBILE — Navegación hamburger + cierre del side panel
-============================================================ */
-
-@media (max-width: 768px) {
-
-    /* ── SIDE PANEL: botón de cierre siempre clicable ──────── */
-
-    /* El panel activo debe permitir scroll y touch en su contenido */
-    .side-panel.active {
-        pointer-events: auto !important;
-        /* Asegurar que ocupa toda la pantalla para detectar tap fuera */
-        right: 0 !important;
-        width: 100% !important;
+    /* ── 4. GRILLAS GENERALES A 1 COLUMNA ─────────────────── */
+    .capabilities-grid,
+    .product-grid-nexura,
+    .tarjeta-corte-unificada,
+    .footer-container {
+        grid-template-columns: 1fr !important;
     }
 
-    /* El contenido del panel no intercepta clics del overlay */
-    .side-panel.active .panel-content {
-        pointer-events: auto !important;
-        /* En mobile: ancho completo para que sea legible */
-        max-width: 100vw !important;
-        width: 100% !important;
-        padding: 24px 6% 60px !important;
-        /* Posición fija desde arriba para no depender del transform */
-        position: fixed !important;
-        top: 0 !important;
-        right: 0 !important;
-        height: 100vh !important;
-        overflow-y: auto !important;
-    }
-
-    /* Botón de cierre: grande, clicable, siempre visible */
-    .btn-close-panel {
-        position: sticky !important;
-        top: 16px !important;
-        z-index: 9999 !important;
-        pointer-events: auto !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        /* Área de toque mínima recomendada: 44x44px */
-        min-width: 44px !important;
-        min-height: 44px !important;
-        padding: 10px 16px !important;
-        font-size: 1rem !important;
-        background: rgba(255, 255, 255, 0.08) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        border-radius: 4px !important;
-        color: #fff !important;
-        cursor: pointer !important;
-        margin-bottom: 20px !important;
-        /* Float a la derecha para que sea alcanzable con el pulgar */
-        float: right !important;
-        clear: both !important;
-    }
-
-    /* ── OVERLAY del drawer: no bloquea links de navegación ── */
-    /* El overlay solo cubre el área fuera del drawer */
-    .nav-overlay.is-visible {
-        /* Asegurar que está debajo del drawer */
-        z-index: 9998 !important;
-        pointer-events: auto !important;
-    }
-
-    /* El drawer está encima del overlay */
-    .nav-links.nav-is-open {
-        z-index: 9999 !important;
-        pointer-events: auto !important;
-    }
-
-    /* Links del menú: área de toque generosa */
-    .nav-links a {
-        min-height: 44px !important;
-        display: flex !important;
-        align-items: center !important;
-        /* pointer-events activo siempre para que el tap llegue */
-        pointer-events: auto !important;
-    }
-}
-
-/* ============================================================
-   FIX DEFINITIVO MOBILE — Hamburger + Side Panel
-============================================================ */
-
-@media (max-width: 768px) {
-
-    /* ── OVERLAY: siempre DETRÁS del drawer ─────────────────
-       Era el culpable de bloquear los taps en los links      */
-    .nav-overlay {
-        z-index: 9998 !important;
-        pointer-events: auto !important;
-    }
-
-    /* ── DRAWER: encima del overlay, links reciben taps ───── */
-    .nav-links {
-        display: flex !important;
-        position: fixed !important;
-        top: 0 !important;
-        right: 0 !important;
-        width: 80vw !important;
-        max-width: 300px !important;
-        height: 100vh !important;
-        transform: translateX(100%) !important;
-        visibility: hidden !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        justify-content: flex-start !important;
-        padding: 90px 32px 40px !important;
-        gap: 0 !important;
-        background: rgba(5, 6, 8, 0.98) !important;
-        backdrop-filter: blur(20px) !important;
-        border-left: 1px solid rgba(0, 118, 255, 0.3) !important;
-        z-index: 9999 !important;           /* encima del overlay */
-        overflow-y: auto !important;
-        pointer-events: none !important;
-        transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
-                    visibility 0.38s linear !important;
-    }
-
-    .nav-links.nav-is-open {
-        transform: translateX(0) !important;
-        visibility: visible !important;
-        pointer-events: auto !important;    /* taps activos solo cuando está abierto */
-    }
-
-    /* Links: área de toque mínima 44px (estándar táctil) */
-    .nav-links a {
-        width: 100% !important;
-        min-height: 44px !important;
-        padding: 12px 0 !important;
-        font-size: 0.9rem !important;
-        letter-spacing: 2px !important;
-        border-bottom: 1px solid rgba(255,255,255,0.06) !important;
-        margin-left: 0 !important;
-        display: flex !important;
-        align-items: center !important;
-        pointer-events: auto !important;
-    }
-
-    .nav-links .portal-btn {
-        margin-top: 24px !important;
-        margin-left: 0 !important;
-        width: 100% !important;
-        justify-content: center !important;
-        padding: 14px 0 !important;
-        border-radius: 2px !important;
-    }
-
-    /* ── SIDE PANEL: 100% ancho en mobile ───────────────── */
-    .panel-content {
-        max-width: 100vw !important;
-        width: 100% !important;
-        padding: 20px 6% 80px !important;
-    }
-
-    /* ── BOTÓN X DE CIERRE: flotante, indestructible ───────
-       .btn-close-panel ya existe en el HTML del spec-panel  */
-    .btn-close-panel {
-        position: fixed !important;
-        top: 16px !important;
+    #ai-agent-trigger {
+        bottom: 16px !important;
         right: 16px !important;
-        z-index: 99999 !important;         /* sobre absolutamente todo */
-        pointer-events: auto !important;
-        min-width: 44px !important;
-        min-height: 44px !important;
-        padding: 0 16px !important;
-        background: #0076ff !important;
-        border: none !important;
-        border-radius: 4px !important;
-        color: #fff !important;
-        font-size: 1.1rem !important;
-        font-weight: 900 !important;
-        cursor: pointer !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
+        font-size: 0.6rem !important;
+        padding: 10px 16px !important;
     }
-}
+}}
