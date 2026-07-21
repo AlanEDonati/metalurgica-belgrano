@@ -3392,10 +3392,10 @@ typebot-standard::part(powered-by),
     margin-top: 40px !important;
 }
 
+
 /* ============================================================
-   MOBILE — BLOQUE ÚNICO DEFINITIVO
-   1. Borrá todo desde el comentario "MOBILE FIX" hasta el fin
-   2. Pegá este bloque en su lugar
+   MOBILE — BLOQUE ÚNICO DEFINITIVO v2
+   Corte limpio. Sin tocar desktop.
 ============================================================ */
 
 /* Hamburger: oculto en desktop */
@@ -3426,7 +3426,7 @@ typebot-standard::part(powered-by),
 .hamburger.is-open .bar:nth-child(2) { opacity: 0; }
 .hamburger.is-open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Overlay: oculto por defecto */
+/* Overlay */
 .nav-overlay {
     display: none;
     position: fixed;
@@ -3440,25 +3440,79 @@ typebot-standard::part(powered-by),
     pointer-events: auto;
 }
 
+/* ── DESKTOP: restaurar nav explícitamente ────────────────
+   Necesario porque el @media 900px de abajo usa !important
+   en propiedades del nav. Este bloque las revierte en desktop.
+*/
+@media (min-width: 901px) {
+    .hamburger { display: none !important; }
+
+    .nav-links {
+        position: static !important;
+        transform: none !important;
+        width: auto !important;
+        height: auto !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        padding: 0 !important;
+        gap: 0 !important;
+        background: transparent !important;
+        border-left: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        z-index: auto !important;
+        overflow-y: visible !important;
+        transition: none !important;
+        pointer-events: auto !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        box-sizing: border-box !important;
+    }
+
+    .nav-links a {
+        width: auto !important;
+        min-height: auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        padding: 0 !important;
+        margin-left: 30px !important;
+        font-size: 0.75rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 1.5px !important;
+        border-bottom: none !important;
+        color: rgba(255,255,255,0.7) !important;
+        text-decoration: none !important;
+        text-transform: uppercase !important;
+        pointer-events: auto !important;
+        position: relative !important;
+        z-index: auto !important;
+        -webkit-tap-highlight-color: initial !important;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        color: #fff !important;
+    }
+
+    .nav-links .portal-btn {
+        background: var(--accent) !important;
+        color: white !important;
+        padding: 10px 22px !important;
+        border-radius: 2px !important;
+        margin-left: 30px !important;
+        margin-top: 0 !important;
+        width: auto !important;
+        text-align: left !important;
+        justify-content: center !important;
+    }
+}
+
+/* ── MOBILE ≤ 900px ───────────────────────────────────── */
 @media (max-width: 900px) {
 
-    /* NAVBAR */
-    .navbar {
-        justify-content: space-between;
-    }
+    .navbar { justify-content: space-between !important; }
+    .hamburger { display: flex !important; z-index: 10000 !important; }
 
-    .hamburger {
-        display: flex;
-        z-index: 10000;
-        position: relative;
-    }
-
-    /*
-     * DRAWER — position:fixed saca .nav-links del flujo normal.
-     * El display:none del @media 900px del CSS base solo aplica
-     * a elementos en flujo — fixed lo ignora completamente.
-     * pointer-events:none cuando cerrado, auto cuando abierto.
-     */
     .nav-links {
         position: fixed !important;
         top: 0 !important;
@@ -3483,13 +3537,11 @@ typebot-standard::part(powered-by),
         box-sizing: border-box !important;
     }
 
-    /* Estado ABIERTO */
     .nav-links.nav-is-open {
         transform: translateX(0) !important;
         pointer-events: auto !important;
     }
 
-    /* Links dentro del drawer */
     .nav-links a {
         width: 100% !important;
         min-height: 52px !important;
@@ -3508,9 +3560,7 @@ typebot-standard::part(powered-by),
         -webkit-tap-highlight-color: rgba(0,118,255,0.15) !important;
     }
 
-    .nav-links a:last-child {
-        border-bottom: none !important;
-    }
+    .nav-links a:last-child { border-bottom: none !important; }
 
     .nav-links .portal-btn {
         margin-top: 20px !important;
@@ -3522,32 +3572,13 @@ typebot-standard::part(powered-by),
     }
 
     /* HERO */
-    .hero-container {
-        grid-template-columns: 1fr !important;
-        padding: 0 6% !important;
-        gap: 36px !important;
-    }
-    .hero-elite {
-        height: auto !important;
-        min-height: 100svh !important;
-        padding-top: 80px !important;
-        padding-bottom: 48px !important;
-    }
-    .main-title {
-        font-size: clamp(2.8rem, 11vw, 4rem) !important;
-        letter-spacing: -2px !important;
-    }
-    .hero-cta-group {
-        flex-direction: column !important;
-        gap: 12px !important;
-        width: 100% !important;
-    }
-    .hero-cta-group a {
-        width: 100% !important;
-        justify-content: center !important;
-    }
+    .hero-container { grid-template-columns: 1fr !important; padding: 0 6% !important; gap: 36px !important; }
+    .hero-elite { height: auto !important; min-height: 100svh !important; padding-top: 80px !important; padding-bottom: 48px !important; }
+    .main-title { font-size: clamp(2.8rem, 11vw, 4rem) !important; letter-spacing: -2px !important; }
+    .hero-cta-group { flex-direction: column !important; gap: 12px !important; width: 100% !important; }
+    .hero-cta-group a { width: 100% !important; justify-content: center !important; }
 
-    /* STATS: carrusel horizontal con snap */
+    /* STATS */
     .hero-stats {
         display: flex !important;
         flex-direction: row !important;
@@ -3581,7 +3612,7 @@ typebot-standard::part(powered-by),
     }
     .stat-item:hover { transform: none !important; }
 
-    /* GRILLAS A 1 COLUMNA */
+    /* GRILLAS */
     .product-grid-nexura { grid-template-columns: 1fr !important; gap: 20px !important; }
     .capabilities-grid   { grid-template-columns: 1fr !important; gap: 16px !important; }
     .footer-container    { grid-template-columns: 1fr !important; gap: 32px !important; }
@@ -3594,23 +3625,9 @@ typebot-standard::part(powered-by),
     .partner-logos { flex-wrap: wrap !important; gap: 16px !important; }
     .partner-logos img { height: 26px !important; max-width: 130px !important; }
 
-    /* SIDE PANEL: ancho completo en mobile */
-    .side-panel.active {
-        right: 0 !important;
-        width: 100% !important;
-    }
-    .side-panel.active .panel-content {
-        max-width: 100% !important;
-        width: 100% !important;
-        padding: 80px 6% 60px !important;
-    }
-
-    /*
-     * BOTÓN X DE CIERRE DEL PANEL
-     * position:fixed → fuera del flujo, nada puede taparlo.
-     * pointer-events:none cuando panel cerrado (no interfiere).
-     * pointer-events:auto cuando .side-panel.active (clicable).
-     */
+    /* SIDE PANEL */
+    .side-panel.active { right: 0 !important; width: 100% !important; }
+    .side-panel.active .panel-content { max-width: 100% !important; width: 100% !important; padding: 80px 6% 60px !important; }
     .btn-close-panel {
         position: fixed !important;
         top: 16px !important;
@@ -3635,79 +3652,16 @@ typebot-standard::part(powered-by),
         padding: 0 !important;
         margin: 0 !important;
     }
-    .side-panel.active .btn-close-panel {
-        opacity: 1 !important;
-        pointer-events: auto !important;
-    }
+    .side-panel.active .btn-close-panel { opacity: 1 !important; pointer-events: auto !important; }
 
     /* UTILIDADES */
     .mapa-container { height: 260px !important; }
-
-    #ai-agent-trigger {
-        bottom: 16px !important;
-        right: 16px !important;
-        font-size: 0.6rem !important;
-        padding: 10px 14px !important;
-        letter-spacing: 1px !important;
-    }
-
-    .typebot-sidebar-nexura {
-        width: 100vw !important;
-        height: 90svh !important;
-        top: auto !important;
-        bottom: 0 !important;
-        right: 0 !important;
-        border-left: none !important;
-        border-top: 2px solid #1e3a8a !important;
-        transform: translateY(100%) !important;
-    }
-    .typebot-sidebar-nexura.active {
-        transform: translateY(0) !important;
-    }
+    #ai-agent-trigger { bottom: 16px !important; right: 16px !important; font-size: 0.6rem !important; padding: 10px 14px !important; }
+    .typebot-sidebar-nexura { width: 100vw !important; height: 90svh !important; top: auto !important; bottom: 0 !important; right: 0 !important; border-left: none !important; border-top: 2px solid #1e3a8a !important; transform: translateY(100%) !important; }
+    .typebot-sidebar-nexura.active { transform: translateY(0) !important; }
 }
 
 @media (max-width: 390px) {
     .main-title { font-size: 2.4rem !important; letter-spacing: -1px !important; }
     .stat-item  { flex: 0 0 85vw !important; }
-}
-
-/* FIX NAVBAR DESKTOP — restaurar estilos originales en pantallas grandes */
-@media (min-width: 901px) {
-    .nav-links {
-        position: static !important;
-        transform: none !important;
-        width: auto !important;
-        height: auto !important;
-        flex-direction: row !important;
-        padding: 0 !important;
-        background: transparent !important;
-        border-left: none !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        z-index: auto !important;
-        pointer-events: auto !important;
-        overflow-y: visible !important;
-        transition: none !important;
-        gap: 0 !important;
-        display: flex !important;
-    }
-
-    .nav-links a {
-        width: auto !important;
-        min-height: auto !important;
-        padding: 0 !important;
-        font-size: 0.75rem !important;
-        letter-spacing: 1.5px !important;
-        border-bottom: none !important;
-        color: rgba(255,255,255,0.7) !important;
-        pointer-events: auto !important;
-        position: relative !important;
-        z-index: auto !important;
-    }
-
-    .nav-links .portal-btn {
-        margin-top: 0 !important;
-        width: auto !important;
-        padding: 10px 22px !important;
-    }
 }
