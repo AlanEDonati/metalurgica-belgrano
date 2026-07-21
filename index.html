@@ -51,7 +51,7 @@
         <span class="bar"></span>
         <span class="bar"></span>
     </button>
-        <div class="nav-links">
+        <div class="nav-links" id="nav-links"></div>
             <a href="index.html" class="active">INICIO</a>
             <a href="productos.html">PRODUCTOS</a>
             <a href="ingenieria.html">INGENIERÍA</a>
@@ -565,85 +565,70 @@
     </script>
 
 <script>
-/**
- * METALÚRGICA BELGRANO — SCRIPT MOBILE DEFINITIVO
- * Reemplaza TODOS los scripts anteriores del hamburger.
- * Pegá esto antes del </body> en los 5 HTML.
- */
-(function () {
-    'use strict';
+var _hBtn = document.getElementById('hamburger-btn');
+var _nav  = document.getElementById('nav-links');
+var _ovl  = document.getElementById('nav-overlay');
+var _panel = document.getElementById('spec-panel');
+var _closeBtn = document.querySelector('.btn-close-panel');
 
-    var hamburgerBtn  = document.getElementById('hamburger-btn');
-    var navLinks      = document.querySelector('.nav-links');
-    var navOverlay    = document.getElementById('nav-overlay');
-    var specPanel     = document.getElementById('spec-panel');
-    var closePanelBtn = document.querySelector('.btn-close-panel');
-
-    /* ── MENÚ HAMBURGUESA ──────────────────────────────── */
-    if (hamburgerBtn && navLinks) {
-
-        function openMenu() {
-            hamburgerBtn.classList.add('is-open');
-            navLinks.classList.add('nav-is-open');
-            if (navOverlay) navOverlay.classList.add('is-visible');
+/* MENÚ HAMBURGUESA */
+if (_hBtn && _nav) {
+    _hBtn.onclick = function() {
+        var isOpen = _nav.classList.contains('nav-is-open');
+        if (isOpen) {
+            _hBtn.classList.remove('is-open');
+            _nav.classList.remove('nav-is-open');
+            if (_ovl) _ovl.classList.remove('is-visible');
+            document.body.style.overflow = '';
+        } else {
+            _hBtn.classList.add('is-open');
+            _nav.classList.add('nav-is-open');
+            if (_ovl) _ovl.classList.add('is-visible');
             document.body.style.overflow = 'hidden';
         }
+    };
 
-        function closeMenu() {
-            hamburgerBtn.classList.remove('is-open');
-            navLinks.classList.remove('nav-is-open');
-            if (navOverlay) navOverlay.classList.remove('is-visible');
+    /* Overlay cierra el menú */
+    if (_ovl) {
+        _ovl.onclick = function() {
+            _hBtn.classList.remove('is-open');
+            _nav.classList.remove('nav-is-open');
+            _ovl.classList.remove('is-visible');
+            document.body.style.overflow = '';
+        };
+    }
+
+    /* Links del menú: cerrar menú y navegar normalmente */
+    var links = _nav.getElementsByTagName('a');
+    for (var i = 0; i < links.length; i++) {
+        links[i].onclick = function() {
+            _hBtn.classList.remove('is-open');
+            _nav.classList.remove('nav-is-open');
+            if (_ovl) _ovl.classList.remove('is-visible');
+            document.body.style.overflow = '';
+            /* SIN preventDefault — el href navega solo */
+        };
+    }
+}
+
+/* SIDE PANEL — BOTÓN DE CIERRE */
+if (_closeBtn && _panel) {
+    _closeBtn.onclick = function(e) {
+        e.stopPropagation();
+        _panel.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+}
+
+/* Tocar el fondo del panel lo cierra */
+if (_panel) {
+    _panel.onclick = function(e) {
+        if (e.target === _panel) {
+            _panel.classList.remove('active');
             document.body.style.overflow = '';
         }
-
-        /* Toggle al tocar el botón */
-        hamburgerBtn.addEventListener('click', function () {
-            navLinks.classList.contains('nav-is-open')
-                ? closeMenu()
-                : openMenu();
-        });
-
-        /* Overlay cierra el menú */
-        if (navOverlay) {
-            navOverlay.addEventListener('click', closeMenu);
-        }
-
-        /*
-         * Links del menú: cerrar drawer + navegar normalmente.
-         * SIN preventDefault — el href del <a> funciona solo.
-         * SIN stopPropagation — no bloqueamos nada.
-         */
-        navLinks.querySelectorAll('a').forEach(function (link) {
-            link.addEventListener('click', function () {
-                closeMenu();
-            });
-        });
-
-        /* ESC cierra el menú */
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') closeMenu();
-        });
-    }
-
-    /* ── SIDE PANEL: BOTÓN DE CIERRE ──────────────────── */
-    if (closePanelBtn && specPanel) {
-        closePanelBtn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            specPanel.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-    }
-
-    /* Tocar el fondo del panel también lo cierra */
-    if (specPanel) {
-        specPanel.addEventListener('click', function (e) {
-            if (e.target === specPanel) {
-                specPanel.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-    }
-
-})()</script>
+    };
+}
+</script>
 </body>
 </html>

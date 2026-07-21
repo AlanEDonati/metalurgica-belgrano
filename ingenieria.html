@@ -20,7 +20,7 @@
         <span class="bar"></span>
         <span class="bar"></span>
     </button>
-        <div class="nav-links">
+        <div class="nav-links" id="nav-links"></div>
             <a href="index.html">INICIO</a>
             <a href="productos.html">PRODUCTOS</a>
             <a href="ingenieria.html" class="active">INGENIERÍA</a>
@@ -333,5 +333,53 @@
             if (e.key === 'Escape') closeMenu();
         });
     })();
-</script></body>
+</script>
+<script>
+var _hBtn = document.getElementById('hamburger-btn');
+var _nav  = document.getElementById('nav-links');
+var _ovl  = document.getElementById('nav-overlay');
+var _panel = document.getElementById('spec-panel');
+var _closeBtn = document.querySelector('.btn-close-panel');
+
+if (_hBtn && _nav) {
+    _hBtn.onclick = function() {
+        var open = _nav.classList.contains('nav-is-open');
+        _hBtn.classList.toggle('is-open', !open);
+        _nav.classList.toggle('nav-is-open', !open);
+        if (_ovl) _ovl.classList.toggle('is-visible', !open);
+        document.body.style.overflow = open ? '' : 'hidden';
+    };
+    if (_ovl) _ovl.onclick = function() {
+        _hBtn.classList.remove('is-open');
+        _nav.classList.remove('nav-is-open');
+        _ovl.classList.remove('is-visible');
+        document.body.style.overflow = '';
+    };
+    var links = _nav.getElementsByTagName('a');
+    for (var i = 0; i < links.length; i++) {
+        links[i].onclick = function() {
+            _hBtn.classList.remove('is-open');
+            _nav.classList.remove('nav-is-open');
+            if (_ovl) _ovl.classList.remove('is-visible');
+            document.body.style.overflow = '';
+        };
+    }
+}
+if (_closeBtn && _panel) {
+    _closeBtn.onclick = function(e) {
+        e.stopPropagation();
+        _panel.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+}
+if (_panel) {
+    _panel.onclick = function(e) {
+        if (e.target === _panel) {
+            _panel.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    };
+}
+</script>
+</body>
 </html>

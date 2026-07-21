@@ -3393,28 +3393,12 @@ typebot-standard::part(powered-by),
 }
 
 /* ============================================================
-   METALÚRGICA BELGRANO — MOBILE FIX DEFINITIVO
-   Bloque único y limpio. Elimina todos los parches anteriores.
-   
-   CONFLICTOS RESUELTOS:
-   1. @media 900px pone display:none en .nav-links.
-      La solución NO es display:flex !important (pisa todo).
-      La solución es position:fixed que saca el elemento del
-      flujo normal — display:none del 900px no aplica a fixed.
-      
-   2. El nav-overlay tenía z-index mayor que el drawer.
-      Ahora: overlay=8000, drawer=9000, hamburger=10000.
-      
-   3. visibility:hidden + display:flex simultáneos = invisible
-      pero bloqueando eventos táctiles.
-      Ahora: solo usamos transform para ocultar/mostrar.
-      pointer-events:none cuando cerrado, auto cuando abierto.
-      
-   4. .btn-close-panel heredaba pointer-events:none del panel.
-      Ahora: position:fixed lo saca del flujo — no hereda nada.
+   MOBILE — BLOQUE ÚNICO DEFINITIVO
+   1. Borrá todo desde el comentario "MOBILE FIX" hasta el fin
+   2. Pegá este bloque en su lugar
 ============================================================ */
 
-/* ── Hamburger: base (oculto en desktop) ───────────────── */
+/* Hamburger: oculto en desktop */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -3429,7 +3413,6 @@ typebot-standard::part(powered-by),
     padding: 6px;
     flex-shrink: 0;
 }
-
 .hamburger .bar {
     display: block;
     width: 22px;
@@ -3439,30 +3422,27 @@ typebot-standard::part(powered-by),
     transition: transform 0.3s ease, opacity 0.3s ease;
     transform-origin: center;
 }
-
 .hamburger.is-open .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger.is-open .bar:nth-child(2) { opacity: 0; }
 .hamburger.is-open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* ── Overlay: oculto por defecto en todos los tamaños ──── */
+/* Overlay: oculto por defecto */
 .nav-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    z-index: 8000;   /* DEBAJO del drawer */
+    background: rgba(0,0,0,0.55);
+    z-index: 8000;
     pointer-events: none;
 }
-
 .nav-overlay.is-visible {
     display: block;
     pointer-events: auto;
 }
 
-/* ── MOBILE: todo lo que cambia en ≤ 768px ─────────────── */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
 
-    /* 1. NAVBAR */
+    /* NAVBAR */
     .navbar {
         justify-content: space-between;
     }
@@ -3474,121 +3454,100 @@ typebot-standard::part(powered-by),
     }
 
     /*
-     * 2. DRAWER DE NAVEGACIÓN
-     *
-     * CLAVE: usamos position:fixed que saca el elemento del
-     * flujo normal. El display:none del @media 900px aplica
-     * solo a elementos en el flujo. Un elemento fixed ignora
-     * ese display:none → no necesitamos !important.
-     *
-     * Estado CERRADO: fuera de pantalla (translateX 100%).
-     * pointer-events:none → los toques lo atraviesan.
-     *
-     * Estado ABIERTO (.nav-is-open): en pantalla.
-     * pointer-events:auto → los toques llegan a los <a>.
+     * DRAWER — position:fixed saca .nav-links del flujo normal.
+     * El display:none del @media 900px del CSS base solo aplica
+     * a elementos en flujo — fixed lo ignora completamente.
+     * pointer-events:none cuando cerrado, auto cuando abierto.
      */
     .nav-links {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: min(80vw, 300px);
-        height: 100vh;
-        /* Oculto fuera de pantalla */
-        transform: translateX(100%);
-        /* Sin visibility:hidden — interfiere con touch events */
-        /* Layout interno */
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        padding: 90px 28px 40px;
-        gap: 0;
-        /* Estética */
-        background: rgba(3, 4, 6, 0.98);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border-left: 1px solid rgba(0, 118, 255, 0.25);
-        /* Z-index: encima del overlay (8000) */
-        z-index: 9000;
-        overflow-y: auto;
-        /* Bloqueado cuando cerrado */
-        pointer-events: none;
-        /* Transición */
-        transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1);
-        /* display:flex necesario para el layout interno */
-        display: flex;
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        width: min(80vw, 300px) !important;
+        height: 100vh !important;
+        transform: translateX(110%) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        padding: 90px 28px 40px !important;
+        gap: 0 !important;
+        background: rgba(3,4,6,0.98) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border-left: 1px solid rgba(0,118,255,0.25) !important;
+        z-index: 9000 !important;
+        overflow-y: auto !important;
+        pointer-events: none !important;
+        transition: transform 0.36s cubic-bezier(0.16,1,0.3,1) !important;
+        box-sizing: border-box !important;
     }
 
-    /* Estado ABIERTO: entra en pantalla y recibe toques */
+    /* Estado ABIERTO */
     .nav-links.nav-is-open {
         transform: translateX(0) !important;
         pointer-events: auto !important;
-        z-index: 9999 !important;
-        visibility: visible !important;
     }
 
-    /* Links: área táctil mínima 48px + pointer-events explícito */
+    /* Links dentro del drawer */
     .nav-links a {
         width: 100% !important;
-        min-height: 48px !important;
+        min-height: 52px !important;
         display: flex !important;
         align-items: center !important;
         padding: 0 !important;
         margin-left: 0 !important;
-        font-size: 0.85rem !important;
-        letter-spacing: 2px !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
-        color: rgba(255, 255, 255, 0.8) !important;
+        font-size: 1rem !important;
+        letter-spacing: 1.5px !important;
+        border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+        color: rgba(255,255,255,0.85) !important;
         text-decoration: none !important;
         pointer-events: auto !important;
         position: relative !important;
-        /* Z-index alto para superar cualquier overlay interno */
-        z-index: 10000 !important;
-        /* Área táctil segura */
-        -webkit-tap-highlight-color: rgba(0,118,255,0.2);
+        z-index: 9500 !important;
+        -webkit-tap-highlight-color: rgba(0,118,255,0.15) !important;
     }
 
-    .nav-links a:last-child { border-bottom: none; }
+    .nav-links a:last-child {
+        border-bottom: none !important;
+    }
 
     .nav-links .portal-btn {
-        margin-top: 20px;
-        margin-left: 0;
-        width: 100%;
-        justify-content: center;
-        text-align: center;
-        padding: 14px 0;
+        margin-top: 20px !important;
+        margin-left: 0 !important;
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+        padding: 14px 0 !important;
     }
 
-    /* 3. HERO */
+    /* HERO */
     .hero-container {
-        grid-template-columns: 1fr;
-        padding: 0 6%;
-        gap: 36px;
+        grid-template-columns: 1fr !important;
+        padding: 0 6% !important;
+        gap: 36px !important;
     }
-
     .hero-elite {
-        height: auto;
-        min-height: 100svh;
-        padding-top: 80px;
-        padding-bottom: 48px;
+        height: auto !important;
+        min-height: 100svh !important;
+        padding-top: 80px !important;
+        padding-bottom: 48px !important;
     }
-
     .main-title {
-        font-size: clamp(2.8rem, 11vw, 4rem);
-        letter-spacing: -2px;
+        font-size: clamp(2.8rem, 11vw, 4rem) !important;
+        letter-spacing: -2px !important;
     }
-
     .hero-cta-group {
-        flex-direction: column;
-        gap: 12px;
-        width: 100%;
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
     }
-
     .hero-cta-group a {
-        width: 100%;
-        justify-content: center;
+        width: 100% !important;
+        justify-content: center !important;
     }
 
-    /* 4. STATS: carrusel con scroll-snap */
+    /* STATS: carrusel horizontal con snap */
     .hero-stats {
         display: flex !important;
         flex-direction: row !important;
@@ -3601,15 +3560,11 @@ typebot-standard::part(powered-by),
         padding: 4px 6% 16px !important;
         gap: 14px !important;
         align-items: stretch !important;
+        height: auto !important;
         scrollbar-width: none !important;
         -ms-overflow-style: none !important;
-        /* Evitar que reglas de desktop sobreescriban */
-        height: auto !important;
-        flex-direction: row !important;
     }
-
     .hero-stats::-webkit-scrollbar { display: none; }
-
     .stat-item {
         flex: 0 0 75vw !important;
         max-width: 270px !important;
@@ -3619,59 +3574,51 @@ typebot-standard::part(powered-by),
         scroll-snap-stop: always !important;
         padding: 16px 18px !important;
         box-sizing: border-box !important;
-        /* Resetear animación que deja opacity:0 en mobile */
+        flex-shrink: 0 !important;
         opacity: 1 !important;
         animation: none !important;
         transform: none !important;
-        flex-shrink: 0 !important;
     }
-
     .stat-item:hover { transform: none !important; }
 
-    /* 5. GRILLAS A 1 COLUMNA */
-    .product-grid-nexura { grid-template-columns: 1fr; gap: 20px; }
-    .capabilities-grid   { grid-template-columns: 1fr; gap: 16px; }
-    .footer-container    { grid-template-columns: 1fr; gap: 32px; }
+    /* GRILLAS A 1 COLUMNA */
+    .product-grid-nexura { grid-template-columns: 1fr !important; gap: 20px !important; }
+    .capabilities-grid   { grid-template-columns: 1fr !important; gap: 16px !important; }
+    .footer-container    { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .tarjeta-corte-unificada { grid-template-columns: 1fr !important; }
+    .tarjeta-corte-unificada .product-visual { height: 240px !important; }
+    .tarjeta-corte-unificada .product-visual img { height: 100% !important; object-fit: cover !important; }
+    .tarjeta-corte-unificada .product-detail { padding: 32px 6% !important; }
+    .action-buttons { flex-direction: column !important; gap: 12px !important; }
+    .btn-contact-elite, .btn-pdf-elite { width: 100% !important; text-align: center !important; }
+    .partner-logos { flex-wrap: wrap !important; gap: 16px !important; }
+    .partner-logos img { height: 26px !important; max-width: 130px !important; }
 
-    .tarjeta-corte-unificada { grid-template-columns: 1fr; }
-    .tarjeta-corte-unificada .product-visual { height: 240px; }
-    .tarjeta-corte-unificada .product-visual img { height: 100%; object-fit: cover; }
-    .tarjeta-corte-unificada .product-detail { padding: 32px 6%; }
-
-    .action-buttons { flex-direction: column; gap: 12px; }
-    .btn-contact-elite, .btn-pdf-elite { width: 100%; text-align: center; }
-
-    /* Logos */
-    .partner-logos { flex-wrap: wrap; gap: 16px; }
-    .partner-logos img { height: 26px; max-width: 130px; }
+    /* SIDE PANEL: ancho completo en mobile */
+    .side-panel.active {
+        right: 0 !important;
+        width: 100% !important;
+    }
+    .side-panel.active .panel-content {
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 80px 6% 60px !important;
+    }
 
     /*
-     * 6. SIDE PANEL Y BOTÓN DE CIERRE
-     *
-     * CLAVE: .btn-close-panel usa position:fixed.
-     * Esto lo saca completamente del flujo del panel.
-     * No hereda pointer-events:none del padre.
-     * Ningún overlay puede taparlo porque tiene z-index: 99999.
+     * BOTÓN X DE CIERRE DEL PANEL
+     * position:fixed → fuera del flujo, nada puede taparlo.
+     * pointer-events:none cuando panel cerrado (no interfiere).
+     * pointer-events:auto cuando .side-panel.active (clicable).
      */
-    .side-panel.active {
-        right: 0;
-        width: 100%;
-    }
-
-    .side-panel.active .panel-content {
-        max-width: 100%;
-        width: 100%;
-        padding: 80px 6% 60px;
-    }
-
     .btn-close-panel {
         position: fixed !important;
         top: 16px !important;
         right: 16px !important;
-        width: 44px !important;
-        height: 44px !important;
+        width: 48px !important;
+        height: 48px !important;
         z-index: 100005 !important;
-        pointer-events: none !important;   /* none cuando panel cerrado */
+        pointer-events: none !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
@@ -3679,49 +3626,47 @@ typebot-standard::part(powered-by),
         border: none !important;
         border-radius: 50% !important;
         color: #fff !important;
-        font-size: 1.3rem !important;
+        font-size: 1.4rem !important;
         font-weight: 700 !important;
         cursor: pointer !important;
-        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5) !important;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.5) !important;
         opacity: 0 !important;
         transition: opacity 0.2s ease !important;
+        padding: 0 !important;
+        margin: 0 !important;
     }
-
-    /* Visible y clicable SOLO cuando el panel está activo */
     .side-panel.active .btn-close-panel {
         opacity: 1 !important;
-        pointer-events: auto !important;   /* auto cuando panel abierto */
-        cursor: pointer !important;
+        pointer-events: auto !important;
     }
 
-    /* 7. UTILIDADES */
-    .mapa-container { height: 260px; }
+    /* UTILIDADES */
+    .mapa-container { height: 260px !important; }
 
     #ai-agent-trigger {
-        bottom: 16px;
-        right: 16px;
-        font-size: 0.6rem;
-        padding: 10px 14px;
-        letter-spacing: 1px;
+        bottom: 16px !important;
+        right: 16px !important;
+        font-size: 0.6rem !important;
+        padding: 10px 14px !important;
+        letter-spacing: 1px !important;
     }
 
     .typebot-sidebar-nexura {
-        width: 100vw;
-        height: 90svh;
-        top: auto;
-        bottom: 0;
-        right: 0;
-        border-left: none;
-        border-top: 2px solid #1e3a8a;
-        transform: translateY(100%);
+        width: 100vw !important;
+        height: 90svh !important;
+        top: auto !important;
+        bottom: 0 !important;
+        right: 0 !important;
+        border-left: none !important;
+        border-top: 2px solid #1e3a8a !important;
+        transform: translateY(100%) !important;
     }
-
     .typebot-sidebar-nexura.active {
-        transform: translateY(0);
+        transform: translateY(0) !important;
     }
 }
 
 @media (max-width: 390px) {
-    .main-title { font-size: 2.4rem; letter-spacing: -1px; }
-    .stat-item  { flex: 0 0 85vw; }
+    .main-title { font-size: 2.4rem !important; letter-spacing: -1px !important; }
+    .stat-item  { flex: 0 0 85vw !important; }
 }
